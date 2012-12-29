@@ -44,5 +44,25 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+
+        /// <summary>
+        /// Uri to the poster image.
+        /// </summary>
+        /// <param name="size">The size for the image as required</param>
+        /// <returns>The uri to the sized image</returns>
+        public Uri Uri(PosterSize size)
+        {
+            return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
+        }
+
+        /// <summary>
+        /// Uri to the backdrop image.
+        /// </summary>
+        /// <param name="size">The size for the image as required</param>
+        /// <returns>The uri to the sized image</returns>
+        public Uri Uri(BackdropSize size)
+        {
+            return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
+        }
     }
 }

@@ -50,5 +50,15 @@ namespace TmdbWrapper.Movies
             Order = (int)jsonObject.GetNamedValue("order").GetSafeNumber();
             ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
         }
+
+        /// <summary>
+        /// Uri to the profile image.
+        /// </summary>
+        /// <param name="size">The size for the image as required</param>
+        /// <returns>The uri to the sized image</returns>
+        public Uri Uri(ProfileSize size)
+        {
+            return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
+        }
     }
 }

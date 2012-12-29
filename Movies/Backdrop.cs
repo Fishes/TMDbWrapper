@@ -11,7 +11,7 @@ namespace TmdbWrapper.Movies
     /// <summary>
     /// A movie image
     /// </summary>
-    public class Image : ITmdbObject
+    public class Backdrop : ITmdbObject
     {
         /// <summary>
         /// Path of this image.
@@ -51,6 +51,16 @@ namespace TmdbWrapper.Movies
             AspectRatio = jsonObject.GetNamedValue("aspect_ratio").GetSafeNumber();
             VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
             VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
+        }
+
+        /// <summary>
+        /// Gives the Uri for the backdrop image
+        /// </summary>
+        /// <param name="size">The requested size of the image</param>
+        /// <returns>Uri to the sized image</returns>
+        public Uri Uri(BackdropSize size)
+        {
+            return Utilities.Extensions.MakeImageUri(size.ToString(), FilePath);
         }
     }
 }

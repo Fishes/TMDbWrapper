@@ -12,6 +12,8 @@ namespace TmdbWrapper.Utilities
 {
     internal static class Extensions
     {
+        private const string baseImageUri = @"http://cf2.imgobject.com/t/p/";
+
         internal static string EscapeString(this string s)
         {
             return Regex.Replace(s, "[" + Regex.Escape(new String(Path.GetInvalidFileNameChars())) + "]", "-");
@@ -77,6 +79,11 @@ namespace TmdbWrapper.Utilities
                 }
             }
             return results;
+        }
+
+        internal static Uri MakeImageUri(string size, string path)
+        {
+            return new Uri(string.Format("{0}{1}{2}", baseImageUri, size, path));
         }
     }
 }

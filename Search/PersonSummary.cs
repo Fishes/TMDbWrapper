@@ -47,14 +47,13 @@ namespace TmdbWrapper.Search
         }
 
         /// <summary>
-        /// Uri of the profileImage.
+        /// Uri to the profile image.
         /// </summary>
-        public Uri ProfileImage
+        /// <param name="size">The size for the image as required</param>
+        /// <returns>The uri to the sized image</returns>
+        public Uri Uri(ProfileSize size)
         {
-            get
-            {
-                return new Uri("http://cf2.imgobject.com/t/p/w185" + ProfilePath);
-            }
+            return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
     }
 }

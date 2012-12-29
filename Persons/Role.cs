@@ -52,5 +52,15 @@ namespace TmdbWrapper.Persons
             ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
             Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
         }
+
+        /// <summary>
+        /// Uri to the poster image.
+        /// </summary>
+        /// <param name="size">The size for the image as required</param>
+        /// <returns>The uri to the sized image</returns>
+        public Uri Uri(PosterSize size)
+        {
+            return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
+        }
     }
 }

@@ -20,17 +20,17 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// List of backdrops
         /// </summary>
-        public IList<Image> Backdrops { get; set; }
+        public IList<Backdrop> Backdrops { get; set; }
         /// <summary>
         /// List of posters
         /// </summary>
-        public IList<Image> Posters { get; set; }
+        public IList<Poster> Posters { get; set; }
     
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Backdrops = jsonObject.GetNamedValue("backdrops").ProcessArray<Image>();
-            Posters = jsonObject.GetNamedValue("posters").ProcessArray<Image>();            
+            Backdrops = jsonObject.GetNamedValue("backdrops").ProcessArray<Backdrop>();
+            Posters = jsonObject.GetNamedValue("posters").ProcessArray<Poster>();            
         }
     }
 }

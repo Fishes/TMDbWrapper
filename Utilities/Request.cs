@@ -19,7 +19,7 @@ namespace TmdbWrapper.Utilities
         public Request(string apiName)
         {
             ApiName = apiName;
-            AddParameter("api_key", TheMovieDatabase.ApiKey);
+            AddParameter("api_key", TheMovieDb.ApiKey);
         }
 
         public void AddParameter(string key, string value)

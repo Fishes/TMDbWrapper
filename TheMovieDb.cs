@@ -14,7 +14,7 @@ namespace TmdbWrapper
     /// <summary>
     /// The static that wraps The movie database service.
     /// </summary>
-    public static partial class TheMovieDatabase
+    public static partial class TheMovieDb
     {
         /// <summary>
         /// The apikey that is used in all requests.

@@ -9,7 +9,7 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
-    public static partial class TheMovieDatabase
+    public static partial class TheMovieDb
     {
         /// <summary>
         /// Gets a movie by the movie database id.

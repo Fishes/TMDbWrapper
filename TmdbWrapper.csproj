@@ -127,18 +127,18 @@
     <Compile Include="Movies\ProductionCompany.cs" />
     <Compile Include="Movies\ProductionCountry.cs" />
     <Compile Include="Movies\SpokenLanguage.cs" />
-    <Compile Include="TheMovieDatabaseCompany.cs" />
-    <Compile Include="TheMovieDatabaseMovie.cs" />
-    <Compile Include="TheMovieDatabasePerson.cs" />
+    <Compile Include="TheMovieDbCompany.cs" />
+    <Compile Include="TheMovieDbMovie.cs" />
+    <Compile Include="TheMovieDbPerson.cs" />
     <Compile Include="Utilities\Request.cs" />
     <Compile Include="Utilities\ITmdbObject.cs" />
     <Compile Include="Movies\Movie.cs" />
     <Compile Include="Search\MovieSummary.cs" />
     <Compile Include="Search\PersonSummary.cs" />
     <Compile Include="Search\SearchResult.cs" />
-    <Compile Include="TheMovieDatabase.cs" />
+    <Compile Include="TheMovieDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TheMovieDatabaseSearch.cs" />
+    <Compile Include="TheMovieDbSearch.cs" />
     <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

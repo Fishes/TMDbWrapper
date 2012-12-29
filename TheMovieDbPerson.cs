@@ -8,7 +8,7 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
-    public static partial class TheMovieDatabase
+    public static partial class TheMovieDb
     {
         /// <summary>
         /// Gets the information of the specified person.

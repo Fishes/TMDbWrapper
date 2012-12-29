@@ -9,7 +9,7 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
-    public partial class TheMovieDatabase
+    public partial class TheMovieDb
     {
         /// <summary>
         /// Gets a specific company

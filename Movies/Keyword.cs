@@ -17,11 +17,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the keyword
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of the keyword
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         #endregion
 
         #region interface implementations

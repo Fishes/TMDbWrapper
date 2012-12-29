@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Code of the language.
         /// </summary>
-        public string Iso639_1 { get; set; }
+        public string Iso639_1 { get; private set; }
         /// <summary>
         /// Name of the language.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// The english name of the language.
         /// </summary>
-        public string EnglishName { get; set; }
+        public string EnglishName { get; private set; }
         #endregion
 
         #region overrides

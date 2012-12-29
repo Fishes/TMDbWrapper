@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the movie.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// List of trailers hosted by quicktime.
         /// </summary>
-        public IList<Trailer> QuickTime { get; set; }
+        public IReadOnlyList<Trailer> QuickTime { get; private set; }
         /// <summary>
         /// List of trailers hoster by youtube.
         /// </summary>
-        public IList<Trailer> Youtube { get; set; }
+        public IReadOnlyList<Trailer> Youtube { get; private set; }
         #endregion
 
         #region interface implementations

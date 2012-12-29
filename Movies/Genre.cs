@@ -16,11 +16,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of this genre.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of this genre.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         #endregion
 
         #region overrides

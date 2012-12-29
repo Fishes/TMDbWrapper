@@ -17,31 +17,31 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// Id of the movie
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Title of the movie
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; private set; }
         /// <summary>
         /// Name of the character.
         /// </summary>
-        public string Character { get; set; }
+        public string Character { get; private set; }
         /// <summary>
         /// Original title of the movie.
         /// </summary>
-        public string OriginalTitle { get; set; }
+        public string OriginalTitle { get; private set; }
         /// <summary>
         /// Path of the poster image.
         /// </summary>
-        public string PosterPath { get; set; }
+        public string PosterPath { get; private set; }
         /// <summary>
         /// Release date of the movie.
         /// </summary>
-        public string ReleaseDate { get; set; }
+        public string ReleaseDate { get; private set; }
         /// <summary>
         /// Indicates if the title is an adult movie.
         /// </summary>
-        public bool Adult { get; set; }
+        public bool Adult { get; private set; }
         #endregion
 
         #region interface implementations

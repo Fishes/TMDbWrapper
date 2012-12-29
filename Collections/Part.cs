@@ -3,62 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Data.Json;
 using TmdbWrapper.Utilities;
+using Windows.Data.Json;
 
-namespace TmdbWrapper.Search
+namespace TmdbWrapper.Collections
 {
     /// <summary>
-    /// Summary of a movie in the results of a search.
+    /// A part of a collection
     /// </summary>
-    public class MovieSummary : ITmdbObject
+    public class Part : ITmdbObject
     {
         #region properties
         /// <summary>
-        /// Indictas if this is an adult movie.
-        /// </summary>
-        public bool Adult { get; private set; }
-        /// <summary>
-        /// Path of the backdrop image
+        /// Backdrop image path
         /// </summary>
         public string BackdropPath { get; private set; }
         /// <summary>
-        /// Id of this movie
+        /// Id of the movie
         /// </summary>
         public int Id { get; private set; }
         /// <summary>
-        /// Original title of this movie.
-        /// </summary>
-        public string OriginalTitle { get; private set; }
-        /// <summary>
-        /// Original date of this release.
-        /// </summary>
-        public string ReleaseDate { get; private set; }
-        /// <summary>
-        /// Path of the poster for this movie.
+        /// Poster image path
         /// </summary>
         public string PosterPath { get; private set; }
         /// <summary>
-        /// Popularity of this movie.
+        /// Release date of the movie
         /// </summary>
-        public double Popularity { get; private set; }
+        public string ReleaseDate { get; private set; }
         /// <summary>
-        /// Title of this movie.
+        /// Title of the movie
         /// </summary>
         public string Title { get; private set; }
-        /// <summary>
-        /// Average of the votes.
-        /// </summary>
-        public double VoteAverage { get; private set; }
-        /// <summary>
-        /// Number of votes cast.
-        /// </summary>
-        public int VoteCount { get; private set; }
         #endregion
 
         #region overrides
         /// <summary>
-        /// Returns the ToString of this instance.
+        /// Returns this instance ToString
         /// </summary>
         public override string ToString()
         {
@@ -66,22 +46,18 @@ namespace TmdbWrapper.Search
         }
         #endregion
 
-        #region interface implementations
+        #region Interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
             BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            OriginalTitle = jsonObject.GetNamedValue("release_date").GetSafeString();
             PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            Popularity = jsonObject.GetNamedValue("popularity").GetSafeNumber();
+            ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
             Title = jsonObject.GetNamedValue("title").GetSafeString();
-            VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
-            VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
         }
         #endregion
 
-        #region Image uri's
+        #region image uri's
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -101,9 +77,10 @@ namespace TmdbWrapper.Search
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
+
         #endregion
 
-        #region Navigation properties
+        #region navigation properties
         /// <summary>
         /// Retrieves the associated movie.
         /// </summary>        
@@ -112,5 +89,5 @@ namespace TmdbWrapper.Search
             return await TheMovieDb.GetMovie(Id);
         }
         #endregion
-    }    
+    }
 }

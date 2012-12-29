@@ -17,19 +17,19 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Id of the collection.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Path of the backdrop path.
         /// </summary>
-        public string BackdropPath { get; set; }
+        public string BackdropPath { get; private set; }
         /// <summary>
         /// Name of the collection
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Path of the poster for this collection
         /// </summary>
-        public string PosterPath { get; set; }
+        public string PosterPath { get; private set; }
         #endregion
 
         #region overrides
@@ -53,7 +53,7 @@ namespace TmdbWrapper.Search
         }
         #endregion
 
-        #region navigation properties
+        #region image uri's
         /// <summary>
         /// Uri to the backdrop image.
         /// </summary>

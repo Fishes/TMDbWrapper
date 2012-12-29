@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Name of the trailer
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Size of the trailer.
         /// </summary>
-        public string Size { get; set; }
+        public string Size { get; private set; }
         /// <summary>
         /// Source of the trailer
         /// </summary>
-        public string Source { get; set; }
+        public string Source { get; private set; }
         #endregion
 
         #region interface implementations

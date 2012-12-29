@@ -17,43 +17,43 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// Indicates wether this person is an adult actor
         /// </summary>
-        public bool Adult { get; set; }
+        public bool Adult { get; private set; }
         /// <summary>
         /// Aliases this person is known by.
         /// </summary>
-        public string[] Aliases { get; set; }
+        public string[] Aliases { get; private set; }
         /// <summary>
         /// Biography of this person.
         /// </summary>
-        public string Biography { get; set; }
+        public string Biography { get; private set; }
         /// <summary>
         /// Birthday 
         /// </summary>
-        public string Birthday { get; set; }
+        public string Birthday { get; private set; }
         /// <summary>
         /// Date of death
         /// </summary>
-        public string Deathday { get; set; }
+        public string Deathday { get; private set; }
         /// <summary>
         /// Uri of possible homepage.
         /// </summary>
-        public Uri Homepage { get; set; }
+        public Uri Homepage { get; private set; }
         /// <summary>
         /// Id of this person
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of this person.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Place of birth
         /// </summary>
-        public string PlaceOfBirth { get; set; }
+        public string PlaceOfBirth { get; private set; }
         /// <summary>
         /// Path of the profile.
         /// </summary>
-        public string ProfilePath { get; set; }
+        public string ProfilePath { get; private set; }
         #endregion
 
         #region interface implementations

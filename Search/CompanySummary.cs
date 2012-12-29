@@ -16,15 +16,15 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Id of the company
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Path of the logo image.
         /// </summary>
-        public string LogoPath { get; set; }
+        public string LogoPath { get; private set; }
         /// <summary>
         /// Name of the company.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         #endregion
 
         #region interface implementations

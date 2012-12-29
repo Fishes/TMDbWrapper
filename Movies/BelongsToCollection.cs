@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Collections;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Movies
@@ -16,19 +17,19 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the collection
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of the collection
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Path to the poster
         /// </summary>
-        public string PosterPath { get; set; }
+        public string PosterPath { get; private set; }
         /// <summary>
         /// Path to the backdrop
         /// </summary>
-        public string BackdropPath { get; set; }
+        public string BackdropPath { get; private set; }
         #endregion
 
         #region interface implementations
@@ -72,6 +73,18 @@ namespace TmdbWrapper.Movies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
+        #endregion
+
+        #region navigation properties 
+        /// <summary>
+        /// Gets the collection
+        /// </summary>
+        /// <returns>The collection</returns>
+        public async Task<Collection> Collection()
+        {
+            return await TheMovieDb.GetCollection(Id);
+        }
+
         #endregion
     }
 }

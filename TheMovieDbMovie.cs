@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Image;
 using TmdbWrapper.Movies;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
@@ -43,7 +44,7 @@ namespace TmdbWrapper
         /// <param name="MovieID">Id of the movie</param>
         /// <param name="Country">Code of the country</param>
         /// <returns>A list of alternative titles.</returns>
-        public static async Task<IList<AlternativeTitle>> GetMovieAlternateTitles(int MovieID, string Country)
+        public static async Task<IReadOnlyList<AlternativeTitle>> GetMovieAlternateTitles(int MovieID, string Country)
         {
             Request<AlternativeTitle> request = new Request<AlternativeTitle>("movie/" + MovieID.ToString() + "/alternative_titles");
             if (!string.IsNullOrEmpty(Country))
@@ -80,7 +81,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns>A list of movie keywords.</returns>
-        public static async Task<IList<Keyword>> GetMovieKeywords(int MovieID)
+        public static async Task<IReadOnlyList<Keyword>> GetMovieKeywords(int MovieID)
         {
             Request<Keyword> request = new Request<Keyword>("movie/" + MovieID.ToString() + "/keywords");
             return await request.ProcesRequestListAsync("keywords");
@@ -91,7 +92,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">Id of the movie</param>
         /// <returns>A list of releases.</returns>
-        public static async Task<IList<Release>> GetMovieReleases(int MovieID)
+        public static async Task<IReadOnlyList<Release>> GetMovieReleases(int MovieID)
         {
             Request<Release> request = new Request<Release>("movie/" + MovieID.ToString() + "/releases");
             return await request.ProcesRequestListAsync("releases");

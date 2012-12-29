@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
 using Windows.Data.Json;
 
-namespace TmdbWrapper.Movies
+namespace TmdbWrapper.Image
 {
     /// <summary>
     /// Images of a movie
@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the movie
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// List of backdrops
         /// </summary>
-        public IList<Backdrop> Backdrops { get; set; }
+        public IReadOnlyList<Backdrop> Backdrops { get; private set; }
         /// <summary>
         /// List of posters
         /// </summary>
-        public IList<Poster> Posters { get; set; }
+        public IReadOnlyList<Poster> Posters { get; private set; }
         #endregion
 
         #region interface implementations

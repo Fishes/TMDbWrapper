@@ -17,23 +17,23 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the person.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of the person.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Name of the character that is played.
         /// </summary>
-        public string Character { get; set; }
+        public string Character { get; private set; }
         /// <summary>
         /// Order of the character in the credits
         /// </summary>
-        public int Order { get; set; }
+        public int Order { get; private set; }
         /// <summary>
         /// Path of the profile picture
         /// </summary>
-        public string ProfilePath { get; set; }
+        public string ProfilePath { get; private set; }
         #endregion
 
         #region overrides

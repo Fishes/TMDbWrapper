@@ -17,19 +17,19 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Page number of this set.
         /// </summary>
-        public int Page { get; set; }
+        public int Page { get; internal set; }
         /// <summary>
         /// List with search results.
         /// </summary>
-        public List<T> Results { get; set; }
+        public List<T> Results { get; internal set; }
         /// <summary>
         /// Total number of search pages.
         /// </summary>
-        public int TotalPages { get; set; }
+        public int TotalPages { get; internal set; }
         /// <summary>
         /// Total number of results
         /// </summary>
-        public int TotalResults { get; set; }
+        public int TotalResults { get; internal set; }
         #endregion
     }
 }

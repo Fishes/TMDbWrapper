@@ -16,19 +16,19 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Indicates wether this is an adult actor.
         /// </summary>
-        public bool Adult { get; set; }
+        public bool Adult { get; private set; }
         /// <summary>
         /// Id of this person.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Name of this person.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Path of an profile image of this person.
         /// </summary>
-        public string ProfilePath { get; set; }
+        public string ProfilePath { get; private set; }
         #endregion
 
         #region overrides

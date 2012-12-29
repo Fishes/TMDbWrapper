@@ -21,11 +21,11 @@ namespace TmdbWrapper
         /// <summary>
         /// The apikey that is used in all requests.
         /// </summary>
-        public static string ApiKey { get; set; }
+        public static string ApiKey { get; private set; }
         /// <summary>
         /// Language all the request uses if entered.
         /// </summary>
-        public static string Language { get; set; }
+        public static string Language { get; private set; }
 
         /// <summary>
         /// Initialises the wrapper.

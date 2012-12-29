@@ -107,14 +107,14 @@ namespace TmdbWrapper.Utilities
             return result;
         }
 
-        public async Task<IList<T>> ProcesRequestListAsync(string valueName)
+        public async Task<IReadOnlyList<T>> ProcesRequestListAsync(string valueName)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
             JsonObject jsonObject = JsonObject.Parse(response);
-            IList<T> result = jsonObject.GetNamedValue("valueName").ProcessArray<T>();
+            IReadOnlyList<T> result = jsonObject.GetNamedValue("valueName").ProcessArray<T>();
             return result;
         }
     }

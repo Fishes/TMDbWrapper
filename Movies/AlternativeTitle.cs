@@ -17,11 +17,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Designation of the language.
         /// </summary>
-        public string Iso3166_1 { get; set; }
+        public string Iso3166_1 { get; private set; }
         /// <summary>
         /// Alternative version of the title.
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; private set; }
         #endregion
 
         #region interface implementations

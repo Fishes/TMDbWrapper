@@ -71,9 +71,9 @@ namespace TmdbWrapper.Utilities
             return default(T);
         }
 
-        internal static IList<T> ProcessArray<T>(this JsonValue jsonValue) where T : ITmdbObject, new()
+        internal static IReadOnlyList<T> ProcessArray<T>(this JsonValue jsonValue) where T : ITmdbObject, new()
         {
-            IList<T> results = new List<T>();
+            List<T> results = new List<T>();
             if (jsonValue.ValueType == JsonValueType.Array)
             {
                 foreach(JsonObject subObject in jsonValue.GetArray())

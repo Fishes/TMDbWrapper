@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Country of this release
         /// </summary>
-        public string Iso3166_1 { get; set; }
+        public string Iso3166_1 { get; private set; }
         /// <summary>
         /// Certification of this release.
         /// </summary>
-        public string Certification { get; set; }
+        public string Certification { get; private set; }
         /// <summary>
         /// Date of this release.
         /// </summary>
-        public string ReleaseDate { get; set; }
+        public string ReleaseDate { get; private set; }
         #endregion
 
         #region interface implementations

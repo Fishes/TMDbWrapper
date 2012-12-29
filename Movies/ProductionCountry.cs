@@ -17,11 +17,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Code of this country
         /// </summary>
-        public string Iso_3166_1 { get; set; }
+        public string Iso_3166_1 { get; private set; }
         /// <summary>
         /// Name of the contry.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         #endregion
 
         #region overrides

@@ -17,15 +17,15 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Id of the movie of this cast.
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Cast of movie
         /// </summary>
-        public IList<CastPerson> Cast { get; set; }
+        public IReadOnlyList<CastPerson> Cast { get; private set; }
         /// <summary>
         /// Crew of this movie.
         /// </summary>
-        public IList<CastPerson> Crew { get; set; }
+        public IReadOnlyList<CastPerson> Crew { get; private set; }
         #endregion
 
         #region interface implementations

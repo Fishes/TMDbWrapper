@@ -17,11 +17,11 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// List of the crew
         /// </summary>
-        public IList<Crew> Crew {get; set;}
+        public IReadOnlyList<Crew> Crew { get; private set; }
         /// <summary>
         /// List of the cast
         /// </summary>
-        public IList<Role> Cast {get; set;}
+        public IReadOnlyList<Role> Cast { get; private set; }
         #endregion
 
         #region interface implementation

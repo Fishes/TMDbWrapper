@@ -37,9 +37,9 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="PersonID">The id of the specified person.</param>
         /// <returns>A list of images</returns>
-        public static async Task<IList<Image>> GetImage(int PersonID)
+        public static async Task<IReadOnlyList<Profile>> GetImage(int PersonID)
         {
-            Request<Image> request = new Request<Image>("person/" + PersonID.ToString() +"/images");
+            Request<Profile> request = new Request<Profile>("person/" + PersonID.ToString() +"/images");
             return await request.ProcesRequestListAsync("profiles");
         }
     }

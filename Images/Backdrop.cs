@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.Data.Json;
 using TmdbWrapper.Utilities;
 
-namespace TmdbWrapper.Movies
+namespace TmdbWrapper.Image
 {
     /// <summary>
     /// A movie image
@@ -17,31 +17,31 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Path of this image.
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath { get; private set; }
         /// <summary>
         /// Width of this image.
         /// </summary>
-        public int Width { get; set; }
+        public int Width { get; private set; }
         /// <summary>
         /// Height of this image.
         /// </summary>
-        public int Height { get; set; }
+        public int Height { get; private set; }
         /// <summary>
         /// Code of this images language.
         /// </summary>
-        public string Iso639_1 { get; set; }
+        public string Iso639_1 { get; private set; }
         /// <summary>
         /// Aspect ratio
         /// </summary>
-        public double AspectRatio { get; set; }
+        public double AspectRatio { get; private set; }
         /// <summary>
         /// Average of votes
         /// </summary>
-        public double VoteAverage { get; set; }
+        public double VoteAverage { get; private set; }
         /// <summary>
         /// Number of votes.
         /// </summary>
-        public int VoteCount { get; set; }
+        public int VoteCount { get; private set; }
         #endregion
 
         #region interface implementations

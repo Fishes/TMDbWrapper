@@ -17,11 +17,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Name of the production company
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Id of the production company
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         #endregion
 
         #region overrides

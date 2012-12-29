@@ -18,31 +18,31 @@ namespace TmdbWrapper.Companies
         /// <summary>
         /// Discription of this company.
         /// </summary>
-        public string Description { get; set; }
+        public string Description { get; private set; }
         /// <summary>
         /// Location of the headquarters of this company.
         /// </summary>
-        public string Headquarters { get; set; }
+        public string Headquarters { get; private set; }
         /// <summary>
         /// Uri for the homepage of this company.
         /// </summary>
-        public Uri Homepage { get; set; }
+        public Uri Homepage { get; private set; }
         /// <summary>
         /// Id of this company
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// Path of the logo for this company
         /// </summary>
-        public string LogoPath { get; set; }
+        public string LogoPath { get; private set; }
         /// <summary>
         /// Name of this company.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
         /// <summary>
         /// Id of the parentcompany.
         /// </summary>
-        public int ParentCompany { get; set; }
+        public int ParentCompany { get; private set; }
         #endregion
 
         #region interface implementations

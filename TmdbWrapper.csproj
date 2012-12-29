@@ -105,11 +105,13 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\Collection.cs" />
+    <Compile Include="Collections\Part.cs" />
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Movies\AlternativeTitle.cs" />
     <Compile Include="Movies\BelongsToCollection.cs" />
     <Compile Include="Movies\CastPerson.cs" />
-    <Compile Include="Movies\Poster.cs" />
+    <Compile Include="Images\Poster.cs" />
     <Compile Include="Persons\Credit.cs" />
     <Compile Include="Persons\Image.cs" />
     <Compile Include="Persons\Crew.cs" />
@@ -119,8 +121,8 @@
     <Compile Include="Search\CompanySummary.cs" />
     <Compile Include="Movies\Credits.cs" />
     <Compile Include="Movies\Genre.cs" />
-    <Compile Include="Movies\Backdrop.cs" />
-    <Compile Include="Movies\Images.cs" />
+    <Compile Include="Images\Backdrop.cs" />
+    <Compile Include="Images\Images.cs" />
     <Compile Include="Movies\Keyword.cs" />
     <Compile Include="Movies\Release.cs" />
     <Compile Include="Movies\Trailer.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="TheMovieDbCompany.cs" />
     <Compile Include="TheMovieDbMovie.cs" />
     <Compile Include="TheMovieDbPerson.cs" />
+    <Compile Include="TheMovieDbCollection.cs" />
     <Compile Include="Utilities\Request.cs" />
     <Compile Include="Utilities\ITmdbObject.cs" />
     <Compile Include="Movies\Movie.cs" />

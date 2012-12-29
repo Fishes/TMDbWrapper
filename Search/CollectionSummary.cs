@@ -13,6 +13,7 @@ namespace TmdbWrapper.Search
     /// </summary>
     public class CollectionSummary : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the collection.
         /// </summary>
@@ -29,7 +30,9 @@ namespace TmdbWrapper.Search
         /// Path of the poster for this collection
         /// </summary>
         public string PosterPath { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Return this instances ToString
         /// </summary>
@@ -38,7 +41,9 @@ namespace TmdbWrapper.Search
         {
             return Name;
         }
-        
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
@@ -46,7 +51,9 @@ namespace TmdbWrapper.Search
             Name = jsonObject.GetNamedValue("name").GetSafeString();
             PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
         }
+        #endregion
 
+        #region navigation properties
         /// <summary>
         /// Uri to the backdrop image.
         /// </summary>
@@ -66,5 +73,6 @@ namespace TmdbWrapper.Search
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
+        #endregion
     }
 }

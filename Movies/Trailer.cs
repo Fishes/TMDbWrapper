@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Trailer : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Name of the trailer
         /// </summary>
@@ -25,14 +26,18 @@ namespace TmdbWrapper.Movies
         /// Source of the trailer
         /// </summary>
         public string Source { get; set; }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Name = jsonObject.GetNamedValue("name").GetSafeString();
             Size = jsonObject.GetNamedValue("size").GetSafeString();
             Source = jsonObject.GetNamedValue("source").GetSafeString();
         }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns this instance ToString
         /// </summary>
@@ -40,5 +45,6 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+        #endregion
     }
 }

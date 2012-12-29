@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Images : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the movie
         /// </summary>
@@ -25,12 +26,15 @@ namespace TmdbWrapper.Movies
         /// List of posters
         /// </summary>
         public IList<Poster> Posters { get; set; }
-    
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
             Backdrops = jsonObject.GetNamedValue("backdrops").ProcessArray<Backdrop>();
-            Posters = jsonObject.GetNamedValue("posters").ProcessArray<Poster>();            
+            Posters = jsonObject.GetNamedValue("posters").ProcessArray<Poster>();
         }
+        #endregion
     }
 }

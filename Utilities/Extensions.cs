@@ -12,13 +12,18 @@ namespace TmdbWrapper.Utilities
 {
     internal static class Extensions
     {
+        #region private constants
         private const string baseImageUri = @"http://cf2.imgobject.com/t/p/";
+        #endregion
 
+        #region string extensions
         internal static string EscapeString(this string s)
         {
             return Regex.Replace(s, "[" + Regex.Escape(new String(Path.GetInvalidFileNameChars())) + "]", "-");
         }
+        #endregion
 
+        #region jsonValue extensions
         internal static string GetSafeString(this JsonValue jsonValue)
         {
             if (jsonValue.ValueType != JsonValueType.Null)
@@ -80,10 +85,13 @@ namespace TmdbWrapper.Utilities
             }
             return results;
         }
+        #endregion
 
+        #region image uri methods
         internal static Uri MakeImageUri(string size, string path)
         {
             return new Uri(string.Format("{0}{1}{2}", baseImageUri, size, path));
         }
+        #endregion
     }
 }

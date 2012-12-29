@@ -14,6 +14,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Movie : ITmdbObject
     {
+        #region Properties
         /// <summary>
         /// Indictates wether this is an adult title.
         /// </summary>
@@ -106,7 +107,9 @@ namespace TmdbWrapper.Movies
         /// Number of votes.
         /// </summary>
         public int VoteCount { get; set; }
+        #endregion
 
+        #region Overrides
         /// <summary>
         /// Returns this instance ToString
         /// </summary>
@@ -114,7 +117,9 @@ namespace TmdbWrapper.Movies
         {
             return Title;
         }
+        #endregion
 
+        #region Interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
@@ -141,7 +146,9 @@ namespace TmdbWrapper.Movies
             VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
             VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
         }
+        #endregion
 
+        #region Image Uri's
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -161,6 +168,9 @@ namespace TmdbWrapper.Movies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
+        #endregion
+
+        #region Navigation Properties
         /// <summary>
         /// Gets a list of altenative titles for the specified country
         /// </summary>
@@ -234,5 +244,7 @@ namespace TmdbWrapper.Movies
         {
             return await TheMovieDb.GetMovieTranslations(Id);
         }
+
+        #endregion
     }
 }

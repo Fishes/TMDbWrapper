@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Credits : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the movie of this cast.
         /// </summary>
@@ -25,12 +26,16 @@ namespace TmdbWrapper.Movies
         /// Crew of this movie.
         /// </summary>
         public IList<CastPerson> Crew { get; set; }
-        
+        #endregion
+
+        #region interface implementations
+
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
             Cast = jsonObject.GetNamedValue("cast").ProcessArray<CastPerson>();
             Crew = jsonObject.GetNamedValue("crew").ProcessArray<CastPerson>();
-        }       
+        }
+        #endregion
     }
 }

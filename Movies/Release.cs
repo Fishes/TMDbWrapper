@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Release : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Country of this release
         /// </summary>
@@ -25,14 +26,18 @@ namespace TmdbWrapper.Movies
         /// Date of this release.
         /// </summary>
         public string ReleaseDate { get; set; }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Iso3166_1 = jsonObject.GetNamedValue("iso_3166_1").GetSafeString();
             Certification = jsonObject.GetNamedValue("certification").GetSafeString();
             ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
         }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns this instances ToString.
         /// </summary>
@@ -40,5 +45,6 @@ namespace TmdbWrapper.Movies
         {
             return Iso3166_1;
         }
+        #endregion
     }
 }

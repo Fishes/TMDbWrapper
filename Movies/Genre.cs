@@ -12,6 +12,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Genre : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of this genre.
         /// </summary>
@@ -20,7 +21,9 @@ namespace TmdbWrapper.Movies
         /// Name of this genre.
         /// </summary>
         public string Name { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns this instance ToString
         /// </summary>        
@@ -28,11 +31,14 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
             Name = jsonObject.GetNamedValue("name").GetSafeString();
         }
+        #endregion
     }
 }

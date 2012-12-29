@@ -13,6 +13,7 @@ namespace TmdbWrapper.Persons
     /// </summary>
     public class Image : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Path of the image
         /// </summary>
@@ -33,7 +34,9 @@ namespace TmdbWrapper.Persons
         /// Aspect ratio of the image.
         /// </summary>
         public double AspectRatio { get; set; }
+        #endregion
 
+        #region interface implememtations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             FilePath = jsonObject.GetNamedValue("file_path").GetSafeString();
@@ -42,5 +45,6 @@ namespace TmdbWrapper.Persons
             iso639_1 = jsonObject.GetNamedValue("iso_639_1").GetSafeString();
             AspectRatio = jsonObject.GetNamedValue("aspect_ratio").GetSafeNumber();
         }
+        #endregion
     }
 }

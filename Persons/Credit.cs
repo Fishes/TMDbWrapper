@@ -13,6 +13,7 @@ namespace TmdbWrapper.Persons
     /// </summary>
     public class Credit : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// List of the crew
         /// </summary>
@@ -21,11 +22,14 @@ namespace TmdbWrapper.Persons
         /// List of the cast
         /// </summary>
         public IList<Role> Cast {get; set;}
+        #endregion
 
+        #region interface implementation
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Crew = jsonObject.GetNamedValue("crew").ProcessArray<Crew>();
             Cast = jsonObject.GetNamedValue("cast").ProcessArray<Role>();
         }
+        #endregion
     }
 }

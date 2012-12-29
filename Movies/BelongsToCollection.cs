@@ -12,6 +12,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class BelongsToCollection : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the collection
         /// </summary>
@@ -28,6 +29,9 @@ namespace TmdbWrapper.Movies
         /// Path to the backdrop
         /// </summary>
         public string BackdropPath { get; set; }
+        #endregion
+
+        #region interface implementations
 
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
@@ -36,7 +40,9 @@ namespace TmdbWrapper.Movies
             PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
             BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
         }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns this instance ToString()
         /// </summary>
@@ -44,7 +50,9 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+        #endregion
 
+        #region image uri's 
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -64,5 +72,6 @@ namespace TmdbWrapper.Movies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
+        #endregion
     }
 }

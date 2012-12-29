@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class ProductionCompany : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Name of the production company
         /// </summary>
@@ -21,21 +22,27 @@ namespace TmdbWrapper.Movies
         /// Id of the production company
         /// </summary>
         public int Id { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
-        /// 
+        /// Returns this instance ToString 
         /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return Name;
         }
-        
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
             Name = jsonObject.GetNamedValue("name").GetSafeString();
         }
+        #endregion
+
+        #region navigation properties
         /// <summary>
         /// Retrieves the associated company.
         /// </summary>
@@ -43,5 +50,6 @@ namespace TmdbWrapper.Movies
         {
             return await TheMovieDb.GetCompany(Id);
         }
+        #endregion
     }
 }

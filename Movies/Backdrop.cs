@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Backdrop : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Path of this image.
         /// </summary>
@@ -41,7 +42,9 @@ namespace TmdbWrapper.Movies
         /// Number of votes.
         /// </summary>
         public int VoteCount { get; set; }
-         
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             FilePath = jsonObject.GetNamedValue("file_path").GetSafeString();
@@ -52,7 +55,9 @@ namespace TmdbWrapper.Movies
             VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
             VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
         }
+        #endregion
 
+        #region image uri's
         /// <summary>
         /// Gives the Uri for the backdrop image
         /// </summary>
@@ -62,5 +67,6 @@ namespace TmdbWrapper.Movies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), FilePath);
         }
+        #endregion
     }
 }

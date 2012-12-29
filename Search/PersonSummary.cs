@@ -12,6 +12,7 @@ namespace TmdbWrapper.Search
     /// </summary>
     public class PersonSummary : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Indicates wether this is an adult actor.
         /// </summary>
@@ -28,7 +29,9 @@ namespace TmdbWrapper.Search
         /// Path of an profile image of this person.
         /// </summary>
         public string ProfilePath { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns the ToString of this instance.
         /// </summary>
@@ -37,7 +40,9 @@ namespace TmdbWrapper.Search
         {
             return Name;
         }
-        
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
             Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
@@ -45,7 +50,9 @@ namespace TmdbWrapper.Search
             Name = jsonObject.GetNamedValue("name").GetSafeString();
             ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
         }
+        #endregion
 
+        #region image uri's 
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -55,6 +62,9 @@ namespace TmdbWrapper.Search
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
+        #endregion
+
+        #region navigation properties
         /// <summary>
         /// Retrieves the associated person.
         /// </summary>
@@ -62,5 +72,6 @@ namespace TmdbWrapper.Search
         {
             return await TheMovieDb.GetPerson(Id);
         }
+        #endregion
     }
 }

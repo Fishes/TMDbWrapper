@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Trailers : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the movie.
         /// </summary>
@@ -24,8 +25,10 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// List of trailers hoster by youtube.
         /// </summary>
-        public IList<Trailer> Youtube { get; set; } 
+        public IList<Trailer> Youtube { get; set; }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
@@ -34,5 +37,6 @@ namespace TmdbWrapper.Movies
             JsonValue youtubeValueObject = jsonObject.GetNamedValue("youtube");
             Youtube = youtubeValueObject.ProcessArray<Trailer>();
         }
+        #endregion
     }
 }

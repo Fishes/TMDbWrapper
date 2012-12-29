@@ -13,6 +13,7 @@ namespace TmdbWrapper.Search
     /// <typeparam name="T">The type that are searched.</typeparam>
     public class SearchResult<T>
     {
+        #region properties
         /// <summary>
         /// Page number of this set.
         /// </summary>
@@ -28,6 +29,7 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Total number of results
         /// </summary>
-        public int TotalResults { get; set; }       
+        public int TotalResults { get; set; }
+        #endregion
     }
 }

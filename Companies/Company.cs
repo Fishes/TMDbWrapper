@@ -14,6 +14,7 @@ namespace TmdbWrapper.Companies
     /// </summary>
     public class Company : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Discription of this company.
         /// </summary>
@@ -42,7 +43,9 @@ namespace TmdbWrapper.Companies
         /// Id of the parentcompany.
         /// </summary>
         public int ParentCompany { get; set; }
-        
+        #endregion
+
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Description = jsonObject.GetNamedValue("description").GetSafeString();
@@ -53,7 +56,9 @@ namespace TmdbWrapper.Companies
             Name = jsonObject.GetNamedValue("name").GetSafeString();
             ParentCompany = (int)jsonObject.GetNamedValue("parent_company").GetSafeNumber();
         }
-
+        #endregion
+        
+        #region image uri's
         /// <summary>
         /// Uri to the logo image.
         /// </summary>
@@ -63,6 +68,9 @@ namespace TmdbWrapper.Companies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), LogoPath);
         }
+        #endregion
+
+        #region navigation properties
         /// <summary>
         /// Retrieves the credits for this company
         /// </summary>
@@ -72,5 +80,6 @@ namespace TmdbWrapper.Companies
         {
             return await TheMovieDb.GetCompanyCredits(Id, page);
         }
+        #endregion
     }
 }

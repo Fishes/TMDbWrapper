@@ -13,6 +13,7 @@ namespace TmdbWrapper.Persons
     /// </summary>
     public class Person : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Indicates wether this person is an adult actor
         /// </summary>
@@ -53,7 +54,9 @@ namespace TmdbWrapper.Persons
         /// Path of the profile.
         /// </summary>
         public string ProfilePath { get; set; }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
@@ -66,7 +69,9 @@ namespace TmdbWrapper.Persons
             PlaceOfBirth = jsonObject.GetNamedValue("place_of_birth").GetSafeString();
             ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
         }
+        #endregion
 
+        #region image uri's
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -76,5 +81,6 @@ namespace TmdbWrapper.Persons
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
+        #endregion
     }
 }

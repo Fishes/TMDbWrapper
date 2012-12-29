@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class SpokenLanguage : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Code of the language.
         /// </summary>
@@ -25,7 +26,9 @@ namespace TmdbWrapper.Movies
         /// The english name of the language.
         /// </summary>
         public string EnglishName { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns of this instance the ToString
         /// </summary>
@@ -33,12 +36,15 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Iso639_1 = jsonObject.GetNamedValue("iso_639_1").GetSafeString();
             Name = jsonObject.GetNamedValue("name").GetSafeString();
             EnglishName = jsonObject.GetNamedValue("english_name").GetSafeString();
         }
+        #endregion
     }
 }

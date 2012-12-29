@@ -13,6 +13,7 @@ namespace TmdbWrapper.Persons
     /// </summary>
     public class Crew : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the movie.
         /// </summary>
@@ -45,7 +46,9 @@ namespace TmdbWrapper.Persons
         /// Indictates if then movie is an adult title.
         /// </summary>
         public bool Adult { get; set; }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
@@ -57,7 +60,9 @@ namespace TmdbWrapper.Persons
             ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
             Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
         }
+        #endregion
 
+        #region image uri's 
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -67,7 +72,9 @@ namespace TmdbWrapper.Persons
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
+        #endregion
 
+        #region navigation properties
         /// <summary>
         /// Retrieves the associated movie.
         /// </summary>
@@ -75,5 +82,6 @@ namespace TmdbWrapper.Persons
         {
             return await TheMovieDb.GetMovie(Id);
         }
+        #endregion
     }
 }

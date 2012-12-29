@@ -13,6 +13,7 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class CastPerson : ITmdbObject
     {
+        #region properties
         /// <summary>
         /// Id of the person.
         /// </summary>
@@ -33,7 +34,9 @@ namespace TmdbWrapper.Movies
         /// Path of the profile picture
         /// </summary>
         public string ProfilePath { get; set; }
+        #endregion
 
+        #region overrides
         /// <summary>
         /// Returns this instances ToString
         /// </summary>        
@@ -41,7 +44,9 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
+        #endregion
 
+        #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
@@ -50,7 +55,9 @@ namespace TmdbWrapper.Movies
             Order = (int)jsonObject.GetNamedValue("order").GetSafeNumber();
             ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
         }
+        #endregion
 
+        #region image uri's
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -60,7 +67,9 @@ namespace TmdbWrapper.Movies
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
+        #endregion
 
+        #region navigation properties
         /// <summary>
         /// Retrieves the associated person
         /// </summary>
@@ -68,5 +77,6 @@ namespace TmdbWrapper.Movies
         {
             return await TheMovieDb.GetPerson(Id);
         }
+        #endregion
     }
 }

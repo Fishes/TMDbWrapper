@@ -18,23 +18,23 @@ namespace TmdbWrapper
         /// <returns>The company that is associated to the id.</returns>
         public static async Task<Company> GetCompany(int CompanyId)
         {
-            Request request = new Request("company/"+ CompanyId.ToString());
-            return await request.ProcesRequestAsync<Company>();            
+            Request<Company> request = new Request<Company>("company/"+ CompanyId.ToString());
+            return await request.ProcesRequestAsync();            
         }
 
         /// <summary>
         /// Gets the credits of the specified company.
         /// </summary>
         /// <param name="CompanyId">The id of the company</param>
-        /// <param name="page">The page number of the set that is requested.</param>
+        /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A page of credits</returns>
         public static async Task<SearchResultBase<MovieSummary>> GetCompanyCredits(int CompanyId, int page = 1)
         {
-            Request request = new Request("company/" + CompanyId.ToString() + "/movies");
+            Request<MovieSummary> request = new Request<MovieSummary>("company/" + CompanyId.ToString() + "/movies");
             request.AddParameter("page", page);
             if(!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
-            return await request.ProcessSearchRequestAsync<MovieSummary>();
+            return await request.ProcessSearchRequestAsync();
         }
     }
 }

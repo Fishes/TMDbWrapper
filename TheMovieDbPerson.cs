@@ -17,8 +17,8 @@ namespace TmdbWrapper
         /// <returns>The person.</returns>
         public static async Task<Person> GetPerson(int PersonID)
         {
-            Request request = new Request("person/" + PersonID.ToString());
-            return await request.ProcesRequestAsync<Person>();
+            Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
+            return await request.ProcesRequestAsync();
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace TmdbWrapper
         /// <returns>The credits.</returns>
         public static async Task<Credit> GetCredits(int PersonID)
         {
-            Request request = new Request("person/" + PersonID.ToString() + "/credits");
-            return await request.ProcesRequestAsync<Credit>();
+            Request<Credit> request = new Request<Credit>("person/" + PersonID.ToString() + "/credits");
+            return await request.ProcesRequestAsync();
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace TmdbWrapper
         /// <returns>A list of images</returns>
         public static async Task<IList<Image>> GetImage(int PersonID)
         {
-            Request request = new Request("person/" + PersonID.ToString() +"/images");
-            return await request.ProcesRequestListAsync<Image>("profiles");
+            Request<Image> request = new Request<Image>("person/" + PersonID.ToString() +"/images");
+            return await request.ProcesRequestListAsync("profiles");
         }
     }
 }

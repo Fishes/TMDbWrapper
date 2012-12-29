@@ -18,10 +18,10 @@ namespace TmdbWrapper
         /// <returns>The specified movie.</returns>
         public static async Task<Movie> GetMovie(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString());
+            Request<Movie> request = new Request<Movie>("movie/" + MovieID.ToString());
             if (!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync<Movie>();
+            return await request.ProcesRequestAsync();
         }        
         
         /// <summary>
@@ -31,10 +31,10 @@ namespace TmdbWrapper
         /// <returns>The specified movie.</returns>
         public static async Task<Movie> GetMovieByIMDB(string IMDBId)
         {
-            Request request = new Request("movie/" + IMDBId);
+            Request<Movie> request = new Request<Movie>("movie/" + IMDBId);
             if (!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync<Movie>();
+            return await request.ProcesRequestAsync();
         }        
         
         /// <summary>
@@ -45,10 +45,10 @@ namespace TmdbWrapper
         /// <returns>A list of alternative titles.</returns>
         public static async Task<IList<AlternativeTitle>> GetMovieAlternateTitles(int MovieID, string Country)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/alternative_titles");
+            Request<AlternativeTitle> request = new Request<AlternativeTitle>("movie/" + MovieID.ToString() + "/alternative_titles");
             if (!string.IsNullOrEmpty(Country))
                 request.AddParameter("country", Country);
-            return await request.ProcesRequestListAsync<AlternativeTitle>("titles");
+            return await request.ProcesRequestListAsync("titles");
         }        
         
         /// <summary>
@@ -58,8 +58,8 @@ namespace TmdbWrapper
         /// <returns>The credits of the movie.</returns>
         public static async Task<Credits> GetMovieCast(int MovieID)
         {
-            Request request = new Request(string.Format("movie/{0}/casts", MovieID));
-            return await request.ProcesRequestAsync<Credits>();
+            Request<Credits> request = new Request<Credits>(string.Format("movie/{0}/casts", MovieID));
+            return await request.ProcesRequestAsync();
         }       
         
         /// <summary>
@@ -69,10 +69,10 @@ namespace TmdbWrapper
         /// <returns>The images.</returns>
         public static async Task<Images> GetMovieImages(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/images");
+            Request<Images> request = new Request<Images>("movie/" + MovieID.ToString() + "/images");
             if (!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync<Images>();
+            return await request.ProcesRequestAsync();
         }        
         
         /// <summary>
@@ -82,8 +82,8 @@ namespace TmdbWrapper
         /// <returns>A list of movie keywords.</returns>
         public static async Task<IList<Keyword>> GetMovieKeywords(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/keywords");
-            return await request.ProcesRequestListAsync<Keyword>("keywords");
+            Request<Keyword> request = new Request<Keyword>("movie/" + MovieID.ToString() + "/keywords");
+            return await request.ProcesRequestListAsync("keywords");
         }
         
         /// <summary>
@@ -93,8 +93,8 @@ namespace TmdbWrapper
         /// <returns>A list of releases.</returns>
         public static async Task<IList<Release>> GetMovieReleases(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/releases");
-            return await request.ProcesRequestListAsync<Release>("releases");
+            Request<Release> request = new Request<Release>("movie/" + MovieID.ToString() + "/releases");
+            return await request.ProcesRequestListAsync("releases");
         }
         
         /// <summary>
@@ -104,26 +104,26 @@ namespace TmdbWrapper
         /// <returns>The trailers of the movie.</returns>
         public static async Task<Trailers> GetMovieTrailers(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/trailers");
+            Request<Trailers> request = new Request<Trailers>("movie/" + MovieID.ToString() + "/trailers");
             if (!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync<Trailers>();
+            return await request.ProcesRequestAsync();
         }
         
         /// <summary>
         /// Gets movies that are similiar to the specified movie.
         /// </summary>
         /// <param name="MovieID">The specific movie.</param>
-        /// <param name="page">The page of the results</param>
+        /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A result set with movie summaries.</returns>
         public static async Task<SearchResultBase<MovieSummary>> GetSimilarMovies(int MovieID, int page = 1)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/similar_movies");
+            Request<MovieSummary> request = new Request<MovieSummary>("movie/" + MovieID.ToString() + "/similar_movies");
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);
 
-            return await request.ProcessSearchRequestAsync<MovieSummary>();
+            return await request.ProcessSearchRequestAsync();
         }        
         
         /// <summary>
@@ -133,8 +133,8 @@ namespace TmdbWrapper
         /// <returns></returns>
         public static async Task<SpokenLanguage> GetMovieTranslations(int MovieID)
         {
-            Request request = new Request("movie/" + MovieID.ToString() + "/translations");
-            return await request.ProcesRequestAsync<SpokenLanguage>();
+            Request<SpokenLanguage> request = new Request<SpokenLanguage>("movie/" + MovieID.ToString() + "/translations");
+            return await request.ProcesRequestAsync();
         }
          
     }

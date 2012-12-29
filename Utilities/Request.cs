@@ -9,7 +9,7 @@ using Windows.Data.Json;
 
 namespace TmdbWrapper.Utilities
 {
-    internal class Request 
+    internal class Request<T> where T : ITmdbObject, new()
     {
         private const string BASE_URL = @"http://api.themoviedb.org/3/";   
 
@@ -46,7 +46,7 @@ namespace TmdbWrapper.Utilities
             }
         }
 
-        public async Task<T> ProcesRequestAsync<T>() where T : ITmdbObject, new()
+        public async Task<T> ProcesRequestAsync() 
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -60,7 +60,29 @@ namespace TmdbWrapper.Utilities
             return result;
         }
 
-        public async Task<SearchResultBase<T>> ProcessSearchRequestAsync<T>() where T : ITmdbObject, new()
+        public async Task<SearchResultBase<T>> ProcessSearchRequestAsync()
+        {
+            if (Parameters["page"] == "0")
+            {
+                Parameters["page"] = "1";
+                SearchResultBase<T> result = await GetSearchResponseAsync();
+                for (int i = 2; i <= result.TotalPages; i++)
+                {
+                    Parameters["page"] = i.ToString();
+                    SearchResultBase<T> subResult = await GetSearchResponseAsync();
+                    result.Results.AddRange(subResult.Results);
+                }
+                result.TotalPages = 1;
+                return result;
+            }
+            else
+            {
+                return await GetSearchResponseAsync();
+            }
+        
+        }
+
+        private async Task<SearchResultBase<T>> GetSearchResponseAsync()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -85,7 +107,7 @@ namespace TmdbWrapper.Utilities
             return result;
         }
 
-        public async Task<IList<T>> ProcesRequestListAsync<T>(string valueName) where T : ITmdbObject, new()
+        public async Task<IList<T>> ProcesRequestListAsync(string valueName)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));

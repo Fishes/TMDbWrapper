@@ -62,5 +62,13 @@ namespace TmdbWrapper.Persons
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
+
+        /// <summary>
+        /// Retrieves the associated movie.
+        /// </summary>
+        public async Task<Movies.Movie> Movie()
+        {
+            return await TheMovieDb.GetMovie(Id);
+        }
     }
 }

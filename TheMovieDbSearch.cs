@@ -19,7 +19,7 @@ namespace TmdbWrapper
         /// <param name="includeAdult">Indicates whether to include adult movies.</param>
         /// <param name="year">If specified the year the movies are released.</param>
         /// <returns>A search result set of movie summaries.</returns>
-        public static async Task<SearchResultBase<MovieSummary>> SearchMovie(string query, int page = 1, bool? includeAdult = null, int? year = null)
+        public static async Task<SearchResult<MovieSummary>> SearchMovie(string query, int page = 1, bool? includeAdult = null, int? year = null)
         {
             Request<MovieSummary> request = new Request<MovieSummary>("search/movie");
             
@@ -41,7 +41,7 @@ namespace TmdbWrapper
         /// <param name="query">The query string</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>The resultset with found collections.</returns>
-        public static async Task<SearchResultBase<CollectionSummary>> SearchCollection(string query, int page = 1)
+        public static async Task<SearchResult<CollectionSummary>> SearchCollection(string query, int page = 1)
         {
             Request<CollectionSummary> request = new Request<CollectionSummary>("search/collection");
             request.AddParameter("query", query.EscapeString());
@@ -57,7 +57,7 @@ namespace TmdbWrapper
         /// <param name="query">The query string</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>The resultset with the found person summaries.</returns>
-        public static async Task<SearchResultBase<PersonSummary>> SearchPerson(string query, int page = 1)
+        public static async Task<SearchResult<PersonSummary>> SearchPerson(string query, int page = 1)
         {
             Request<PersonSummary> request = new Request<PersonSummary>("search/person");
             
@@ -75,7 +75,7 @@ namespace TmdbWrapper
         /// <param name="query">The query string.</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>The resultset with the found company summaries.</returns>
-        public static async Task<SearchResultBase<CompanySummary>> SearchCompany(string query, int page = 1)
+        public static async Task<SearchResult<CompanySummary>> SearchCompany(string query, int page = 1)
         {
             Request<CompanySummary> request = new Request<CompanySummary>("search/company");
             request.AddParameter("query", query.EscapeString());

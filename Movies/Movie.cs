@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 using Windows.Data.Json;
 
@@ -159,6 +160,79 @@ namespace TmdbWrapper.Movies
         public Uri Uri(BackdropSize size)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
+        }
+        /// <summary>
+        /// Gets a list of altenative titles for the specified country
+        /// </summary>
+        /// <param name="Country">Code of the country</param>
+        /// <returns>A list of alternative titles.</returns>
+        public async Task<IList<AlternativeTitle>> AlternateTitles(string Country)
+        {
+            return await TheMovieDb.GetMovieAlternateTitles(Id, Country);
+        }
+
+        /// <summary>
+        /// Gets the credits of this movie.
+        /// </summary>
+        /// <returns>The credits of the movie.</returns>
+        public async Task<Credits> Cast()
+        {
+            return await TheMovieDb.GetMovieCast(Id);
+        }
+
+        /// <summary>
+        /// All images of this movie.
+        /// </summary>
+        /// <returns>The images.</returns>
+        public async Task<Images> Images()
+        {
+            return await TheMovieDb.GetMovieImages(Id);
+        }
+
+        /// <summary>
+        /// The keywords of a specific movie.
+        /// </summary>
+        /// <returns>A list of movie keywords.</returns>
+        public async Task<IList<Keyword>> Keywords()
+        {
+            return await TheMovieDb.GetMovieKeywords(Id);
+        }
+
+        /// <summary>
+        /// Releases of a specific movie.
+        /// </summary>
+        /// <returns>A list of releases.</returns>
+        public async Task<IList<Release>> Releases()
+        {
+            return await TheMovieDb.GetMovieReleases(Id);
+        }
+
+        /// <summary>
+        /// Gets the trailer of a specific movie.
+        /// </summary>
+        /// <returns>The trailers of the movie.</returns>
+        public async Task<Trailers> Trailers()
+        {
+            return await TheMovieDb.GetMovieTrailers(Id);
+        }
+
+        /// <summary>
+        /// Gets movies that are similiar to the specified movie.
+        /// </summary>
+        /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
+        /// <returns>A result set with movie summaries.</returns>
+        public async Task<SearchResult<MovieSummary>> SimilarMovies(int page = 1)
+        {
+            return await TheMovieDb.GetSimilarMovies(Id, page);
+        }
+
+        /// <summary>
+        /// Gets the languages that a specific movie is translated into.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<SpokenLanguage> Translations()
+        {
+            return await TheMovieDb.GetMovieTranslations(Id);
         }
     }
 }

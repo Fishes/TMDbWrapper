@@ -11,7 +11,7 @@ namespace TmdbWrapper.Search
     /// A page of search results
     /// </summary>
     /// <typeparam name="T">The type that are searched.</typeparam>
-    public class SearchResultBase<T>
+    public class SearchResult<T>
     {
         /// <summary>
         /// Page number of this set.

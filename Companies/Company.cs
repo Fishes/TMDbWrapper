@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 using Windows.Data.Json;
 
@@ -61,6 +62,15 @@ namespace TmdbWrapper.Companies
         public Uri Uri(LogoSize size)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), LogoPath);
+        }
+        /// <summary>
+        /// Retrieves the credits for this company
+        /// </summary>
+        /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
+        /// <returns>A page of credits</returns>
+        public async Task<SearchResult<MovieSummary>> Credits(int page = 1)
+        {
+            return await TheMovieDb.GetCompanyCredits(Id, page);
         }
     }
 }

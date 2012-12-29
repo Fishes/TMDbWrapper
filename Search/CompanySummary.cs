@@ -49,5 +49,12 @@ namespace TmdbWrapper.Search
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), LogoPath);
         }
+        /// <summary>
+        /// Retrieves the associated company.
+        /// </summary>
+        public async Task<Companies.Company> Company()
+        {
+            return await TheMovieDb.GetCompany(Id);
+        }
     }
 }

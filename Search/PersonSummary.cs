@@ -55,5 +55,12 @@ namespace TmdbWrapper.Search
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
+        /// <summary>
+        /// Retrieves the associated person.
+        /// </summary>
+        public async Task<Persons.Person> Person()
+        {
+            return await TheMovieDb.GetPerson(Id);
+        }
     }
 }

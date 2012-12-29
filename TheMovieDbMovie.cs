@@ -116,7 +116,7 @@ namespace TmdbWrapper
         /// <param name="MovieID">The specific movie.</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A result set with movie summaries.</returns>
-        public static async Task<SearchResultBase<MovieSummary>> GetSimilarMovies(int MovieID, int page = 1)
+        public static async Task<SearchResult<MovieSummary>> GetSimilarMovies(int MovieID, int page = 1)
         {
             Request<MovieSummary> request = new Request<MovieSummary>("movie/" + MovieID.ToString() + "/similar_movies");
             request.AddParameter("page", page);

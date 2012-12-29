@@ -14,7 +14,7 @@ namespace TmdbWrapper.Persons
     public class Crew : ITmdbObject
     {
         /// <summary>
-        /// Id of the person.
+        /// Id of the movie.
         /// </summary>
         public int Id { get; set; }
         /// <summary>
@@ -66,6 +66,14 @@ namespace TmdbWrapper.Persons
         public Uri Uri(PosterSize size)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
+        }
+
+        /// <summary>
+        /// Retrieves the associated movie.
+        /// </summary>
+        public async Task<Movies.Movie> Movie()
+        {
+            return await TheMovieDb.GetMovie(Id);
         }
     }
 }

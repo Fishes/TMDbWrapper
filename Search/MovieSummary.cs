@@ -95,5 +95,12 @@ namespace TmdbWrapper.Search
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
 
+        /// <summary>
+        /// Retrieves the associated movie.
+        /// </summary>        
+        public async Task<Movies.Movie> Movie()
+        {
+            return await TheMovieDb.GetMovie(Id);
+        }
     }    
 }

@@ -28,7 +28,7 @@ namespace TmdbWrapper
         /// <param name="CompanyId">The id of the company</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A page of credits</returns>
-        public static async Task<SearchResultBase<MovieSummary>> GetCompanyCredits(int CompanyId, int page = 1)
+        public static async Task<SearchResult<MovieSummary>> GetCompanyCredits(int CompanyId, int page = 1)
         {
             Request<MovieSummary> request = new Request<MovieSummary>("company/" + CompanyId.ToString() + "/movies");
             request.AddParameter("page", page);

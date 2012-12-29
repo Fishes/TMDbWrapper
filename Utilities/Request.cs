@@ -60,16 +60,16 @@ namespace TmdbWrapper.Utilities
             return result;
         }
 
-        public async Task<SearchResultBase<T>> ProcessSearchRequestAsync()
+        public async Task<SearchResult<T>> ProcessSearchRequestAsync()
         {
             if (Parameters["page"] == "0")
             {
                 Parameters["page"] = "1";
-                SearchResultBase<T> result = await GetSearchResponseAsync();
+                SearchResult<T> result = await GetSearchResponseAsync();
                 for (int i = 2; i <= result.TotalPages; i++)
                 {
                     Parameters["page"] = i.ToString();
-                    SearchResultBase<T> subResult = await GetSearchResponseAsync();
+                    SearchResult<T> subResult = await GetSearchResponseAsync();
                     result.Results.AddRange(subResult.Results);
                 }
                 result.TotalPages = 1;
@@ -82,7 +82,7 @@ namespace TmdbWrapper.Utilities
         
         }
 
-        private async Task<SearchResultBase<T>> GetSearchResponseAsync()
+        private async Task<SearchResult<T>> GetSearchResponseAsync()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -90,7 +90,7 @@ namespace TmdbWrapper.Utilities
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
             JsonObject jsonObject = JsonObject.Parse(response);
 
-            SearchResultBase<T> result = new SearchResultBase<T>();
+            SearchResult<T> result = new SearchResult<T>();
             result.Page = (int)jsonObject.GetNamedNumber("page");
             result.TotalPages = (int)jsonObject.GetNamedNumber("total_pages");
             result.TotalResults = (int)jsonObject.GetNamedNumber("total_results");

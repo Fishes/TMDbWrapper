@@ -36,5 +36,12 @@ namespace TmdbWrapper.Movies
             Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
             Name = jsonObject.GetNamedValue("name").GetSafeString();
         }
+        /// <summary>
+        /// Retrieves the associated company.
+        /// </summary>
+        public async Task<Companies.Company> Company()
+        {
+            return await TheMovieDb.GetCompany(Id);
+        }
     }
 }

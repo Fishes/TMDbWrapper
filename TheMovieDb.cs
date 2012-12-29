@@ -13,6 +13,8 @@ namespace TmdbWrapper
 {
     /// <summary>
     /// The static that wraps The movie database service.
+    /// It should be initilised with your API_KEY.
+    /// You can apply for an API_KEY at www.TheMovieDb.org
     /// </summary>
     public static partial class TheMovieDb
     {

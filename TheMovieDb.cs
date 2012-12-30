@@ -31,7 +31,7 @@ namespace TmdbWrapper
         /// Initialises the wrapper.
         /// </summary>
         /// <param name="apiKey">The apikey the requests will use.</param>       
-        public static void InitialiseTmdb(string apiKey) 
+        public static void Initialise(string apiKey) 
         {
             ApiKey = apiKey;
         }
@@ -41,7 +41,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="apiKey">The apikey the request will use.</param>       
         /// <param name="language">The language the requests will use.</param>
-        public static void InitialiseTmdb(string apiKey, string language)
+        public static void Initialise(string apiKey, string language)
         {
             ApiKey = apiKey;
             Language = language;

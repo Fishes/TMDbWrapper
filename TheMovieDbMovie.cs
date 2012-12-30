@@ -17,7 +17,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">Id of the movie</param>
         /// <returns>The specified movie.</returns>
-        public static async Task<Movie> GetMovie(int MovieID)
+        public static async Task<Movie> GetMovieAsync(int MovieID)
         {
             Request<Movie> request = new Request<Movie>("movie/" + MovieID.ToString());
             if (!string.IsNullOrEmpty(Language))
@@ -30,7 +30,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="IMDBId">The IMDB id</param>
         /// <returns>The specified movie.</returns>
-        public static async Task<Movie> GetMovieByIMDB(string IMDBId)
+        public static async Task<Movie> GetMovieByIMDBAsync(string IMDBId)
         {
             Request<Movie> request = new Request<Movie>("movie/" + IMDBId);
             if (!string.IsNullOrEmpty(Language))
@@ -44,7 +44,7 @@ namespace TmdbWrapper
         /// <param name="MovieID">Id of the movie</param>
         /// <param name="Country">Code of the country</param>
         /// <returns>A list of alternative titles.</returns>
-        public static async Task<IReadOnlyList<AlternativeTitle>> GetMovieAlternateTitles(int MovieID, string Country)
+        public static async Task<IReadOnlyList<AlternativeTitle>> GetMovieAlternateTitlesAsync(int MovieID, string Country)
         {
             Request<AlternativeTitle> request = new Request<AlternativeTitle>("movie/" + MovieID.ToString() + "/alternative_titles");
             if (!string.IsNullOrEmpty(Country))
@@ -57,7 +57,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns>The credits of the movie.</returns>
-        public static async Task<Credits> GetMovieCast(int MovieID)
+        public static async Task<Credits> GetMovieCastAsync(int MovieID)
         {
             Request<Credits> request = new Request<Credits>(string.Format("movie/{0}/casts", MovieID));
             return await request.ProcesRequestAsync();
@@ -68,7 +68,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns>The images.</returns>
-        public static async Task<Images> GetMovieImages(int MovieID)
+        public static async Task<Images> GetMovieImagesAsync(int MovieID)
         {
             Request<Images> request = new Request<Images>("movie/" + MovieID.ToString() + "/images");
             if (!string.IsNullOrEmpty(Language))
@@ -81,7 +81,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns>A list of movie keywords.</returns>
-        public static async Task<IReadOnlyList<Keyword>> GetMovieKeywords(int MovieID)
+        public static async Task<IReadOnlyList<Keyword>> GetMovieKeywordsAsync(int MovieID)
         {
             Request<Keyword> request = new Request<Keyword>("movie/" + MovieID.ToString() + "/keywords");
             return await request.ProcesRequestListAsync("keywords");
@@ -92,7 +92,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">Id of the movie</param>
         /// <returns>A list of releases.</returns>
-        public static async Task<IReadOnlyList<Release>> GetMovieReleases(int MovieID)
+        public static async Task<IReadOnlyList<Release>> GetMovieReleasesAsync(int MovieID)
         {
             Request<Release> request = new Request<Release>("movie/" + MovieID.ToString() + "/releases");
             return await request.ProcesRequestListAsync("releases");
@@ -103,7 +103,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns>The trailers of the movie.</returns>
-        public static async Task<Trailers> GetMovieTrailers(int MovieID)
+        public static async Task<Trailers> GetMovieTrailersAsync(int MovieID)
         {
             Request<Trailers> request = new Request<Trailers>("movie/" + MovieID.ToString() + "/trailers");
             if (!string.IsNullOrEmpty(Language))
@@ -117,7 +117,7 @@ namespace TmdbWrapper
         /// <param name="MovieID">The specific movie.</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A result set with movie summaries.</returns>
-        public static async Task<SearchResult<MovieSummary>> GetSimilarMovies(int MovieID, int page = 1)
+        public static async Task<SearchResult<MovieSummary>> GetSimilarMoviesAsync(int MovieID, int page = 1)
         {
             Request<MovieSummary> request = new Request<MovieSummary>("movie/" + MovieID.ToString() + "/similar_movies");
             request.AddParameter("page", page);
@@ -132,7 +132,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="MovieID">The id of the movie.</param>
         /// <returns></returns>
-        public static async Task<SpokenLanguage> GetMovieTranslations(int MovieID)
+        public static async Task<SpokenLanguage> GetMovieTranslationsAsync(int MovieID)
         {
             Request<SpokenLanguage> request = new Request<SpokenLanguage>("movie/" + MovieID.ToString() + "/translations");
             return await request.ProcesRequestAsync();

@@ -87,9 +87,9 @@ namespace TmdbWrapper.Collections
         /// Gets the images of this collection
         /// </summary>
         /// <returns>The image set of this collection.</returns>
-        public async Task<Images> Images()
+        public async Task<Images> ImagesAsync()
         {
-            return await TheMovieDb.GetCollectionImages(Id);
+            return await TheMovieDb.GetCollectionImagesAsync(Id);
         }
         #endregion
     }

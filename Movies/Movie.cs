@@ -177,54 +177,54 @@ namespace TmdbWrapper.Movies
         /// </summary>
         /// <param name="Country">Code of the country</param>
         /// <returns>A list of alternative titles.</returns>
-        public async Task<IReadOnlyList<AlternativeTitle>> AlternateTitles(string Country)
+        public async Task<IReadOnlyList<AlternativeTitle>> AlternateTitlesAsync(string Country)
         {
-            return await TheMovieDb.GetMovieAlternateTitles(Id, Country);
+            return await TheMovieDb.GetMovieAlternateTitlesAsync(Id, Country);
         }
 
         /// <summary>
         /// Gets the credits of this movie.
         /// </summary>
         /// <returns>The credits of the movie.</returns>
-        public async Task<Credits> Cast()
+        public async Task<Credits> CastAsync()
         {
-            return await TheMovieDb.GetMovieCast(Id);
+            return await TheMovieDb.GetMovieCastAsync(Id);
         }
 
         /// <summary>
         /// All images of this movie.
         /// </summary>
         /// <returns>The images.</returns>
-        public async Task<Images> Images()
+        public async Task<Images> ImagesAsync()
         {
-            return await TheMovieDb.GetMovieImages(Id);
+            return await TheMovieDb.GetMovieImagesAsync(Id);
         }
 
         /// <summary>
         /// The keywords of a specific movie.
         /// </summary>
         /// <returns>A list of movie keywords.</returns>
-        public async Task<IReadOnlyList<Keyword>> Keywords()
+        public async Task<IReadOnlyList<Keyword>> KeywordsAsync()
         {
-            return await TheMovieDb.GetMovieKeywords(Id);
+            return await TheMovieDb.GetMovieKeywordsAsync(Id);
         }
 
         /// <summary>
         /// Releases of a specific movie.
         /// </summary>
         /// <returns>A list of releases.</returns>
-        public async Task<IReadOnlyList<Release>> Releases()
+        public async Task<IReadOnlyList<Release>> ReleasesAsync()
         {
-            return await TheMovieDb.GetMovieReleases(Id);
+            return await TheMovieDb.GetMovieReleasesAsync(Id);
         }
 
         /// <summary>
         /// Gets the trailer of a specific movie.
         /// </summary>
         /// <returns>The trailers of the movie.</returns>
-        public async Task<Trailers> Trailers()
+        public async Task<Trailers> TrailersAsync()
         {
-            return await TheMovieDb.GetMovieTrailers(Id);
+            return await TheMovieDb.GetMovieTrailersAsync(Id);
         }
 
         /// <summary>
@@ -232,18 +232,18 @@ namespace TmdbWrapper.Movies
         /// </summary>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A result set with movie summaries.</returns>
-        public async Task<SearchResult<MovieSummary>> SimilarMovies(int page = 1)
+        public async Task<SearchResult<MovieSummary>> SimilarMoviesAsync(int page = 1)
         {
-            return await TheMovieDb.GetSimilarMovies(Id, page);
+            return await TheMovieDb.GetSimilarMoviesAsync(Id, page);
         }
 
         /// <summary>
         /// Gets the languages that a specific movie is translated into.
         /// </summary>
         /// <returns></returns>
-        public async Task<SpokenLanguage> Translations()
+        public async Task<SpokenLanguage> TranslationsAsync()
         {
-            return await TheMovieDb.GetMovieTranslations(Id);
+            return await TheMovieDb.GetMovieTranslationsAsync(Id);
         }
 
         #endregion

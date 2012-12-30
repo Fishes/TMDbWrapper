@@ -80,9 +80,9 @@ namespace TmdbWrapper.Movies
         /// Gets the collection
         /// </summary>
         /// <returns>The collection</returns>
-        public async Task<Collection> Collection()
+        public async Task<Collection> CollectionAsync()
         {
-            return await TheMovieDb.GetCollection(Id);
+            return await TheMovieDb.GetCollectionAsync(Id);
         }
 
         #endregion

@@ -73,9 +73,9 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Retrieves the associated person
         /// </summary>
-        public async Task<Persons.Person> Person()
+        public async Task<Persons.Person> PersonAsync()
         {
-            return await TheMovieDb.GetPerson(Id);
+            return await TheMovieDb.GetPersonAsync(Id);
         }
         #endregion
     }

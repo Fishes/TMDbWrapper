@@ -16,7 +16,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="CollectionId">Id of the collection</param>
         /// <returns>The collection</returns>
-        public static async Task<Collection> GetCollection(int CollectionId)
+        public static async Task<Collection> GetCollectionAsync(int CollectionId)
         {
             Request<Collection> request = new Request<Collection>("collection/" + CollectionId.ToString());
             return await request.ProcesRequestAsync();
@@ -27,7 +27,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="CollectionId">Id of the collection</param>
         /// <returns>The image set of the collection.</returns>
-        public static async Task<Images> GetCollectionImages(int CollectionId)
+        public static async Task<Images> GetCollectionImagesAsync(int CollectionId)
         {
             Request<Images> request = new Request<Images>("collection/" + CollectionId.ToString() + "/images");
             return await request.ProcesRequestAsync();

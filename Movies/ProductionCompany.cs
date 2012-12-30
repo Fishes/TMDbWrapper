@@ -46,9 +46,9 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Retrieves the associated company.
         /// </summary>
-        public async Task<Companies.Company> Company()
+        public async Task<Companies.Company> CompanyAsync()
         {
-            return await TheMovieDb.GetCompany(Id);
+            return await TheMovieDb.GetCompanyAsync(Id);
         }
         #endregion
     }

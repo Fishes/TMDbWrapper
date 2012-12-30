@@ -76,9 +76,9 @@ namespace TmdbWrapper.Companies
         /// </summary>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A page of credits</returns>
-        public async Task<SearchResult<MovieSummary>> Credits(int page = 1)
+        public async Task<SearchResult<MovieSummary>> CreditsAsync(int page = 1)
         {
-            return await TheMovieDb.GetCompanyCredits(Id, page);
+            return await TheMovieDb.GetCompanyCreditsAsync(Id, page);
         }
         #endregion
     }

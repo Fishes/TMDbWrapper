@@ -107,9 +107,9 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Retrieves the associated movie.
         /// </summary>        
-        public async Task<Movies.Movie> Movie()
+        public async Task<Movies.Movie> MovieAsync()
         {
-            return await TheMovieDb.GetMovie(Id);
+            return await TheMovieDb.GetMovieAsync(Id);
         }
         #endregion
     }    

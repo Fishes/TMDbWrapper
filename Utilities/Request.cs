@@ -18,6 +18,10 @@ namespace TmdbWrapper.Utilities
 
         public Request(string apiName)
         {
+            if (string.IsNullOrWhiteSpace(TheMovieDb.ApiKey))
+            {
+                throw new ArgumentNullException("The library was not initialized correctly. Please specify an API_KEY.");
+            }
             ApiName = apiName;
             AddParameter("api_key", TheMovieDb.ApiKey);
         }

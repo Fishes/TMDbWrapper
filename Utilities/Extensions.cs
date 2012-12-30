@@ -24,63 +24,148 @@ namespace TmdbWrapper.Utilities
         #endregion
 
         #region jsonValue extensions
-        internal static string GetSafeString(this JsonValue jsonValue)
+        internal static string GetSafeString(this JsonObject jsonObject, string valueName)
         {
-            if (jsonValue.ValueType != JsonValueType.Null)
+            try
             {
-                return jsonValue.GetString();
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
+                    {
+                        return jsonValue.GetString();
+                    }
+                }
+                return "";
             }
-            return "";
+            catch
+            {
+                return "";
+            }
         }
 
-        internal static bool GetSafeBoolean(this JsonValue jsonValue, bool defaultValue = false)
+        internal static Uri GetSafeUri(this JsonObject jsonObject, string valueName)
         {
-            if (jsonValue.ValueType != JsonValueType.Null)
+            try
             {
-                return jsonValue.GetBoolean();
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
+                    {
+                        string value = jsonValue.GetString();
+                        if (!string.IsNullOrWhiteSpace(value))
+                        {
+                            return new Uri(value);
+                        }
+                    }
+                }
+                return null;
             }
-            return defaultValue;
+            catch
+            {
+                return null;
+            }
         }
 
-        internal static double GetSafeNumber(this JsonValue jsonValue)
+        internal static bool GetSafeBoolean(this JsonObject jsonObject, string valueName, bool defaultValue = false)
         {
-            if (jsonValue.ValueType != JsonValueType.Null)
+            try
             {
-                return jsonValue.GetNumber();
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
+                    {
+                        return jsonValue.GetBoolean();
+                    }
+                }
+                return defaultValue;
             }
-            return 0.0;
+            catch
+            {
+                return defaultValue;
+            }
         }
 
-        internal static JsonObject GetSafeObject(this JsonValue jsonValue)
+        internal static double GetSafeNumber(this JsonObject jsonObject, string valueName)
         {
-            if (jsonValue.ValueType != JsonValueType.Null)
+            try
             {
-                return jsonValue.GetObject();
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
+                    {
+                        return jsonValue.GetNumber();
+                    }
+                }
+                return 0.0;
             }
-            return null;
+            catch
+            { 
+                return 0.0;
+            }
         }
 
-        internal static T ProcessObject<T>(this JsonValue jsonValue) where T : ITmdbObject, new()
+        internal static JsonObject GetSafeObject(this JsonObject jsonObject, string valueName)
         {
-            if (jsonValue.ValueType == JsonValueType.Object)
+            try
             {
-                T newT = new T();
-                newT.ProcessJson(jsonValue.GetObject());
-                return newT;
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Object))
+                    {
+                        return jsonValue.GetObject();
+                    }
+                }
+                return null;
             }
-            return default(T);
+            catch
+            {
+                return null;
+            }
         }
 
-        internal static IReadOnlyList<T> ProcessArray<T>(this JsonValue jsonValue) where T : ITmdbObject, new()
+        internal static T ProcessObject<T>(this JsonObject jsonObject, string valueName) where T : ITmdbObject, new()
+        {
+            try
+            {
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Object))
+                    {
+                        T newT = new T();
+                        newT.ProcessJson(jsonValue.GetObject());
+                        return newT;
+                    }
+                }
+                return default(T);
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
+        internal static IReadOnlyList<T> ProcessArray<T>(this JsonObject jsonObject, string valueName) where T : ITmdbObject, new()
         {
             List<T> results = new List<T>();
-            if (jsonValue.ValueType == JsonValueType.Array)
+            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
             {
-                foreach(JsonObject subObject in jsonValue.GetArray())
+                foreach(JsonValue subObject in jsonValue.GetArray())
                 {
-                    T newT = new T();
-                    newT.ProcessJson(subObject);
-                    results.Add(newT);
+                    try
+                    {
+                        T newT = new T();
+                        newT.ProcessJson(subObject.GetObject());
+                        results.Add(newT);
+                    }
+                    catch
+                    { }
                 }
             }
             return results;

@@ -123,29 +123,29 @@ namespace TmdbWrapper.Movies
         #region Interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
-            BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
-            BelongsToCollection = jsonObject.GetNamedValue("belongs_to_collection").ProcessObject<BelongsToCollection>();
-            Budget = (int)jsonObject.GetNamedValue("budget").GetSafeNumber();
-            Genres = jsonObject.GetNamedValue("genres").ProcessArray<Genre>();            
-            Homepage = new Uri(jsonObject.GetNamedValue("homepage").GetSafeString());
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            ImdbId = jsonObject.GetNamedValue("imdb_id").GetSafeString();
-            OriginalTitle = jsonObject.GetNamedValue("original_title").GetSafeString();
-            Overview = jsonObject.GetNamedValue("overview").GetSafeString();
-            Popularity = (int)jsonObject.GetNamedValue("popularity").GetSafeNumber();
-            PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            ProductionCompanies = jsonObject.GetNamedValue("production_companies").ProcessArray<ProductionCompany>();
-            ProductionCountries = jsonObject.GetNamedValue("production_countries").ProcessArray<ProductionCountry>();
-            ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
-            Revenue = (int)jsonObject.GetNamedValue("revenue").GetSafeNumber();
-            Runtime = (int)jsonObject.GetNamedValue("runtime").GetSafeNumber();
-            SpokenLanguages = jsonObject.GetNamedValue("spoken_languages").ProcessArray<SpokenLanguage>();
-            Status = jsonObject.GetNamedValue("status").GetSafeString();
-            Tagline = jsonObject.GetNamedValue("tagline").GetSafeString();
-            Title = jsonObject.GetNamedValue("title").GetSafeString();
-            VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
-            VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
+            Adult = jsonObject.GetSafeBoolean("adult");
+            BackdropPath = jsonObject.GetSafeString("backdrop_path");
+            BelongsToCollection = jsonObject.ProcessObject<BelongsToCollection>("belongs_to_collection");
+            Budget = (int)jsonObject.GetSafeNumber("budget");
+            Genres = jsonObject.ProcessArray<Genre>("genres");            
+            Homepage = jsonObject.GetSafeUri("homepage");
+            Id = (int)jsonObject.GetSafeNumber("id");
+            ImdbId = jsonObject.GetSafeString("imdb_id");
+            OriginalTitle = jsonObject.GetSafeString("original_title");
+            Overview = jsonObject.GetSafeString("overview");
+            Popularity = (int)jsonObject.GetSafeNumber("popularity");
+            PosterPath = jsonObject.GetSafeString("poster_path");
+            ProductionCompanies = jsonObject.ProcessArray<ProductionCompany>("production_companies");
+            ProductionCountries = jsonObject.ProcessArray<ProductionCountry>("production_countries");
+            ReleaseDate = jsonObject.GetSafeString("release_date");
+            Revenue = (int)jsonObject.GetSafeNumber("revenue");
+            Runtime = (int)jsonObject.GetSafeNumber("runtime");
+            SpokenLanguages = jsonObject.ProcessArray<SpokenLanguage>("spoken_languages");
+            Status = jsonObject.GetSafeString("status");
+            Tagline = jsonObject.GetSafeString("tagline");
+            Title = jsonObject.GetSafeString("title");
+            VoteAverage = jsonObject.GetSafeNumber("vote_average");
+            VoteCount = (int)jsonObject.GetSafeNumber("vote_count");
         }
         #endregion
 

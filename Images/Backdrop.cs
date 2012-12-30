@@ -47,13 +47,13 @@ namespace TmdbWrapper.Image
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            FilePath = jsonObject.GetNamedValue("file_path").GetSafeString();
-            Width = (int)jsonObject.GetNamedValue("width").GetSafeNumber();
-            Height = (int)jsonObject.GetNamedValue("height").GetSafeNumber();
-            Iso639_1 = jsonObject.GetNamedValue("iso_639_1").GetSafeString();
-            AspectRatio = jsonObject.GetNamedValue("aspect_ratio").GetSafeNumber();
-            VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
-            VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
+            FilePath = jsonObject.GetSafeString("file_path");
+            Width = (int)jsonObject.GetSafeNumber("width");
+            Height = (int)jsonObject.GetSafeNumber("height");
+            Iso639_1 = jsonObject.GetSafeString("iso_639_1");
+            AspectRatio = jsonObject.GetSafeNumber("aspect_ratio");
+            VoteAverage = jsonObject.GetSafeNumber("vote_average");
+            VoteCount = (int)jsonObject.GetSafeNumber("vote_count");
         }
         #endregion
 

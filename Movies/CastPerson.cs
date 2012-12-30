@@ -49,11 +49,11 @@ namespace TmdbWrapper.Movies
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
-            Character = jsonObject.GetNamedValue("character").GetSafeString();
-            Order = (int)jsonObject.GetNamedValue("order").GetSafeNumber();
-            ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Name = jsonObject.GetSafeString("name");
+            Character = jsonObject.GetSafeString("character");
+            Order = (int)jsonObject.GetSafeNumber("order");
+            ProfilePath = jsonObject.GetSafeString("profile_path");
         }
         #endregion
 

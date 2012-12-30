@@ -69,15 +69,15 @@ namespace TmdbWrapper.Search
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
-            BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            OriginalTitle = jsonObject.GetNamedValue("release_date").GetSafeString();
-            PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            Popularity = jsonObject.GetNamedValue("popularity").GetSafeNumber();
-            Title = jsonObject.GetNamedValue("title").GetSafeString();
-            VoteAverage = jsonObject.GetNamedValue("vote_average").GetSafeNumber();
-            VoteCount = (int)jsonObject.GetNamedValue("vote_count").GetSafeNumber();
+            Adult = jsonObject.GetSafeBoolean("adult");
+            BackdropPath = jsonObject.GetSafeString("backdrop_path");
+            Id = (int)jsonObject.GetSafeNumber("id");
+            OriginalTitle = jsonObject.GetSafeString("release_date");
+            PosterPath = jsonObject.GetSafeString("poster_path");
+            Popularity = jsonObject.GetSafeNumber("popularity");
+            Title = jsonObject.GetSafeString("title");
+            VoteAverage = jsonObject.GetSafeNumber("vote_average");
+            VoteCount = (int)jsonObject.GetSafeNumber("vote_count");
         }
         #endregion
 

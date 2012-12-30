@@ -39,11 +39,11 @@ namespace TmdbWrapper.Persons
         #region interface implememtations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            FilePath = jsonObject.GetNamedValue("file_path").GetSafeString();
-            Width = (int)jsonObject.GetNamedValue("width").GetSafeNumber();
-            Height = (int)jsonObject.GetNamedValue("height").GetSafeNumber();
-            iso639_1 = jsonObject.GetNamedValue("iso_639_1").GetSafeString();
-            AspectRatio = jsonObject.GetNamedValue("aspect_ratio").GetSafeNumber();
+            FilePath = jsonObject.GetSafeString("file_path");
+            Width = (int)jsonObject.GetSafeNumber("width");
+            Height = (int)jsonObject.GetSafeNumber("height");
+            iso639_1 = jsonObject.GetSafeString("iso_639_1");
+            AspectRatio = jsonObject.GetSafeNumber("aspect_ratio");
         }
         #endregion
     }

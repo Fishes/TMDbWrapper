@@ -49,11 +49,11 @@ namespace TmdbWrapper.Collections
         #region Interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
-            Title = jsonObject.GetNamedValue("title").GetSafeString();
+            BackdropPath = jsonObject.GetSafeString("backdrop_path");
+            Id = (int)jsonObject.GetSafeNumber("id");
+            PosterPath = jsonObject.GetSafeString("poster_path");
+            ReleaseDate = jsonObject.GetSafeString("release_date");
+            Title = jsonObject.GetSafeString("title");
         }
         #endregion
 

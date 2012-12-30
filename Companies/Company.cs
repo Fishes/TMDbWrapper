@@ -48,13 +48,13 @@ namespace TmdbWrapper.Companies
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Description = jsonObject.GetNamedValue("description").GetSafeString();
-            Headquarters = jsonObject.GetNamedValue("headquarters").GetSafeString();
-            Homepage = new Uri(jsonObject.GetNamedValue("homepage").GetSafeString());
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            LogoPath = jsonObject.GetNamedValue("logo_path").GetSafeString();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
-            ParentCompany = (int)jsonObject.GetNamedValue("parent_company").GetSafeNumber();
+            Description = jsonObject.GetSafeString("description");
+            Headquarters = jsonObject.GetSafeString("headquarters");
+            Homepage = jsonObject.GetSafeUri("homepage");
+            Id = (int)jsonObject.GetSafeNumber("id");
+            LogoPath = jsonObject.GetSafeString("logo_path");
+            Name = jsonObject.GetSafeString("name");
+            ParentCompany = (int)jsonObject.GetSafeNumber("parent_company");
         }
         #endregion
         

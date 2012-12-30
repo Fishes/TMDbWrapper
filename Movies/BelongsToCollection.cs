@@ -36,10 +36,10 @@ namespace TmdbWrapper.Movies
 
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
-            PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            BackdropPath = jsonObject.GetNamedValue("backdrop_path").GetSafeString();
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Name = jsonObject.GetSafeString("name");
+            PosterPath = jsonObject.GetSafeString("poster_path");
+            BackdropPath = jsonObject.GetSafeString("backdrop_path");
         }
         #endregion
 

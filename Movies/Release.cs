@@ -31,9 +31,9 @@ namespace TmdbWrapper.Movies
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Iso3166_1 = jsonObject.GetNamedValue("iso_3166_1").GetSafeString();
-            Certification = jsonObject.GetNamedValue("certification").GetSafeString();
-            ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
+            Iso3166_1 = jsonObject.GetSafeString("iso_3166_1");
+            Certification = jsonObject.GetSafeString("certification");
+            ReleaseDate = jsonObject.GetSafeString("release_date");
         }
         #endregion
 

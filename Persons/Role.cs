@@ -47,13 +47,13 @@ namespace TmdbWrapper.Persons
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Title = jsonObject.GetNamedValue("title").GetSafeString();
-            Character = jsonObject.GetNamedValue("character").GetSafeString();
-            OriginalTitle = jsonObject.GetNamedValue("original_title").GetSafeString();
-            PosterPath = jsonObject.GetNamedValue("poster_path").GetSafeString();
-            ReleaseDate = jsonObject.GetNamedValue("release_date").GetSafeString();
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Title = jsonObject.GetSafeString("title");
+            Character = jsonObject.GetSafeString("character");
+            OriginalTitle = jsonObject.GetSafeString("original_title");
+            PosterPath = jsonObject.GetSafeString("poster_path");
+            ReleaseDate = jsonObject.GetSafeString("release_date");
+            Adult = jsonObject.GetSafeBoolean("adult");
         }
         #endregion
 

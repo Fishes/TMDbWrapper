@@ -118,7 +118,7 @@ namespace TmdbWrapper.Utilities
 
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
             JsonObject jsonObject = JsonObject.Parse(response);
-            IReadOnlyList<T> result = jsonObject.GetNamedValue("valueName").ProcessArray<T>();
+            IReadOnlyList<T> result = jsonObject.ProcessArray<T>("valueName");
             return result;
         }
     }

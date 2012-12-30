@@ -45,10 +45,10 @@ namespace TmdbWrapper.Search
         #region interface implementations
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
-            ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
+            Adult = jsonObject.GetSafeBoolean("adult");
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Name = jsonObject.GetSafeString("name");
+            ProfilePath = jsonObject.GetSafeString("profile_path");
         }
         #endregion
 

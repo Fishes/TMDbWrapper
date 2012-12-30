@@ -31,11 +31,9 @@ namespace TmdbWrapper.Movies
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            JsonValue quickTimeValueObject = jsonObject.GetNamedValue("quicktime");
-            QuickTime = quickTimeValueObject.ProcessArray<Trailer>();
-            JsonValue youtubeValueObject = jsonObject.GetNamedValue("youtube");
-            Youtube = youtubeValueObject.ProcessArray<Trailer>();
+            Id = (int)jsonObject.GetSafeNumber("id");
+            QuickTime = jsonObject.ProcessArray<Trailer>("quicktime");
+            Youtube = jsonObject.ProcessArray<Trailer>("youtube");
         }
         #endregion
     }

@@ -36,8 +36,8 @@ namespace TmdbWrapper.Movies
         #region interface implementations
         void ITmdbObject.ProcessJson(Windows.Data.Json.JsonObject jsonObject)
         {
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Name = jsonObject.GetSafeString("name");
         }
         #endregion
     }

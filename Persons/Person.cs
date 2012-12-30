@@ -59,15 +59,15 @@ namespace TmdbWrapper.Persons
         #region interface implementations
         void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Adult = jsonObject.GetNamedValue("adult").GetSafeBoolean();
-            Biography = jsonObject.GetNamedValue("biography").GetSafeString();
-            Birthday = jsonObject.GetNamedValue("birthday").GetSafeString();
-            Deathday = jsonObject.GetNamedValue("deathday").GetSafeString();
-            Homepage = new Uri(jsonObject.GetNamedValue("homepage").GetSafeString());
-            Id = (int)jsonObject.GetNamedValue("id").GetSafeNumber();
-            Name = jsonObject.GetNamedValue("name").GetSafeString();
-            PlaceOfBirth = jsonObject.GetNamedValue("place_of_birth").GetSafeString();
-            ProfilePath = jsonObject.GetNamedValue("profile_path").GetSafeString();
+            Adult = jsonObject.GetSafeBoolean("adult");
+            Biography = jsonObject.GetSafeString("biography");
+            Birthday = jsonObject.GetSafeString("birthday");
+            Deathday = jsonObject.GetSafeString("deathday");
+            Homepage = new Uri(jsonObject.GetSafeString("homepage"));
+            Id = (int)jsonObject.GetSafeNumber("id");
+            Name = jsonObject.GetSafeString("name");
+            PlaceOfBirth = jsonObject.GetSafeString("place_of_birth");
+            ProfilePath = jsonObject.GetSafeString("profile_path");
         }
         #endregion
 

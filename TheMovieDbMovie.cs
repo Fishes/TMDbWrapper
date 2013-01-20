@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Cache;
 using TmdbWrapper.Image;
 using TmdbWrapper.Movies;
 using TmdbWrapper.Search;
@@ -32,6 +33,9 @@ namespace TmdbWrapper
         /// <returns>The specified movie.</returns>
         public static async Task<Movie> GetMovieAsync(int MovieID, MovieExtras extra = 0)
         {
+            Movie movie = DatabaseCache.GetObject<Movie>(MovieID);
+            if (movie == null)
+            {
                 Request<Movie> request = new Request<Movie>("movie/" + MovieID.ToString());
                 if (!string.IsNullOrEmpty(Language))
                     request.AddParameter("language", Language);
@@ -40,8 +44,11 @@ namespace TmdbWrapper
                     request.AddParameter("append_to_response", extra.ToString().Replace(" ", ""));
                 }
                 movie = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(MovieID, movie);
+            }
             return movie;
         }
+
         /// <summary>
         /// Gets a movie by the IMDB id.
         /// </summary>
@@ -76,8 +83,14 @@ namespace TmdbWrapper
         /// <returns>The credits of the movie.</returns>
         public static async Task<Credits> GetMovieCastAsync(int MovieID)
         {
-            Request<Credits> request = new Request<Credits>(string.Format("movie/{0}/casts", MovieID));
-            return await request.ProcesRequestAsync();
+            Credits credits = DatabaseCache.GetObject<Credits>(MovieID);
+            if (credits == null)
+            {
+                Request<Credits> request = new Request<Credits>(string.Format("movie/{0}/casts", MovieID));
+                credits = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(MovieID, credits);
+            }
+            return credits;
         }       
         
         /// <summary>
@@ -87,10 +100,16 @@ namespace TmdbWrapper
         /// <returns>The images.</returns>
         public static async Task<Images> GetMovieImagesAsync(int MovieID)
         {
-            Request<Images> request = new Request<Images>("movie/" + MovieID.ToString() + "/images");
-            if (!string.IsNullOrEmpty(Language))
-                request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync();
+            Images images = DatabaseCache.GetObject<Images>(MovieID);
+            if (images == null)
+            {
+                Request<Images> request = new Request<Images>("movie/" + MovieID.ToString() + "/images");
+                if (!string.IsNullOrEmpty(Language))
+                    request.AddParameter("language", Language);
+                images = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(MovieID, images);
+            }
+            return images;
         }        
         
         /// <summary>

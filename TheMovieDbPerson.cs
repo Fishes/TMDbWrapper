@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Cache;
 using TmdbWrapper.Persons;
 using TmdbWrapper.Utilities;
 
@@ -30,14 +31,17 @@ namespace TmdbWrapper
         /// <returns>The person.</returns>
         public static async Task<Person> GetPersonAsync(int PersonID, PersonExtras extras = 0)
         {
-            Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
-            return await request.ProcesRequestAsync();
+            Person result = DatabaseCache.GetObject<Person>(PersonID);
+            if (result == null)
+            {
                 Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
                 if (extras != 0)
                 {
                     request.AddParameter("append_to_response", extras.ToString().Replace(" ", ""));
                 }
                 result = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(PersonID, result);
+            }
             return result;
         }
 
@@ -48,8 +52,14 @@ namespace TmdbWrapper
         /// <returns>The credits.</returns>
         public static async Task<Credit> GetCreditsAsync(int PersonID)
         {
-            Request<Credit> request = new Request<Credit>("person/" + PersonID.ToString() + "/credits");
-            return await request.ProcesRequestAsync();
+            Credit credits = DatabaseCache.GetObject<Credit>(PersonID);
+            if (credits == null)
+            {
+                Request<Credit> request = new Request<Credit>("person/" + PersonID.ToString() + "/credits");
+                credits = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(PersonID, credits);
+            }
+            return credits;
         }
 
         /// <summary>
@@ -59,8 +69,14 @@ namespace TmdbWrapper
         /// <returns>A list of images</returns>
         public static async Task<IReadOnlyList<Profile>> GetImageAsync(int PersonID)
         {
-            Request<Profile> request = new Request<Profile>("person/" + PersonID.ToString() +"/images");
-            return await request.ProcesRequestListAsync("profiles");
+            IReadOnlyList<Profile> profile = DatabaseCache.GetObject<IReadOnlyList<Profile>>(PersonID);
+            if (profile == null)
+            {
+                Request<Profile> request = new Request<Profile>("person/" + PersonID.ToString() + "/images");
+                profile = await request.ProcesRequestListAsync("profiles");
+                DatabaseCache.SetObject(PersonID, profile);
+            }
+            return profile;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Cache;
 using TmdbWrapper.Companies;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
@@ -18,8 +19,14 @@ namespace TmdbWrapper
         /// <returns>The company that is associated to the id.</returns>
         public static async Task<Company> GetCompanyAsync(int CompanyId)
         {
-            Request<Company> request = new Request<Company>("company/"+ CompanyId.ToString());
-            return await request.ProcesRequestAsync();            
+            Company company = DatabaseCache.GetObject<Company>(CompanyId);
+            if (company == null)
+            {
+                Request<Company> request = new Request<Company>("company/" + CompanyId.ToString());
+                company = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(CompanyId, company);
+            }
+            return company;
         }
 
         /// <summary>

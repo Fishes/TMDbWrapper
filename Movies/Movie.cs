@@ -15,6 +15,10 @@ namespace TmdbWrapper.Movies
     /// </summary>
     public class Movie : ITmdbObject
     {
+        #region private fields
+        private Credits _credits;
+        #endregion
+
         #region Properties
         /// <summary>
         /// Indictates wether this is an adult title.
@@ -108,6 +112,23 @@ namespace TmdbWrapper.Movies
         /// Number of votes.
         /// </summary>
         public int VoteCount { get; private set; }
+
+        /// <summary>
+        /// Gets the credits associated to this movie.
+        /// </summary>
+        public Credits Credits {
+            get
+            {
+                if (_credits == null)
+                {
+                    var task = TheMovieDb.GetMovieCastAsync(Id);
+                    task.RunSynchronously();
+                    _credits = task.Result;
+                }
+                return _credits;
+            }
+        }
+
         #endregion
 
         #region Overrides
@@ -146,6 +167,8 @@ namespace TmdbWrapper.Movies
             Title = jsonObject.GetSafeString("title");
             VoteAverage = jsonObject.GetSafeNumber("vote_average");
             VoteCount = (int)jsonObject.GetSafeNumber("vote_count");
+            _credits = jsonObject.ProcessObject<Credits>("casts");
+
         }
         #endregion
 

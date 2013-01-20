@@ -8,17 +8,37 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
+    /// <summary>
+    /// Enumeration of extras that should be prefilled on retrieving the person info
+    /// </summary>
+    [Flags]
+    public enum PersonExtras
+    {
+        /// <summary>
+        /// Retrieve the credits
+        /// </summary>
+        credits = 1
+    }
+
     public static partial class TheMovieDb
     {
         /// <summary>
         /// Gets the information of the specified person.
         /// </summary>
         /// <param name="PersonID">The id of the person.</param>
+        /// <param name="extras">Indicates which parts should be prefetched.</param>
         /// <returns>The person.</returns>
-        public static async Task<Person> GetPersonAsync(int PersonID)
+        public static async Task<Person> GetPersonAsync(int PersonID, PersonExtras extras = 0)
         {
             Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
             return await request.ProcesRequestAsync();
+                Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
+                if (extras != 0)
+                {
+                    request.AddParameter("append_to_response", extras.ToString().Replace(" ", ""));
+                }
+                result = await request.ProcesRequestAsync();
+            return result;
         }
 
         /// <summary>

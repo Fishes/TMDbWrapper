@@ -13,6 +13,10 @@ namespace TmdbWrapper.Persons
     /// </summary>
     public class Person : ITmdbObject
     {
+        #region private fields
+        private Credit _credits;
+        #endregion
+
         #region properties
         /// <summary>
         /// Indicates wether this person is an adult actor
@@ -54,6 +58,22 @@ namespace TmdbWrapper.Persons
         /// Path of the profile.
         /// </summary>
         public string ProfilePath { get; private set; }
+        /// <summary>
+        /// Gets the credits associated to this person.
+        /// </summary>
+        public Credit Credits
+        {
+            get
+            {
+                if (_credits == null)
+                {
+                    var task = TheMovieDb.GetCreditsAsync(Id);
+                    task.RunSynchronously();
+                    _credits = task.Result;
+                }
+                return _credits;
+            }
+        }
         #endregion
 
         #region interface implementations
@@ -68,6 +88,7 @@ namespace TmdbWrapper.Persons
             Name = jsonObject.GetSafeString("name");
             PlaceOfBirth = jsonObject.GetSafeString("place_of_birth");
             ProfilePath = jsonObject.GetSafeString("profile_path");
+            _credits = jsonObject.ProcessObject<Credit>("credits");
         }
         #endregion
 

@@ -10,21 +10,38 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
-    public static partial class TheMovieDb
+    /// <summary>
+    /// Enumeration of extras that should be prefilled on retrieving the movie info
+    /// </summary>
+    [Flags]
+    public enum MovieExtras
     {
+        /// <summary>
+        /// Retrieve the cast
+        /// </summary>
+        casts = 1        
+    }
+
+    public static partial class TheMovieDb
+    {        
         /// <summary>
         /// Gets a movie by the movie database id.
         /// </summary>
         /// <param name="MovieID">Id of the movie</param>
+        /// <param name="extra">Indicates which parts should be prefetched.</param>
         /// <returns>The specified movie.</returns>
-        public static async Task<Movie> GetMovieAsync(int MovieID)
+        public static async Task<Movie> GetMovieAsync(int MovieID, MovieExtras extra = 0)
         {
-            Request<Movie> request = new Request<Movie>("movie/" + MovieID.ToString());
-            if (!string.IsNullOrEmpty(Language))
-                request.AddParameter("language", Language);
-            return await request.ProcesRequestAsync();
-        }        
-        
+                Request<Movie> request = new Request<Movie>("movie/" + MovieID.ToString());
+                if (!string.IsNullOrEmpty(Language))
+                    request.AddParameter("language", Language);
+                if (extra != 0)
+                {
+                    request.AddParameter("append_to_response", extra.ToString().Replace(" ", ""));
+                }
+                movie = await request.ProcesRequestAsync();
+            return movie;
+        }
         /// <summary>
         /// Gets a movie by the IMDB id.
         /// </summary>

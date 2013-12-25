@@ -1,8 +1,8 @@
 TMDbWrapper
 ===========
 
-A C# wrapper around TheMovieDb.org v3 for .Net 4.5.
--------------------------------------------------------
+A C# wrapper around TheMovieDb.org v3 for .Net 4.5. (Windows 8.1)
+-----------------------------------------------------------------
 
 Introduction
 

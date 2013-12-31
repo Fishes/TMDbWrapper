@@ -72,7 +72,8 @@ namespace TmdbWrapper.Search
             Adult = jsonObject.GetSafeBoolean("adult");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
-            OriginalTitle = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeString("release_date");
+            OriginalTitle = jsonObject.GetSafeString("original_title");
             PosterPath = jsonObject.GetSafeString("poster_path");
             Popularity = jsonObject.GetSafeNumber("popularity");
             Title = jsonObject.GetSafeString("title");
@@ -87,7 +88,7 @@ namespace TmdbWrapper.Search
         /// </summary>
         /// <param name="size">The size for the image as required</param>
         /// <returns>The uri to the sized image</returns>
-        public Uri Uri(PosterSize size)
+        public Uri Uri(PosterSize size = PosterSize.w342)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
@@ -97,7 +98,7 @@ namespace TmdbWrapper.Search
         /// </summary>
         /// <param name="size">The size for the image as required</param>
         /// <returns>The uri to the sized image</returns>
-        public Uri Uri(BackdropSize size)
+        public Uri Uri(BackdropSize size = BackdropSize.w300)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
@@ -112,5 +113,5 @@ namespace TmdbWrapper.Search
             return await TheMovieDb.GetMovieAsync(Id);
         }
         #endregion
-    }    
+    }  
 }

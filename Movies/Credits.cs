@@ -24,7 +24,7 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Crew of this movie.
         /// </summary>
-        public IReadOnlyList<CastPerson> Crew { get; private set; }
+        public IReadOnlyList<CrewPerson> Crew { get; private set; }
         #endregion
 
         #region interface implementations
@@ -33,7 +33,7 @@ namespace TmdbWrapper.Movies
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Cast = jsonObject.ProcessArray<CastPerson>("cast");
-            Crew = jsonObject.ProcessArray<CastPerson>("crew");
+            Crew = jsonObject.ProcessArray<CrewPerson>("crew");
         }
         #endregion
     }

@@ -55,6 +55,7 @@
     <Compile Include="Movies\BelongsToCollection.cs" />
     <Compile Include="Movies\CastPerson.cs" />
     <Compile Include="Movies\Credits.cs" />
+    <Compile Include="Movies\CrewPerson.cs" />
     <Compile Include="Movies\Genre.cs" />
     <Compile Include="Movies\Keyword.cs" />
     <Compile Include="Movies\Movie.cs" />

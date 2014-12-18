@@ -97,7 +97,7 @@ namespace TmdbWrapper.Utilities
             try
             {
                 JToken value = jsonObject[valueName];
-                if (value.HasValues)
+                if (value != null && value.HasValues)
                 {
                     T newT = new T();
                     newT.ProcessJson(new JSONObject((JObject)value));

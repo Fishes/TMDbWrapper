@@ -114,6 +114,7 @@
     <Compile Include="Companies\Company.cs" />
     <Compile Include="Movies\AlternativeTitle.cs" />
     <Compile Include="Movies\BelongsToCollection.cs" />
+    <Compile Include="Movies\CrewPerson.cs" />
     <Compile Include="Movies\CastPerson.cs" />
     <Compile Include="Images\Poster.cs" />
     <Compile Include="Persons\Credit.cs" />

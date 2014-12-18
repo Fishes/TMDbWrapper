@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Data.Json;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Movies
@@ -47,7 +46,7 @@ namespace TmdbWrapper.Movies
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");

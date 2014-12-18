@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Movies
 {
@@ -30,7 +29,7 @@ namespace TmdbWrapper.Movies
 
         #region interface implementations
 
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Cast = jsonObject.ProcessArray<CastPerson>("cast");

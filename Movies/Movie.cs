@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using TmdbWrapper.Image;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Movies
 {
@@ -142,7 +141,7 @@ namespace TmdbWrapper.Movies
         #endregion
 
         #region Interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Adult = jsonObject.GetSafeBoolean("adult");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");

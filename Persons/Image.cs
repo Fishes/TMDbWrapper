@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Persons
 {
@@ -37,7 +36,7 @@ namespace TmdbWrapper.Persons
         #endregion
 
         #region interface implememtations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             FilePath = jsonObject.GetSafeString("file_path");
             Width = (int)jsonObject.GetSafeNumber("width");

@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Search;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Utilities
 {
@@ -56,7 +55,7 @@ namespace TmdbWrapper.Utilities
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JsonObject jsonObject = JsonObject.Parse(response);
+            JSONObject jsonObject = new JSONObject(response);
 
             T result = new T();
             result.ProcessJson(jsonObject);
@@ -92,20 +91,18 @@ namespace TmdbWrapper.Utilities
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JsonObject jsonObject = JsonObject.Parse(response);
+            JSONObject jsonObject = new JSONObject(response);
 
             SearchResult<T> result = new SearchResult<T>();
-            result.Page = (int)jsonObject.GetNamedNumber("page");
-            result.TotalPages = (int)jsonObject.GetNamedNumber("total_pages");
-            result.TotalResults = (int)jsonObject.GetNamedNumber("total_results");
+            result.Page = (int)jsonObject.GetSafeNumber("page");
+            result.TotalPages = (int)jsonObject.GetSafeNumber("total_pages");
+            result.TotalResults = (int)jsonObject.GetSafeNumber("total_results");
 
-            var jsonObjects = from obj in jsonObject.GetNamedArray("results")
-                              select obj;
             result.Results = new List<T>();
-            foreach (var jsonObj in jsonObjects)
+            foreach (var jsonObj in jsonObject.GetNamedArray("results"))
             {
                 T newT = new T();
-                newT.ProcessJson(jsonObj.GetObject());
+                newT.ProcessJson(jsonObj);
                 result.Results.Add(newT);
             }
             return result;
@@ -117,7 +114,7 @@ namespace TmdbWrapper.Utilities
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JsonObject jsonObject = JsonObject.Parse(response);
+            JSONObject jsonObject = new JSONObject(response);
             IReadOnlyList<T> result = jsonObject.ProcessArray<T>("valueName");
             return result;
         }

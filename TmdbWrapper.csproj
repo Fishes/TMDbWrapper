@@ -138,6 +138,12 @@
     <Compile Include="TheMovieDbMovie.cs" />
     <Compile Include="TheMovieDbPerson.cs" />
     <Compile Include="TheMovieDbCollection.cs" />
+    <Compile Include="Utilities\Extensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utilities\ExtensionsRT.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utilities\Request.cs" />
     <Compile Include="Utilities\ITmdbObject.cs" />
     <Compile Include="Movies\Movie.cs" />
@@ -147,11 +153,13 @@
     <Compile Include="TheMovieDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheMovieDbSearch.cs" />
-    <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\Sizes.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

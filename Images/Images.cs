@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Image
 {
@@ -29,7 +28,7 @@ namespace TmdbWrapper.Image
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Backdrops = jsonObject.ProcessArray<Backdrop>("backdrops");

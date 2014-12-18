@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Data.Json;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Image
@@ -45,7 +44,7 @@ namespace TmdbWrapper.Image
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             FilePath = jsonObject.GetSafeString("file_path");
             Width = (int)jsonObject.GetSafeNumber("width");

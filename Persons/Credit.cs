@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Persons
 {
@@ -25,7 +24,7 @@ namespace TmdbWrapper.Persons
         #endregion
 
         #region interface implementation
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Crew = jsonObject.ProcessArray<Crew>("crew");
             Cast = jsonObject.ProcessArray<Role>("cast");

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Movies
 {
@@ -29,7 +28,7 @@ namespace TmdbWrapper.Movies
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Iso3166_1 = jsonObject.GetSafeString("iso_3166_1");
             Certification = jsonObject.GetSafeString("certification");

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Data.Json;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Search
@@ -67,7 +66,7 @@ namespace TmdbWrapper.Search
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Adult = jsonObject.GetSafeBoolean("adult");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");

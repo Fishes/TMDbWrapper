@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
-using Windows.Data.Json;
 
 namespace TmdbWrapper.Companies
 {
@@ -46,7 +45,7 @@ namespace TmdbWrapper.Companies
         #endregion
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JsonObject jsonObject)
+        void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Description = jsonObject.GetSafeString("description");
             Headquarters = jsonObject.GetSafeString("headquarters");

@@ -120,9 +120,7 @@ namespace TmdbWrapper.Movies
             {
                 if (_credits == null)
                 {
-                    var task = TheMovieDb.GetMovieCastAsync(Id);
-                    task.RunSynchronously();
-                    _credits = task.Result;
+                    _credits = TheMovieDb.GetMovieCastAsync(Id).Result;
                 }
                 return _credits;
             }

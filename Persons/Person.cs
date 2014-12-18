@@ -66,9 +66,7 @@ namespace TmdbWrapper.Persons
             {
                 if (_credits == null)
                 {
-                    var task = TheMovieDb.GetCreditsAsync(Id);
-                    task.RunSynchronously();
-                    _credits = task.Result;
+                    _credits = TheMovieDb.GetCreditsAsync(Id).Result;
                 }
                 return _credits;
             }

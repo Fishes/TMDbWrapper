@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdbWrapper", "TmdbWrapper.csproj", "{553DFD31-C58A-4583-8765-23DA13A753E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdbWrapperRT", "TmdbWrapperRT.csproj", "{553DFD31-C58A-4583-8765-23DA13A753E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorter", "..\Sorter\Sorter.csproj", "{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdbWrapperD", "TmdbWrapperD.csproj", "{73D732A9-4AA2-4BB8-BD34-7A70F170472D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmdbWrapper", "TmdbWrapper.csproj", "{73D732A9-4AA2-4BB8-BD34-7A70F170472D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,16 +35,6 @@ Global
 		{553DFD31-C58A-4583-8765-23DA13A753E1}.Release|x64.Build.0 = Release|x64
 		{553DFD31-C58A-4583-8765-23DA13A753E1}.Release|x86.ActiveCfg = Release|x86
 		{553DFD31-C58A-4583-8765-23DA13A753E1}.Release|x86.Build.0 = Release|x86
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Release|ARM.ActiveCfg = Release|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Release|x64.ActiveCfg = Release|Any CPU
-		{B4BBA0FA-AF32-4FF5-B233-5BBC7E180FEF}.Release|x86.ActiveCfg = Release|Any CPU
 		{73D732A9-4AA2-4BB8-BD34-7A70F170472D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73D732A9-4AA2-4BB8-BD34-7A70F170472D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73D732A9-4AA2-4BB8-BD34-7A70F170472D}.Debug|ARM.ActiveCfg = Debug|Any CPU

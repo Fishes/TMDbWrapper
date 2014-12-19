@@ -32,8 +32,8 @@ namespace TmdbWrapper.Movies
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
-            Cast = jsonObject.ProcessArray<CastPerson>("cast");
-            Crew = jsonObject.ProcessArray<CrewPerson>("crew");
+            Cast = jsonObject.ProcessObjectArray<CastPerson>("cast");
+            Crew = jsonObject.ProcessObjectArray<CrewPerson>("crew");
         }
         #endregion
     }

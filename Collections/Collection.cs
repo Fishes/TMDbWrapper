@@ -54,7 +54,7 @@ namespace TmdbWrapper.Collections
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
             PosterPath = jsonObject.GetSafeString("poster_path");
-            Parts = jsonObject.ProcessArray<Part>("parts");         
+            Parts = jsonObject.ProcessObjectArray<Part>("parts");         
         }
         #endregion
 

@@ -111,7 +111,7 @@ namespace TmdbWrapper.Utilities
             }
         }
 
-        internal IReadOnlyList<T> ProcessArray<T>(string valueName) where T : ITmdbObject, new()
+        internal IReadOnlyList<T> ProcessObjectArray<T>(string valueName) where T : ITmdbObject, new()
         {
             List<T> results = new List<T>();
             JToken value = jsonObject[valueName];
@@ -129,6 +129,46 @@ namespace TmdbWrapper.Utilities
                     catch
                     { }
                 }
+            }
+            return results;
+        }
+
+        internal IReadOnlyList<int> ProcessIntArray(string valueName) 
+        {
+            List<int> results = new List<int>();
+            JToken value = jsonObject[valueName];
+            if (value.HasValues)
+            {
+                if (value is JArray)
+                    foreach (JValue subObject in ((JArray)value))
+                    {
+                        try
+                        {
+                            results.Add((int)subObject);
+                        }
+                        catch
+                        { }
+                    }
+            }
+            return results;
+        }
+
+        internal IReadOnlyList<string> ProcessStringArray(string valueName)
+        {
+            List<string> results = new List<string>();
+            JToken value = jsonObject[valueName];
+            if (value.HasValues)
+            {
+                if (value is JArray)
+                    foreach (JValue subObject in ((JArray)value))
+                    {
+                        try
+                        {
+                            results.Add((string)subObject);
+                        }
+                        catch
+                        { }
+                    }
             }
             return results;
         }

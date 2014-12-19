@@ -81,6 +81,25 @@ namespace TmdbWrapper
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             return await request.ProcessSearchRequestAsync();
-        }              
+        }
+
+        /// <summary>
+        /// Searches for TV series that match the query string
+        /// </summary>
+        /// <param name="query">The query string</param>
+        /// <param name="firstAirDateYear">The year of first air date</param>
+        /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
+        /// <returns>The resultset with the found tv series.</returns>
+        public static async Task<SearchResult<TVSummary>> SearchTVAsync(string query, int? firstAirDateYear = null, int page = 1)
+        {
+            Request<TVSummary> request = new Request<TVSummary>("search/tv");
+            request.AddParameter("query", query.EscapeString());
+            request.AddParameter("page", page);
+            if (firstAirDateYear.HasValue)
+            {
+                request.AddParameter("first_air_date_year", firstAirDateYear.Value);
+            }
+            return await request.ProcessSearchRequestAsync();
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace TmdbWrapper
         /// Retrieve the cast
         /// </summary>
         casts = 1        
-    }
+    }                                                                                            
 
     public static partial class TheMovieDb
     {        

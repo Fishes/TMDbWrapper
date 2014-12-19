@@ -76,12 +76,18 @@
     <Compile Include="Search\MovieSummary.cs" />
     <Compile Include="Search\PersonSummary.cs" />
     <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Search\TVSummary.cs" />
     <Compile Include="TheMovieDb.cs" />
     <Compile Include="TheMovieDbCollection.cs" />
     <Compile Include="TheMovieDbCompany.cs" />
     <Compile Include="TheMovieDbMovie.cs" />
     <Compile Include="TheMovieDbPerson.cs" />
     <Compile Include="TheMovieDbSearch.cs" />
+    <Compile Include="TheMovieDbSearchTv.cs" />
+    <Compile Include="TV\Creator.cs" />
+    <Compile Include="TV\Network.cs" />
+    <Compile Include="TV\Season.cs" />
+    <Compile Include="TV\TVSeries.cs" />
     <Compile Include="Utilities\ExtensionsJSON.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\ITmdbObject.cs" />
@@ -91,6 +97,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

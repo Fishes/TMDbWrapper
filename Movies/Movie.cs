@@ -145,7 +145,7 @@ namespace TmdbWrapper.Movies
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             BelongsToCollection = jsonObject.ProcessObject<BelongsToCollection>("belongs_to_collection");
             Budget = (int)jsonObject.GetSafeNumber("budget");
-            Genres = jsonObject.ProcessArray<Genre>("genres");            
+            Genres = jsonObject.ProcessObjectArray<Genre>("genres");            
             Homepage = jsonObject.GetSafeUri("homepage");
             Id = (int)jsonObject.GetSafeNumber("id");
             ImdbId = jsonObject.GetSafeString("imdb_id");
@@ -153,12 +153,12 @@ namespace TmdbWrapper.Movies
             Overview = jsonObject.GetSafeString("overview");
             Popularity = (int)jsonObject.GetSafeNumber("popularity");
             PosterPath = jsonObject.GetSafeString("poster_path");
-            ProductionCompanies = jsonObject.ProcessArray<ProductionCompany>("production_companies");
-            ProductionCountries = jsonObject.ProcessArray<ProductionCountry>("production_countries");
+            ProductionCompanies = jsonObject.ProcessObjectArray<ProductionCompany>("production_companies");
+            ProductionCountries = jsonObject.ProcessObjectArray<ProductionCountry>("production_countries");
             ReleaseDate = jsonObject.GetSafeString("release_date");
             Revenue = (int)jsonObject.GetSafeNumber("revenue");
             Runtime = (int)jsonObject.GetSafeNumber("runtime");
-            SpokenLanguages = jsonObject.ProcessArray<SpokenLanguage>("spoken_languages");
+            SpokenLanguages = jsonObject.ProcessObjectArray<SpokenLanguage>("spoken_languages");
             Status = jsonObject.GetSafeString("status");
             Tagline = jsonObject.GetSafeString("tagline");
             Title = jsonObject.GetSafeString("title");

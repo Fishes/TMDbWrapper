@@ -31,8 +31,8 @@ namespace TmdbWrapper.Image
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
-            Backdrops = jsonObject.ProcessArray<Backdrop>("backdrops");
-            Posters = jsonObject.ProcessArray<Poster>("posters");
+            Backdrops = jsonObject.ProcessObjectArray<Backdrop>("backdrops");
+            Posters = jsonObject.ProcessObjectArray<Poster>("posters");
         }
         #endregion
     }

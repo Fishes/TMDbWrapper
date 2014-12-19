@@ -26,8 +26,8 @@ namespace TmdbWrapper.Persons
         #region interface implementation
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
-            Crew = jsonObject.ProcessArray<Crew>("crew");
-            Cast = jsonObject.ProcessArray<Role>("cast");
+            Crew = jsonObject.ProcessObjectArray<Crew>("crew");
+            Cast = jsonObject.ProcessObjectArray<Role>("cast");
         }
         #endregion
     }

@@ -160,7 +160,7 @@ namespace TmdbWrapper.Utilities
             }
         }
 
-        internal IReadOnlyList<T> ProcessArray<T>(string valueName) where T : ITmdbObject, new()
+        internal IReadOnlyList<T> ProcessObjectArray<T>(string valueName) where T : ITmdbObject, new()
         {
             List<T> results = new List<T>();
             JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
@@ -173,6 +173,44 @@ namespace TmdbWrapper.Utilities
                         T newT = new T();
                         newT.ProcessJson(new JSONObject(subObject.GetObject()));
                         results.Add(newT);
+                    }
+                    catch
+                    { }
+                }
+            }
+            return results;
+        }
+
+        internal IReadOnlyList<string> ProcessStringArray(string valueName) 
+        {
+            List<string> results = new List<string>();
+            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
+            {
+                foreach (JsonValue subObject in jsonValue.GetArray())
+                {
+                    try
+                    {
+                        results.Add(jsonValue.GetString());
+                    }
+                    catch
+                    { }
+                }
+            }
+            return results;
+        }
+
+        internal IReadOnlyList<int> ProcessNumberArray(string valueName)
+        {
+            List<int> results = new List<int>();
+            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
+            {
+                foreach (JsonValue subObject in jsonValue.GetArray())
+                {
+                    try
+                    {
+                        results.Add((int)jsonValue.GetNumber());
                     }
                     catch
                     { }

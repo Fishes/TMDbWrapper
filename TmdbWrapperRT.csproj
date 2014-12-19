@@ -135,6 +135,7 @@
     <Compile Include="Movies\ProductionCompany.cs" />
     <Compile Include="Movies\ProductionCountry.cs" />
     <Compile Include="Movies\SpokenLanguage.cs" />
+    <Compile Include="Search\TVSummary.cs" />
     <Compile Include="TheMovieDbCompany.cs" />
     <Compile Include="TheMovieDbMovie.cs" />
     <Compile Include="TheMovieDbPerson.cs" />

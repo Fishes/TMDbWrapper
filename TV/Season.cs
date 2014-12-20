@@ -15,7 +15,7 @@ namespace TmdbWrapper.TV
         /// <summary>
         /// The first broadcast of the first episode
         /// </summary>
-        public string AirDate { get; private set; }
+        public DateTime? AirDate { get; private set; }
         /// <summary>
         /// Episodes of the season
         /// </summary>
@@ -51,7 +51,7 @@ namespace TmdbWrapper.TV
 
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
-            AirDate = jsonObject.GetSafeString("air_date");
+            AirDate = jsonObject.GetSafeDateTime("air_date");
             EpisodeSummaries = jsonObject.ProcessObjectArray<Episode>("episodes");
             Name = jsonObject.GetSafeString("name");
             Overview = jsonObject.GetSafeString("overview");

@@ -24,7 +24,7 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Date of this release.
         /// </summary>
-        public string ReleaseDate { get; private set; }
+        public DateTime? ReleaseDate { get; private set; }
         #endregion
 
         #region interface implementations
@@ -32,7 +32,7 @@ namespace TmdbWrapper.Movies
         {
             Iso3166_1 = jsonObject.GetSafeString("iso_3166_1");
             Certification = jsonObject.GetSafeString("certification");
-            ReleaseDate = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeDateTime("release_date");
         }
         #endregion
 

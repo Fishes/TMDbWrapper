@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,31 @@ namespace TmdbWrapper.Utilities
             var jsonObjects = from obj in jsonObject.GetNamedArray(name)
                               select new JSONObject(obj.GetObject());
             return jsonObjects.ToArray();
+        }
+
+        internal DateTime? GetSafeDateTime(string valueName)
+        {
+            try
+            {
+                if (jsonObject.ContainsKey(valueName))
+                {
+                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
+                    {
+                        DateTime dateTime;
+                        if(DateTime.TryParse(jsonValue.GetString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime )){
+                            return dateTime;
+                        }
+
+                        return null;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

@@ -12,10 +12,10 @@ namespace TmdbWrapper.Utilities
     internal static partial class Extensions
     {
         #region private constants
-        private static string baseImageUri;
+        private static Uri baseImageUri;
         #endregion
 
-        internal static void Initialize(string baseUri)
+        internal static void Initialize(Uri baseUri)
         {
             baseImageUri = baseUri;
         }

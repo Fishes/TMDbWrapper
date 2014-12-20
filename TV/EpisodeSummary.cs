@@ -15,7 +15,7 @@ namespace TmdbWrapper.TV
         /// <summary>
         /// Date of the first broadcast
         /// </summary>
-        public string AirDate { get; private set; }
+        public DateTime? AirDate { get; private set; }
         /// <summary>
         /// List of all the crew members
         /// </summary>
@@ -71,7 +71,7 @@ namespace TmdbWrapper.TV
         
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
-            AirDate = jsonObject.GetSafeString("air_date");
+            AirDate = jsonObject.GetSafeDateTime("air_date");
             Crew = jsonObject.ProcessObjectArray<CrewPerson>("crew");
             EpisodeNumber = (int)jsonObject.GetSafeNumber("episode_number");
             GuestStars = jsonObject.ProcessObjectArray<CastPerson>("guest_stars");
@@ -87,11 +87,11 @@ namespace TmdbWrapper.TV
 
         #region Image Uri's
         /// <summary>
-        /// Uri to the poster image.
+        /// Uri to the still image.
         /// </summary>
         /// <param name="size">The size for the image as required</param>
         /// <returns>The uri to the sized image</returns>
-        public Uri Uri(PosterSize size)
+        public Uri Uri(StillSize size)
         {
             return Utilities.Extensions.MakeImageUri(size.ToString(), StillPath);
         }

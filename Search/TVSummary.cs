@@ -28,7 +28,7 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Original date of first broadcast.
         /// </summary>
-        public string FirstAirDate { get; private set; }
+        public DateTime? FirstAirDate { get; private set; }
         /// <summary>
         /// Path of the poster for this series.
         /// </summary>
@@ -66,7 +66,7 @@ namespace TmdbWrapper.Search
         {
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
-            FirstAirDate = jsonObject.GetSafeString("first_air_date");
+            FirstAirDate = jsonObject.GetSafeDateTime("first_air_date");
             OriginalName = jsonObject.GetSafeString("original_name");
             PosterPath = jsonObject.GetSafeString("poster_path");
             Popularity = jsonObject.GetSafeNumber("popularity");

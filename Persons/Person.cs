@@ -32,11 +32,11 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// Birthday 
         /// </summary>
-        public string Birthday { get; private set; }
+        public DateTime? Birthday { get; private set; }
         /// <summary>
         /// Date of death
         /// </summary>
-        public string Deathday { get; private set; }
+        public DateTime? Deathday { get; private set; }
         /// <summary>
         /// Uri of possible homepage.
         /// </summary>
@@ -78,8 +78,8 @@ namespace TmdbWrapper.Persons
         {
             Adult = jsonObject.GetSafeBoolean("adult");
             Biography = jsonObject.GetSafeString("biography");
-            Birthday = jsonObject.GetSafeString("birthday");
-            Deathday = jsonObject.GetSafeString("deathday");
+            Birthday = jsonObject.GetSafeDateTime("birthday");
+            Deathday = jsonObject.GetSafeDateTime("deathday");
             Homepage = new Uri(jsonObject.GetSafeString("homepage"));
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");

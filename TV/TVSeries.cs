@@ -28,7 +28,7 @@ namespace TmdbWrapper.TV
         /// <summary>
         /// The date of the first broadcast
         /// </summary>
-        public string FirstAirDate { get; private set; }
+        public DateTime? FirstAirDate { get; private set; }
         /// <summary>
         /// A list of genres
         /// </summary>
@@ -52,7 +52,7 @@ namespace TmdbWrapper.TV
         /// <summary>
         /// The broadcast date of the last episode
         /// </summary>
-        public string LastAirDate { get; private set; }
+        public DateTime? LastAirDate { get; private set; }
         /// <summary>
         /// The name of the tv series
         /// </summary>
@@ -126,13 +126,13 @@ namespace TmdbWrapper.TV
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             CreatedBy = jsonObject.ProcessObjectArray<Creator>("created_by");
             EpisodeRuntime = jsonObject.ProcessIntArray("episode_run_time");
-            FirstAirDate = jsonObject.GetSafeString("first_air_date");
+            FirstAirDate = jsonObject.GetSafeDateTime("first_air_date");
             Genres = jsonObject.ProcessObjectArray<Genre>("genres");
             Homepage = jsonObject.GetSafeUri("homepage");
             Id = (int)jsonObject.GetSafeNumber("id");
             InProduction = jsonObject.GetSafeBoolean("in_production");
             Languages = jsonObject.ProcessStringArray("languages");
-            LastAirDate = jsonObject.GetSafeString("last_air_date");
+            LastAirDate = jsonObject.GetSafeDateTime("last_air_date");
             Name = jsonObject.GetSafeString("name");
             Networks = jsonObject.ProcessObjectArray<Network>("networks");
             NumberOfEpisodes = (int)jsonObject.GetSafeNumber("number_of_episodes");

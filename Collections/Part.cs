@@ -28,7 +28,7 @@ namespace TmdbWrapper.Collections
         /// <summary>
         /// Release date of the movie
         /// </summary>
-        public string ReleaseDate { get; private set; }
+        public DateTime? ReleaseDate { get; private set; }
         /// <summary>
         /// Title of the movie
         /// </summary>
@@ -51,7 +51,7 @@ namespace TmdbWrapper.Collections
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
             PosterPath = jsonObject.GetSafeString("poster_path");
-            ReleaseDate = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             Title = jsonObject.GetSafeString("title");
         }
         #endregion

@@ -78,7 +78,7 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Date this movie was released.
         /// </summary>
-        public string ReleaseDate { get; private set; }
+        public DateTime? ReleaseDate { get; private set; }
         /// <summary>
         /// Revenue that this movie gathered.
         /// </summary>
@@ -155,7 +155,7 @@ namespace TmdbWrapper.Movies
             PosterPath = jsonObject.GetSafeString("poster_path");
             ProductionCompanies = jsonObject.ProcessObjectArray<ProductionCompany>("production_companies");
             ProductionCountries = jsonObject.ProcessObjectArray<ProductionCountry>("production_countries");
-            ReleaseDate = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             Revenue = (int)jsonObject.GetSafeNumber("revenue");
             Runtime = (int)jsonObject.GetSafeNumber("runtime");
             SpokenLanguages = jsonObject.ProcessObjectArray<SpokenLanguage>("spoken_languages");

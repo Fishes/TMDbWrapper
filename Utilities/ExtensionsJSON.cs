@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,21 @@ namespace TmdbWrapper.Utilities
         {
             return from obj in (jsonObject[name] as JArray)
                    select new JSONObject(obj);
+        }
+
+        internal DateTime? GetSafeDateTime(string valueName)
+        {
+            try
+            {
+                DateTime dateTime;
+                if(!DateTime.TryParse((string)jsonObject[valueName], CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime )){
+                    return null;
+                }
+                return dateTime;            
+            }
+            catch{
+                return null;
+            }
         }
 
         internal string GetSafeString(string valueName)

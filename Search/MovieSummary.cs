@@ -32,7 +32,7 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Original date of this release.
         /// </summary>
-        public string ReleaseDate { get; private set; }
+        public DateTime? ReleaseDate { get; private set; }
         /// <summary>
         /// Path of the poster for this movie.
         /// </summary>
@@ -71,7 +71,7 @@ namespace TmdbWrapper.Search
             Adult = jsonObject.GetSafeBoolean("adult");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
-            ReleaseDate = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             OriginalTitle = jsonObject.GetSafeString("original_title");
             PosterPath = jsonObject.GetSafeString("poster_path");
             Popularity = jsonObject.GetSafeNumber("popularity");

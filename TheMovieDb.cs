@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper;
+using TmdbWrapper.Configuration;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 
@@ -20,19 +21,26 @@ namespace TmdbWrapper
         /// <summary>
         /// The apikey that is used in all requests.
         /// </summary>
-        public static string ApiKey { get; private set; }
+        internal static string ApiKey { get; private set; }
         /// <summary>
         /// Language all the request uses if entered.
         /// </summary>
-        public static string Language { get; private set; }
+        internal static string Language { get; private set; }
+
+        internal static bool UseSecureConnections { get; set; }
+        internal static Configuration.Configuration Configuration { get; private set; }
 
         /// <summary>
         /// Initialises the wrapper.
         /// </summary>
-        /// <param name="apiKey">The apikey the requests will use.</param>       
-        public static void Initialise(string apiKey) 
+        /// <param name="apiKey">The apikey the requests will use.</param>  
+        /// <param name="useSecureConnections">Inidicates if a secure connection should be used.</param>
+        public static void Initialise(string apiKey, bool useSecureConnections = true) 
         {
             ApiKey = apiKey;
+            UseSecureConnections = useSecureConnections;
+            Configuration.Configuration config = GetConfig();
+            Extensions.Initialize(useSecureConnections ? config.ImageConfiguration.SecureBaseUrl : config.ImageConfiguration.BaseUrl);
         }
 
         /// <summary>
@@ -40,12 +48,19 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="apiKey">The apikey the request will use.</param>       
         /// <param name="language">The language the requests will use.</param>
-        public static void Initialise(string apiKey, string language)
+        /// <param name="useSecureConnections">Inidicates if a secure connection should be used.</param>
+        public static void Initialise(string apiKey, string language, bool useSecureConnections = true) 
         {
-            ApiKey = apiKey;
+            Initialise(apiKey, useSecureConnections);
             Language = language;
-        }        
+        }
 
-        
+        private static Configuration.Configuration GetConfig()
+        {
+            Request<Configuration.Configuration>.Initialize(UseSecureConnections);
+            Request<Configuration.Configuration> request = new Request<Configuration.Configuration>("configuration");
+            Configuration.Configuration config = request.ProcesRequestAsync().Result;
+            return config;
+        }
     }
 }

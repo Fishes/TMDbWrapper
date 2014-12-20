@@ -10,10 +10,17 @@ namespace TmdbWrapper.Utilities
 {
     internal class Request<T> where T : ITmdbObject, new()
     {
-        private const string BASE_URL = @"http://api.themoviedb.org/3/";   
+        private static string BASE_URL = @"http://api.themoviedb.org/3/";
+        private const string BASE_NONSECURE_URL = @"http://api.themoviedb.org/3/";
+        private const string BASE_SECURE_URL = @"https://api.themoviedb.org/3/";   
 
         public string ApiName { get; private set; }
         private IDictionary<string, string> Parameters = new Dictionary<string, string>();
+
+        internal static void Initialize(bool useSecureConnection)
+        {
+            BASE_URL = useSecureConnection ? BASE_SECURE_URL : BASE_NONSECURE_URL;
+        }
 
         public Request(string apiName)
         {

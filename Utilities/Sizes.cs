@@ -118,4 +118,27 @@ namespace TmdbWrapper.Utilities
         original
     }
 
+    /// <summary>
+    /// Different sizes for still images
+    /// </summary>
+    public enum StillSize
+    {
+        /// <summary>
+        /// Width of 92 pixels
+        /// </summary>
+        w92,
+        /// <summary>
+        /// Width of 185 pixels
+        /// </summary>
+        w185,
+        /// <summary>
+        /// Width of 300 pixels
+        /// </summary>
+        w300,
+        /// <summary>
+        /// Original image
+        /// </summary>
+        original
+    }
+
 }

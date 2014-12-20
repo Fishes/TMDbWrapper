@@ -40,7 +40,7 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// Date of the original release.
         /// </summary>
-        public string ReleaseDate { get; private set; }
+        public DateTime? ReleaseDate { get; private set; }
         /// <summary>
         /// Indictates if then movie is an adult title.
         /// </summary>
@@ -56,7 +56,7 @@ namespace TmdbWrapper.Persons
             OriginalTitle = jsonObject.GetSafeString("original_title");
             Job = jsonObject.GetSafeString("job");
             PosterPath = jsonObject.GetSafeString("poster_path");
-            ReleaseDate = jsonObject.GetSafeString("release_date");
+            ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             Adult = jsonObject.GetSafeBoolean("adult");
         }
         #endregion

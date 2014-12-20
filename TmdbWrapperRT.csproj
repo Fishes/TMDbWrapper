@@ -140,6 +140,13 @@
     <Compile Include="TheMovieDbMovie.cs" />
     <Compile Include="TheMovieDbPerson.cs" />
     <Compile Include="TheMovieDbCollection.cs" />
+    <Compile Include="TheMovieDbTv.cs" />
+    <Compile Include="TV\Creator.cs" />
+    <Compile Include="TV\EpisodeSummary.cs" />
+    <Compile Include="TV\Network.cs" />
+    <Compile Include="TV\Season.cs" />
+    <Compile Include="TV\SeasonSummary.cs" />
+    <Compile Include="TV\TVSeries.cs" />
     <Compile Include="Utilities\Extensions.cs">
       <SubType>Code</SubType>
     </Compile>

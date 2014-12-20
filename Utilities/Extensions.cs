@@ -12,8 +12,13 @@ namespace TmdbWrapper.Utilities
     internal static partial class Extensions
     {
         #region private constants
-        private const string baseImageUri = @"http://cf2.imgobject.com/t/p/";
+        private static string baseImageUri;
         #endregion
+
+        internal static void Initialize(string baseUri)
+        {
+            baseImageUri = baseUri;
+        }
 
         #region string extensions
         internal static string EscapeString(this string s)

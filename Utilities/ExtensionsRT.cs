@@ -200,7 +200,7 @@ namespace TmdbWrapper.Utilities
             return results;
         }
 
-        internal IReadOnlyList<int> ProcessNumberArray(string valueName)
+        internal IReadOnlyList<int> ProcessIntArray(string valueName)
         {
             List<int> results = new List<int>();
             JsonValue jsonValue = jsonObject.GetNamedValue(valueName);

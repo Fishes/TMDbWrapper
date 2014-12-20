@@ -6,14 +6,27 @@ using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.TV
 {
+    /// <summary>
+    /// A creator of a tv series
+    /// </summary>
     public class Creator : ITmdbObject
     {
+        /// <summary>
+        /// Id of the creator
+        /// </summary>
         public int Id { get; private set; }
-
+        /// <summary>
+        /// Name of the creator
+        /// </summary>
         public string Name { get; private set; }
-
+        /// <summary>
+        /// Path to the profile picture
+        /// </summary>
         public string ProfilePath { get; private set; }
-
+        /// <summary>
+        /// Returns the name of the creator
+        /// </summary>
+        /// <returns>The name</returns>
         public override string ToString()
         {
             return Name;

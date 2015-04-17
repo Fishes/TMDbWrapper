@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TmdbWrapper.Movies;
 using TmdbWrapper.Utilities;
 
@@ -93,7 +91,7 @@ namespace TmdbWrapper.TV
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(StillSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), StillPath);
+            return Extensions.MakeImageUri(size.ToString(), StillPath);
         }
         #endregion
     }

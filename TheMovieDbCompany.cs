@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TmdbWrapper.Cache;
 using TmdbWrapper.Companies;
 using TmdbWrapper.Search;
@@ -15,16 +11,16 @@ namespace TmdbWrapper
         /// <summary>
         /// Gets a specific company
         /// </summary>
-        /// <param name="CompanyId">Id of the requested company.</param>
+        /// <param name="companyId">Id of the requested company.</param>
         /// <returns>The company that is associated to the id.</returns>
-        public static async Task<Company> GetCompanyAsync(int CompanyId)
+        public static async Task<Company> GetCompanyAsync(int companyId)
         {
-            Company company = DatabaseCache.GetObject<Company>(CompanyId);
+            var company = DatabaseCache.GetObject<Company>(companyId);
             if (company == null)
             {
-                Request<Company> request = new Request<Company>("company/" + CompanyId.ToString());
+                var request = new Request<Company>("company/" + companyId);
                 company = await request.ProcesRequestAsync();
-                DatabaseCache.SetObject(CompanyId, company);
+                DatabaseCache.SetObject(companyId, company);
             }
             return company;
         }
@@ -32,12 +28,12 @@ namespace TmdbWrapper
         /// <summary>
         /// Gets the credits of the specified company.
         /// </summary>
-        /// <param name="CompanyId">The id of the company</param>
+        /// <param name="companyId">The id of the company</param>
         /// <param name="page">The request page of the search results, giving 0 will give all results.</param>
         /// <returns>A page of credits</returns>
-        public static async Task<SearchResult<MovieSummary>> GetCompanyCreditsAsync(int CompanyId, int page = 1)
+        public static async Task<SearchResult<MovieSummary>> GetCompanyCreditsAsync(int companyId, int page = 1)
         {
-            Request<MovieSummary> request = new Request<MovieSummary>("company/" + CompanyId.ToString() + "/movies");
+            var request = new Request<MovieSummary>("company/" + companyId + "/movies");
             request.AddParameter("page", page);
             if(!string.IsNullOrEmpty(Language))
                 request.AddParameter("language", Language);

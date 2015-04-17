@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TmdbWrapper.Movies;
+﻿using System.Threading.Tasks;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 
@@ -21,7 +16,7 @@ namespace TmdbWrapper
         /// <returns>A search result set of movie summaries.</returns>
         public static async Task<SearchResult<MovieSummary>> SearchMovieAsync(string query, int page = 1, bool? includeAdult = null, int? year = null)
         {
-            Request<MovieSummary> request = new Request<MovieSummary>("search/movie");
+            var request = new Request<MovieSummary>("search/movie");
             
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
@@ -43,7 +38,7 @@ namespace TmdbWrapper
         /// <returns>The resultset with found collections.</returns>
         public static async Task<SearchResult<CollectionSummary>> SearchCollectionAsync(string query, int page = 1)
         {
-            Request<CollectionSummary> request = new Request<CollectionSummary>("search/collection");
+            var request = new Request<CollectionSummary>("search/collection");
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
@@ -59,7 +54,7 @@ namespace TmdbWrapper
         /// <returns>The resultset with the found person summaries.</returns>
         public static async Task<SearchResult<PersonSummary>> SearchPersonAsync(string query, int page = 1)
         {
-            Request<PersonSummary> request = new Request<PersonSummary>("search/person");
+            var request = new Request<PersonSummary>("search/person");
             
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
@@ -77,7 +72,7 @@ namespace TmdbWrapper
         /// <returns>The resultset with the found company summaries.</returns>
         public static async Task<SearchResult<CompanySummary>> SearchCompanyAsync(string query, int page = 1)
         {
-            Request<CompanySummary> request = new Request<CompanySummary>("search/company");
+            var request = new Request<CompanySummary>("search/company");
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             return await request.ProcessSearchRequestAsync();
@@ -92,7 +87,7 @@ namespace TmdbWrapper
         /// <returns>The resultset with the found tv series.</returns>
         public static async Task<SearchResult<TVSummary>> SearchTVAsync(string query, int? firstAirDateYear = null, int page = 1)
         {
-            Request<TVSummary> request = new Request<TVSummary>("search/tv");
+            var request = new Request<TVSummary>("search/tv");
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             if (firstAirDateYear.HasValue)

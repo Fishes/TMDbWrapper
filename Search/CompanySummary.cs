@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Companies;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Search
@@ -54,7 +52,7 @@ namespace TmdbWrapper.Search
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(LogoSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), LogoPath);
+            return Extensions.MakeImageUri(size.ToString(), LogoPath);
         }
         #endregion
 
@@ -62,7 +60,7 @@ namespace TmdbWrapper.Search
         /// <summary>
         /// Retrieves the associated company.
         /// </summary>
-        public async Task<Companies.Company> CompanyAsync()
+        public async Task<Company> CompanyAsync()
         {
             return await TheMovieDb.GetCompanyAsync(Id);
         }

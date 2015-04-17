@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TmdbWrapper.Cache;
 using TmdbWrapper.Collections;
-using TmdbWrapper.Image;
+using TmdbWrapper.Images;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
@@ -15,16 +11,16 @@ namespace TmdbWrapper
         /// <summary>
         /// Get a specific collection
         /// </summary>
-        /// <param name="CollectionId">Id of the collection</param>
+        /// <param name="collectionId">Id of the collection</param>
         /// <returns>The collection</returns>
-        public static async Task<Collection> GetCollectionAsync(int CollectionId)
+        public static async Task<Collection> GetCollectionAsync(int collectionId)
         {
-            Collection collection = DatabaseCache.GetObject<Collection>(CollectionId);
+            var collection = DatabaseCache.GetObject<Collection>(collectionId);
             if (collection != null)
             {
-                Request<Collection> request = new Request<Collection>("collection/" + CollectionId.ToString());
+                var request = new Request<Collection>("collection/" + collectionId);
                 collection = await request.ProcesRequestAsync();
-                DatabaseCache.SetObject(CollectionId, collection);
+                DatabaseCache.SetObject(collectionId, collection);
             }
             return collection;
         }
@@ -32,16 +28,16 @@ namespace TmdbWrapper
         /// <summary>
         /// Gets the images that are associated with the collection.
         /// </summary>
-        /// <param name="CollectionId">Id of the collection</param>
+        /// <param name="collectionId">Id of the collection</param>
         /// <returns>The image set of the collection.</returns>
-        public static async Task<Images> GetCollectionImagesAsync(int CollectionId)
+        public static async Task<Image> GetCollectionImagesAsync(int collectionId)
         {
-            Images images = DatabaseCache.GetObject<Images>(CollectionId);
+            var images = DatabaseCache.GetObject<Image>(collectionId);
             if (images != null)
             {
-                Request<Images> request = new Request<Images>("collection/" + CollectionId.ToString() + "/images");
+                var request = new Request<Image>("collection/" + collectionId + "/images");
                 images = await request.ProcesRequestAsync();
-                DatabaseCache.SetObject(CollectionId, images);
+                DatabaseCache.SetObject(collectionId, images);
             }
             return images;
         }

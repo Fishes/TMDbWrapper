@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using TmdbWrapper;
-using TmdbWrapper.Configuration;
-using TmdbWrapper.Search;
-using TmdbWrapper.Utilities;
+﻿using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper
 {
@@ -39,7 +30,7 @@ namespace TmdbWrapper
         {
             ApiKey = apiKey;
             UseSecureConnections = useSecureConnections;
-            Configuration.Configuration config = GetConfig();
+            var config = GetConfig();
             Extensions.Initialize(useSecureConnections ? config.ImageConfiguration.SecureBaseUrl : config.ImageConfiguration.BaseUrl);
         }
 
@@ -58,8 +49,8 @@ namespace TmdbWrapper
         private static Configuration.Configuration GetConfig()
         {
             Request<Configuration.Configuration>.Initialize(UseSecureConnections);
-            Request<Configuration.Configuration> request = new Request<Configuration.Configuration>("configuration");
-            Configuration.Configuration config = request.ProcesRequestAsync().Result;
+            var request = new Request<Configuration.Configuration>("configuration");
+            var config = request.ProcesRequestAsync().Result;
             return config;
         }
     }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.TV
@@ -47,7 +44,7 @@ namespace TmdbWrapper.TV
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(ProfileSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
+            return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
         #endregion
     }

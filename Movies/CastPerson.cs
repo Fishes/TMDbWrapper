@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using TmdbWrapper.Persons;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Movies
@@ -64,7 +62,7 @@ namespace TmdbWrapper.Movies
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(ProfileSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
+            return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
         #endregion
 
@@ -72,7 +70,7 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Retrieves the associated person
         /// </summary>
-        public async Task<Persons.Person> PersonAsync()
+        public async Task<Person> PersonAsync()
         {
             return await TheMovieDb.GetPersonAsync(Id);
         }

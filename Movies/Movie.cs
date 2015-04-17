@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TmdbWrapper.Image;
+using TmdbWrapper.Images;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 
@@ -177,7 +175,7 @@ namespace TmdbWrapper.Movies
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(PosterSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
+            return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace TmdbWrapper.Movies
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(BackdropSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
+            return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
         #endregion
 
@@ -195,11 +193,11 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Gets a list of altenative titles for the specified country
         /// </summary>
-        /// <param name="Country">Code of the country</param>
+        /// <param name="country">Code of the country</param>
         /// <returns>A list of alternative titles.</returns>
-        public async Task<IReadOnlyList<AlternativeTitle>> AlternateTitlesAsync(string Country)
+        public async Task<IReadOnlyList<AlternativeTitle>> AlternateTitlesAsync(string country)
         {
-            return await TheMovieDb.GetMovieAlternateTitlesAsync(Id, Country);
+            return await TheMovieDb.GetMovieAlternateTitlesAsync(Id, country);
         }
 
         /// <summary>
@@ -215,7 +213,7 @@ namespace TmdbWrapper.Movies
         /// All images of this movie.
         /// </summary>
         /// <returns>The images.</returns>
-        public async Task<Images> ImagesAsync()
+        public async Task<Image> ImagesAsync()
         {
             return await TheMovieDb.GetMovieImagesAsync(Id);
         }

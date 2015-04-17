@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Search;
@@ -10,23 +11,23 @@ namespace TmdbWrapper.Utilities
 {
     internal class Request<T> where T : ITmdbObject, new()
     {
-        private static string BASE_URL = @"http://api.themoviedb.org/3/";
-        private const string BASE_NONSECURE_URL = @"http://api.themoviedb.org/3/";
-        private const string BASE_SECURE_URL = @"https://api.themoviedb.org/3/";   
+        private static string _baseUrl = @"http://api.themoviedb.org/3/";
+        private const string BaseNonsecureUrl = @"http://api.themoviedb.org/3/";
+        private const string BaseSecureUrl = @"https://api.themoviedb.org/3/";   
 
         public string ApiName { get; private set; }
-        private IDictionary<string, string> Parameters = new Dictionary<string, string>();
+        private readonly IDictionary<string, string> _parameters = new Dictionary<string, string>();
 
         internal static void Initialize(bool useSecureConnection)
         {
-            BASE_URL = useSecureConnection ? BASE_SECURE_URL : BASE_NONSECURE_URL;
+            _baseUrl = useSecureConnection ? BaseSecureUrl : BaseNonsecureUrl;
         }
 
         public Request(string apiName)
         {
             if (string.IsNullOrWhiteSpace(TheMovieDb.ApiKey))
             {
-                throw new ArgumentNullException("The library was not initialized correctly. Please specify an API_KEY.");
+                throw new ArgumentNullException("apiName", "The library was not initialized correctly. Please specify an API_KEY.");
             }
             ApiName = apiName;
             AddParameter("api_key", TheMovieDb.ApiKey);
@@ -34,7 +35,7 @@ namespace TmdbWrapper.Utilities
 
         public void AddParameter(string key, string value)
         {
-            Parameters.Add(key, value);
+            _parameters.Add(key, value);
         }
 
         public void AddParameter(string key, object value)
@@ -46,10 +47,10 @@ namespace TmdbWrapper.Utilities
         {
             get 
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 sb.Append(ApiName);
                 sb.Append("?");
-                var args = from n in Parameters
+                var args = from n in _parameters
                            select n.Key + "=" + n.Value;
                 sb.Append(string.Join("&", args));
                 return sb.ToString();
@@ -58,13 +59,13 @@ namespace TmdbWrapper.Utilities
 
         public async Task<T> ProcesRequestAsync() 
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JSONObject jsonObject = new JSONObject(response);
+            var response = await client.GetStringAsync(_baseUrl + RequestUrl);
+            var jsonObject = new JSONObject(response);
 
-            T result = new T();
+            var result = new T();
             result.ProcessJson(jsonObject);
 
             return result;
@@ -72,14 +73,14 @@ namespace TmdbWrapper.Utilities
 
         public async Task<SearchResult<T>> ProcessSearchRequestAsync()
         {
-            if (Parameters["page"] == "0")
+            if (_parameters["page"] == "0")
             {
-                Parameters["page"] = "1";
-                SearchResult<T> result = await GetSearchResponseAsync();
-                for (int i = 2; i <= result.TotalPages; i++)
+                _parameters["page"] = "1";
+                var result = await GetSearchResponseAsync();
+                for (var i = 2; i <= result.TotalPages; i++)
                 {
-                    Parameters["page"] = i.ToString();
-                    SearchResult<T> subResult = await GetSearchResponseAsync();
+                    _parameters["page"] = i.ToString();
+                    var subResult = await GetSearchResponseAsync();
                     result.Results.AddRange(subResult.Results);
                 }
                 result.TotalPages = 1;
@@ -94,21 +95,23 @@ namespace TmdbWrapper.Utilities
 
         private async Task<SearchResult<T>> GetSearchResponseAsync()
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JSONObject jsonObject = new JSONObject(response);
+            var response = await client.GetStringAsync(_baseUrl + RequestUrl);
+            var jsonObject = new JSONObject(response);
 
-            SearchResult<T> result = new SearchResult<T>();
-            result.Page = (int)jsonObject.GetSafeNumber("page");
-            result.TotalPages = (int)jsonObject.GetSafeNumber("total_pages");
-            result.TotalResults = (int)jsonObject.GetSafeNumber("total_results");
+            var result = new SearchResult<T>
+            {
+                Page = (int) jsonObject.GetSafeNumber("page"),
+                TotalPages = (int) jsonObject.GetSafeNumber("total_pages"),
+                TotalResults = (int) jsonObject.GetSafeNumber("total_results"),
+                Results = new List<T>()
+            };
 
-            result.Results = new List<T>();
             foreach (var jsonObj in jsonObject.GetNamedArray("results"))
             {
-                T newT = new T();
+                var newT = new T();
                 newT.ProcessJson(jsonObj);
                 result.Results.Add(newT);
             }
@@ -117,12 +120,12 @@ namespace TmdbWrapper.Utilities
 
         public async Task<IReadOnlyList<T>> ProcesRequestListAsync(string valueName)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            string response = await client.GetStringAsync(BASE_URL + RequestUrl);
-            JSONObject jsonObject = new JSONObject(response);
-            IReadOnlyList<T> result = jsonObject.ProcessObjectArray<T>("valueName");
+            var response = await client.GetStringAsync(_baseUrl + RequestUrl);
+            var jsonObject = new JSONObject(response);
+            var result = jsonObject.ProcessObjectArray<T>(valueName);
             return result;
         }
     }

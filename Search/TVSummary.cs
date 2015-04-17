@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Search
@@ -84,7 +80,7 @@ namespace TmdbWrapper.Search
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(PosterSize size = PosterSize.w342)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), PosterPath);
+            return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
 
         /// <summary>
@@ -94,7 +90,7 @@ namespace TmdbWrapper.Search
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(BackdropSize size = BackdropSize.w300)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), BackdropPath);
+            return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
         #endregion
 

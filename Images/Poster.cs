@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
 
-namespace TmdbWrapper.Image
+namespace TmdbWrapper.Images
 {
     /// <summary>
     /// A movie image
@@ -64,7 +60,7 @@ namespace TmdbWrapper.Image
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(PosterSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), FilePath);
+            return Extensions.MakeImageUri(size.ToString(), FilePath);
         }
         #endregion
     }

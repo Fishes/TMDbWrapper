@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TmdbWrapper;
 
 namespace TmdbWrapper.Utilities
 {
-    internal static partial class Extensions
+    internal static class Extensions
     {
         #region private constants
-        private static Uri baseImageUri;
+        private static Uri _baseImageUri;
         #endregion
 
         internal static void Initialize(Uri baseUri)
         {
-            baseImageUri = baseUri;
+            _baseImageUri = baseUri;
         }
 
         #region string extensions
@@ -30,7 +25,7 @@ namespace TmdbWrapper.Utilities
         #region image uri methods
         internal static Uri MakeImageUri(string size, string path)
         {
-            return new Uri(string.Format("{0}{1}{2}", baseImageUri, size, path));
+            return new Uri(string.Format("{0}{1}{2}", _baseImageUri, size, path));
         }
         #endregion
     }

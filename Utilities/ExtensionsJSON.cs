@@ -2,34 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TmdbWrapper;
+
 
 namespace TmdbWrapper.Utilities
 {
     internal class JSONObject
     {
-        private JToken jsonObject;
+        private readonly JToken _jsonObject;
 
         internal JSONObject(JToken json)
         {
-            jsonObject = json;
+            _jsonObject = json;
         }
 
         internal JSONObject(string json) 
         {
-            jsonObject = JObject.Parse(json);
+            _jsonObject = JObject.Parse(json);
         }
 
         #region jsonValue extensions
 
         internal IEnumerable<JSONObject> GetNamedArray(string name)
         {
-            return from obj in (jsonObject[name] as JArray)
+            return from obj in (_jsonObject[name] as JArray)
                    select new JSONObject(obj);
         }
 
@@ -38,7 +34,7 @@ namespace TmdbWrapper.Utilities
             try
             {
                 DateTime dateTime;
-                if(!DateTime.TryParse((string)jsonObject[valueName], CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime )){
+                if(!DateTime.TryParse((string)_jsonObject[valueName], CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime )){
                     return null;
                 }
                 return dateTime;            
@@ -52,7 +48,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {
-                return (string)jsonObject[valueName];                
+                return (string)_jsonObject[valueName];                
             }
             catch
             {
@@ -64,7 +60,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {
-                return (Uri)jsonObject[valueName];  
+                return (Uri)_jsonObject[valueName];  
             }
             catch
             {
@@ -76,7 +72,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {
-                return (bool)jsonObject[valueName];  
+                return (bool)_jsonObject[valueName];  
             }
             catch
             {
@@ -88,7 +84,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {
-                return (double)jsonObject[valueName];  
+                return (double)_jsonObject[valueName];  
             }
             catch
             { 
@@ -100,7 +96,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {                
-                return new JSONObject((JObject)jsonObject[valueName]);                
+                return new JSONObject((JObject)_jsonObject[valueName]);                
             }
             catch
             {
@@ -112,7 +108,7 @@ namespace TmdbWrapper.Utilities
         {
             try
             {
-                JToken value = jsonObject[valueName];
+                JToken value = _jsonObject[valueName];
                 if (value != null && value.HasValues)
                 {
                     T newT = new T();
@@ -130,12 +126,14 @@ namespace TmdbWrapper.Utilities
         internal IReadOnlyList<T> ProcessObjectArray<T>(string valueName) where T : ITmdbObject, new()
         {
             List<T> results = new List<T>();
-            JToken value = jsonObject[valueName];
+            JToken value = _jsonObject[valueName];
             if (value.HasValues)
             {
-                if(value is JArray)
-                foreach(JObject subObject in ((JArray)value))
+                JArray jArray = value as JArray;
+                if(jArray != null)
+                foreach(var jToken in jArray)
                 {
+                    var subObject = (JObject) jToken;
                     try
                     {
                         T newT = new T();
@@ -152,12 +150,14 @@ namespace TmdbWrapper.Utilities
         internal IReadOnlyList<int> ProcessIntArray(string valueName) 
         {
             List<int> results = new List<int>();
-            JToken value = jsonObject[valueName];
+            JToken value = _jsonObject[valueName];
             if (value.HasValues)
             {
-                if (value is JArray)
-                    foreach (JValue subObject in ((JArray)value))
+                JArray jArray = value as JArray;
+                if (jArray != null)
+                    foreach (var jToken in jArray)
                     {
+                        var subObject = (JValue) jToken;
                         try
                         {
                             results.Add((int)subObject);
@@ -172,12 +172,14 @@ namespace TmdbWrapper.Utilities
         internal IReadOnlyList<string> ProcessStringArray(string valueName)
         {
             List<string> results = new List<string>();
-            JToken value = jsonObject[valueName];
+            JToken value = _jsonObject[valueName];
             if (value.HasValues)
             {
-                if (value is JArray)
-                    foreach (JValue subObject in ((JArray)value))
+                JArray jArray = value as JArray;
+                if (jArray != null)
+                    foreach (var jToken in jArray)
                     {
+                        var subObject = (JValue) jToken;
                         try
                         {
                             results.Add((string)subObject);

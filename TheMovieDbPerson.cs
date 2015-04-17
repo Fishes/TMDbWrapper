@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TmdbWrapper.Cache;
 using TmdbWrapper.Persons;
@@ -18,7 +16,7 @@ namespace TmdbWrapper
         /// <summary>
         /// Retrieve the credits
         /// </summary>
-        credits = 1
+        Credits = 1
     }
 
     public static partial class TheMovieDb
@@ -26,21 +24,21 @@ namespace TmdbWrapper
         /// <summary>
         /// Gets the information of the specified person.
         /// </summary>
-        /// <param name="PersonID">The id of the person.</param>
+        /// <param name="personId">The id of the person.</param>
         /// <param name="extras">Indicates which parts should be prefetched.</param>
         /// <returns>The person.</returns>
-        public static async Task<Person> GetPersonAsync(int PersonID, PersonExtras extras = 0)
+        public static async Task<Person> GetPersonAsync(int personId, PersonExtras extras = 0)
         {
-            Person result = DatabaseCache.GetObject<Person>(PersonID);
+            var result = DatabaseCache.GetObject<Person>(personId);
             if (result == null)
             {
-                Request<Person> request = new Request<Person>("person/" + PersonID.ToString());
+                var request = new Request<Person>("person/" + personId);
                 if (extras != 0)
                 {
                     request.AddParameter("append_to_response", extras.ToString().Replace(" ", ""));
                 }
                 result = await request.ProcesRequestAsync();
-                DatabaseCache.SetObject(PersonID, result);
+                DatabaseCache.SetObject(personId, result);
             }
             return result;
         }
@@ -48,16 +46,16 @@ namespace TmdbWrapper
         /// <summary>
         /// Get the credits of a specific movie.
         /// </summary>
-        /// <param name="PersonID">The id of the person.</param>
+        /// <param name="personId">The id of the person.</param>
         /// <returns>The credits.</returns>
-        public static async Task<Credit> GetCreditsAsync(int PersonID)
+        public static async Task<Credit> GetCreditsAsync(int personId)
         {
-            Credit credits = DatabaseCache.GetObject<Credit>(PersonID);
+            var credits = DatabaseCache.GetObject<Credit>(personId);
             if (credits == null)
             {
-                Request<Credit> request = new Request<Credit>("person/" + PersonID.ToString() + "/credits");
+                var request = new Request<Credit>("person/" + personId + "/credits");
                 credits = await request.ProcesRequestAsync();
-                DatabaseCache.SetObject(PersonID, credits);
+                DatabaseCache.SetObject(personId, credits);
             }
             return credits;
         }
@@ -65,16 +63,16 @@ namespace TmdbWrapper
         /// <summary>
         /// The images of a specific person.
         /// </summary>
-        /// <param name="PersonID">The id of the specified person.</param>
+        /// <param name="personId">The id of the specified person.</param>
         /// <returns>A list of images</returns>
-        public static async Task<IReadOnlyList<Profile>> GetImageAsync(int PersonID)
+        public static async Task<IReadOnlyList<Profile>> GetImageAsync(int personId)
         {
-            IReadOnlyList<Profile> profile = DatabaseCache.GetObject<IReadOnlyList<Profile>>(PersonID);
+            var profile = DatabaseCache.GetObject<IReadOnlyList<Profile>>(personId);
             if (profile == null)
             {
-                Request<Profile> request = new Request<Profile>("person/" + PersonID.ToString() + "/images");
+                var request = new Request<Profile>("person/" + personId + "/images");
                 profile = await request.ProcesRequestListAsync("profiles");
-                DatabaseCache.SetObject(PersonID, profile);
+                DatabaseCache.SetObject(personId, profile);
             }
             return profile;
         }

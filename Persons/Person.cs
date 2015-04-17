@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Persons
@@ -24,7 +21,7 @@ namespace TmdbWrapper.Persons
         /// <summary>
         /// Aliases this person is known by.
         /// </summary>
-        public string[] Aliases { get; private set; }
+        public IReadOnlyList<string> Aliases { get; private set; }
         /// <summary>
         /// Biography of this person.
         /// </summary>
@@ -62,14 +59,7 @@ namespace TmdbWrapper.Persons
         /// </summary>
         public Credit Credits
         {
-            get
-            {
-                if (_credits == null)
-                {
-                    _credits = TheMovieDb.GetCreditsAsync(Id).Result;
-                }
-                return _credits;
-            }
+            get { return _credits ?? (_credits = TheMovieDb.GetCreditsAsync(Id).Result); }
         }
         #endregion
 
@@ -77,6 +67,7 @@ namespace TmdbWrapper.Persons
         void ITmdbObject.ProcessJson(JSONObject jsonObject)
         {
             Adult = jsonObject.GetSafeBoolean("adult");
+            Aliases = jsonObject.ProcessStringArray("also_known_as");
             Biography = jsonObject.GetSafeString("biography");
             Birthday = jsonObject.GetSafeDateTime("birthday");
             Deathday = jsonObject.GetSafeDateTime("deathday");
@@ -97,7 +88,7 @@ namespace TmdbWrapper.Persons
         /// <returns>The uri to the sized image</returns>
         public Uri Uri(ProfileSize size)
         {
-            return Utilities.Extensions.MakeImageUri(size.ToString(), ProfilePath);
+            return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
         #endregion
     }

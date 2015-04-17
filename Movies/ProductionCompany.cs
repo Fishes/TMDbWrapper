@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TmdbWrapper.Companies;
 using TmdbWrapper.Utilities;
 
 namespace TmdbWrapper.Movies
@@ -45,7 +42,7 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Retrieves the associated company.
         /// </summary>
-        public async Task<Companies.Company> CompanyAsync()
+        public async Task<Company> CompanyAsync()
         {
             return await TheMovieDb.GetCompanyAsync(Id);
         }

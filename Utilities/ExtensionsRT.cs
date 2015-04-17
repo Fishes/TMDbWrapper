@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TmdbWrapper;
 using Windows.Data.Json;
 
 namespace TmdbWrapper.Utilities
@@ -40,7 +35,7 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
                     {
                         DateTime dateTime;
@@ -66,7 +61,7 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
                     {
                         return jsonValue.GetString();
@@ -86,10 +81,10 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
                     {
-                        string value = jsonValue.GetString();
+                        var value = jsonValue.GetString();
                         if (!string.IsNullOrWhiteSpace(value))
                         {
                             return new Uri(value);
@@ -110,7 +105,7 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
                     {
                         return jsonValue.GetBoolean();
@@ -130,7 +125,7 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType != JsonValueType.Null))
                     {
                         return jsonValue.GetNumber();
@@ -150,7 +145,7 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Object))
                     {
                         return new JSONObject(jsonValue.GetObject());
@@ -170,10 +165,10 @@ namespace TmdbWrapper.Utilities
             {
                 if (jsonObject.ContainsKey(valueName))
                 {
-                    JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+                    var jsonValue = jsonObject.GetNamedValue(valueName);
                     if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Object))
                     {
-                        T newT = new T();
+                        var newT = new T();
                         newT.ProcessJson(new JSONObject(jsonValue.GetObject()));
                         return newT;
                     }
@@ -188,15 +183,15 @@ namespace TmdbWrapper.Utilities
 
         internal IReadOnlyList<T> ProcessObjectArray<T>(string valueName) where T : ITmdbObject, new()
         {
-            List<T> results = new List<T>();
-            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            var results = new List<T>();
+            var jsonValue = jsonObject.GetNamedValue(valueName);
             if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
             {
                 foreach (JsonValue subObject in jsonValue.GetArray())
                 {
                     try
                     {
-                        T newT = new T();
+                        var newT = new T();
                         newT.ProcessJson(new JSONObject(subObject.GetObject()));
                         results.Add(newT);
                     }
@@ -209,8 +204,8 @@ namespace TmdbWrapper.Utilities
 
         internal IReadOnlyList<string> ProcessStringArray(string valueName) 
         {
-            List<string> results = new List<string>();
-            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            var results = new List<string>();
+            var jsonValue = jsonObject.GetNamedValue(valueName);
             if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
             {
                 foreach (JsonValue subObject in jsonValue.GetArray())
@@ -228,8 +223,8 @@ namespace TmdbWrapper.Utilities
 
         internal IReadOnlyList<int> ProcessIntArray(string valueName)
         {
-            List<int> results = new List<int>();
-            JsonValue jsonValue = jsonObject.GetNamedValue(valueName);
+            var results = new List<int>();
+            var jsonValue = jsonObject.GetNamedValue(valueName);
             if ((jsonValue != null) && (jsonValue.ValueType == JsonValueType.Array))
             {
                 foreach (JsonValue subObject in jsonValue.GetArray())

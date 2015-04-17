@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TmdbWrapper.Utilities;
 
-namespace TmdbWrapper.Image
+namespace TmdbWrapper.Images
 {
     /// <summary>
     /// Images of a movie
     /// </summary>
-    public class Images : ITmdbObject
+    public class Image : ITmdbObject
     {
         #region properties
         /// <summary>

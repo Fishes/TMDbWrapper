@@ -12,30 +12,36 @@ namespace TmdbWrapper.Collections
     public class Collection : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Backdrop image path
         /// </summary>
         public string BackdropPath { get; private set; }
+
         /// <summary>
         /// Id of the collection
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Poster image path
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// Title of the collection
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// A list with all the parts of this collection
         /// </summary>
         public IReadOnlyList<Part> Parts { get; private set; }
-        #endregion
 
-        
+        #endregion properties
+
         #region Overrides
+
         /// <summary>
         /// Returns this instance ToString
         /// </summary>
@@ -43,20 +49,24 @@ namespace TmdbWrapper.Collections
         {
             return Name;
         }
-        #endregion
+
+        #endregion Overrides
 
         #region Interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
             PosterPath = jsonObject.GetSafeString("poster_path");
-            Parts = jsonObject.ProcessObjectArray<Part>("parts");         
+            Parts = jsonObject.ProcessObjectArray<Part>("parts");
         }
-        #endregion
+
+        #endregion Interface implementations
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -76,7 +86,8 @@ namespace TmdbWrapper.Collections
         {
             return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
-        #endregion
+
+        #endregion Image Uri's
 
         #region navigation properties
 
@@ -88,6 +99,7 @@ namespace TmdbWrapper.Collections
         {
             return await TheMovieDb.GetCollectionImagesAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

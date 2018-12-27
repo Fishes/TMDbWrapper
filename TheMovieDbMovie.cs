@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TmdbWrapper.Cache;
 using TmdbWrapper.Images;
 using TmdbWrapper.Movies;
+using TmdbWrapper.Persons;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 
@@ -18,11 +19,11 @@ namespace TmdbWrapper
         /// <summary>
         /// Retrieve the cast
         /// </summary>
-        Casts = 1        
-    }                                                                                            
+        Casts = 1
+    }
 
     public static partial class TheMovieDb
-    {        
+    {
         /// <summary>
         /// Gets a movie by the movie database id.
         /// </summary>
@@ -34,9 +35,12 @@ namespace TmdbWrapper
             var movie = DatabaseCache.GetObject<Movie>(movieId);
             if (movie == null)
             {
-                var request = new Request<Movie>("movie/" + movieId);
+                var request = new Request<Movie>($"movie/{movieId}");
                 if (!string.IsNullOrEmpty(Language))
+                {
                     request.AddParameter("language", Language);
+                }
+
                 if (extra != 0)
                 {
                     request.AddParameter("append_to_response", extra.ToString().Replace(" ", ""));
@@ -54,12 +58,15 @@ namespace TmdbWrapper
         /// <returns>The specified movie.</returns>
         public static async Task<Movie> GetMovieByImdbAsync(string imdbId)
         {
-            var request = new Request<Movie>("movie/" + imdbId);
+            var request = new Request<Movie>($"movie/{imdbId}");
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
+
             return await request.ProcesRequestAsync();
-        }        
-        
+        }
+
         /// <summary>
         /// Gets a list of altenative titles for the specified country
         /// </summary>
@@ -68,12 +75,15 @@ namespace TmdbWrapper
         /// <returns>A list of alternative titles.</returns>
         public static async Task<IReadOnlyList<AlternativeTitle>> GetMovieAlternateTitlesAsync(int movieId, string country)
         {
-            var request = new Request<AlternativeTitle>("movie/" + movieId + "/alternative_titles");
+            var request = new Request<AlternativeTitle>($"movie/{movieId}/alternative_titles");
             if (!string.IsNullOrEmpty(country))
+            {
                 request.AddParameter("country", country);
+            }
+
             return await request.ProcesRequestListAsync("titles");
-        }        
-        
+        }
+
         /// <summary>
         /// Gets the credits of a specific movie.
         /// </summary>
@@ -84,13 +94,22 @@ namespace TmdbWrapper
             var credits = DatabaseCache.GetObject<Credits>(movieId);
             if (credits == null)
             {
-                var request = new Request<Credits>(string.Format("movie/{0}/casts", movieId));
+                var request = new Request<Credits>($"movie/{movieId}/credits");
                 credits = await request.ProcesRequestAsync();
+                foreach (var castPerson in credits.Cast)
+                {
+                    castPerson.Media = MediaType.Movie;
+                }
+
+                foreach (var crewPerson in credits.Crew)
+                {
+                    crewPerson.Media = MediaType.Movie;
+                }
                 DatabaseCache.SetObject(movieId, credits);
             }
             return credits;
-        }       
-        
+        }
+
         /// <summary>
         /// All images of a specific movie.
         /// </summary>
@@ -101,15 +120,18 @@ namespace TmdbWrapper
             var images = DatabaseCache.GetObject<Image>(movieId);
             if (images == null)
             {
-                var request = new Request<Image>("movie/" + movieId + "/images");
+                var request = new Request<Image>($"movie/{movieId}/images");
                 if (!string.IsNullOrEmpty(Language))
+                {
                     request.AddParameter("language", Language);
+                }
+
                 images = await request.ProcesRequestAsync();
                 DatabaseCache.SetObject(movieId, images);
             }
             return images;
-        }        
-        
+        }
+
         /// <summary>
         /// The keywords of a specific movie.
         /// </summary>
@@ -120,7 +142,7 @@ namespace TmdbWrapper
             var request = new Request<Keyword>("movie/" + movieId + "/keywords");
             return await request.ProcesRequestListAsync("keywords");
         }
-        
+
         /// <summary>
         /// Releases of a specific movie.
         /// </summary>
@@ -131,7 +153,7 @@ namespace TmdbWrapper
             var request = new Request<Release>("movie/" + movieId + "/releases");
             return await request.ProcesRequestListAsync("releases");
         }
-        
+
         /// <summary>
         /// Gets the trailer of a specific movie.
         /// </summary>
@@ -141,10 +163,13 @@ namespace TmdbWrapper
         {
             var request = new Request<Trailers>("movie/" + movieId + "/trailers");
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
+
             return await request.ProcesRequestAsync();
         }
-        
+
         /// <summary>
         /// Gets movies that are similiar to the specified movie.
         /// </summary>
@@ -156,11 +181,13 @@ namespace TmdbWrapper
             var request = new Request<MovieSummary>("movie/" + movieId + "/similar_movies");
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
 
             return await request.ProcessSearchRequestAsync();
-        }        
-        
+        }
+
         /// <summary>
         /// Gets the languages that a specific movie is translated into.
         /// </summary>
@@ -171,6 +198,5 @@ namespace TmdbWrapper
             var request = new Request<SpokenLanguage>("movie/" + movieId + "/translations");
             return await request.ProcesRequestAsync();
         }
-         
     }
 }

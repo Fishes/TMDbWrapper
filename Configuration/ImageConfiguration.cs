@@ -20,7 +20,7 @@ namespace TmdbWrapper.Configuration
 
         internal IReadOnlyList<string> StillSizes { get; private set; }
 
-        public void ProcessJson(JSONObject jsonObject)
+        public void ProcessJson(JsonObject jsonObject)
         {
             BaseUrl = jsonObject.GetSafeUri("base_url");
             SecureBaseUrl = jsonObject.GetSafeUri("secure_base_url");

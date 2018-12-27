@@ -9,25 +9,31 @@ namespace TmdbWrapper.Search
     public class CollectionSummary : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the collection.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Path of the backdrop path.
         /// </summary>
         public string BackdropPath { get; private set; }
+
         /// <summary>
         /// Name of the collection
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Path of the poster for this collection
         /// </summary>
         public string PosterPath { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Return this instances ToString
         /// </summary>
@@ -36,19 +42,23 @@ namespace TmdbWrapper.Search
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Name = jsonObject.GetSafeString("name");
             PosterPath = jsonObject.GetSafeString("poster_path");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region image uri's
+
         /// <summary>
         /// Uri to the backdrop image.
         /// </summary>
@@ -68,6 +78,7 @@ namespace TmdbWrapper.Search
         {
             return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
-        #endregion
+
+        #endregion image uri's
     }
 }

@@ -12,14 +12,17 @@ namespace TmdbWrapper.TV
         /// Id of the creator
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of the creator
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Path to the profile picture
         /// </summary>
         public string ProfilePath { get; private set; }
+
         /// <summary>
         /// Returns the name of the creator
         /// </summary>
@@ -29,7 +32,7 @@ namespace TmdbWrapper.TV
             return Name;
         }
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
@@ -37,6 +40,7 @@ namespace TmdbWrapper.TV
         }
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -46,6 +50,7 @@ namespace TmdbWrapper.TV
         {
             return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
-        #endregion
+
+        #endregion Image Uri's
     }
 }

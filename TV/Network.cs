@@ -11,10 +11,12 @@ namespace TmdbWrapper.TV
         /// The id of the network
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// The name of the network
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Returns the string representation
         /// </summary>
@@ -24,7 +26,7 @@ namespace TmdbWrapper.TV
             return Name;
         }
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");

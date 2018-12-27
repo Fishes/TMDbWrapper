@@ -8,25 +8,31 @@ namespace TmdbWrapper.Movies
     public class AlternativeTitle : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Designation of the language.
         /// </summary>
-        public string Iso3166_1 { get; private set; }
+        public string Iso31661 { get; private set; }
+
         /// <summary>
         /// Alternative version of the title.
         /// </summary>
         public string Title { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
-            Iso3166_1 = jsonObject.GetSafeString("iso_3166_1");
-            Title = jsonObject.GetSafeString("title");            
+            Iso31661 = jsonObject.GetSafeString("iso_3166_1");
+            Title = jsonObject.GetSafeString("title");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region overrides
+
         /// <summary>
         /// Returns this instance of ToString()
         /// </summary>
@@ -34,9 +40,7 @@ namespace TmdbWrapper.Movies
         {
             return Title;
         }
-        #endregion
+
+        #endregion overrides
     }
-
-
-    
 }

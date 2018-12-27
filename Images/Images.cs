@@ -9,27 +9,33 @@ namespace TmdbWrapper.Images
     public class Image : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the movie
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// List of backdrops
         /// </summary>
         public IReadOnlyList<Backdrop> Backdrops { get; private set; }
+
         /// <summary>
         /// List of posters
         /// </summary>
         public IReadOnlyList<Poster> Posters { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Backdrops = jsonObject.ProcessObjectArray<Backdrop>("backdrops");
             Posters = jsonObject.ProcessObjectArray<Poster>("posters");
         }
-        #endregion
+
+        #endregion interface implementations
     }
 }

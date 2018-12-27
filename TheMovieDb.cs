@@ -13,20 +13,20 @@ namespace TmdbWrapper
         /// The apikey that is used in all requests.
         /// </summary>
         internal static string ApiKey { get; private set; }
+
         /// <summary>
         /// Language all the request uses if entered.
         /// </summary>
         internal static string Language { get; private set; }
 
         internal static bool UseSecureConnections { get; set; }
-        internal static Configuration.Configuration Configuration { get; private set; }
 
         /// <summary>
         /// Initialises the wrapper.
         /// </summary>
-        /// <param name="apiKey">The apikey the requests will use.</param>  
+        /// <param name="apiKey">The apikey the requests will use.</param>
         /// <param name="useSecureConnections">Inidicates if a secure connection should be used.</param>
-        public static void Initialise(string apiKey, bool useSecureConnections = true) 
+        public static void Initialise(string apiKey, bool useSecureConnections = true)
         {
             ApiKey = apiKey;
             UseSecureConnections = useSecureConnections;
@@ -37,10 +37,10 @@ namespace TmdbWrapper
         /// <summary>
         /// Initialises the wrapper.
         /// </summary>
-        /// <param name="apiKey">The apikey the request will use.</param>       
+        /// <param name="apiKey">The apikey the request will use.</param>
         /// <param name="language">The language the requests will use.</param>
         /// <param name="useSecureConnections">Inidicates if a secure connection should be used.</param>
-        public static void Initialise(string apiKey, string language, bool useSecureConnections = true) 
+        public static void Initialise(string apiKey, string language, bool useSecureConnections = true)
         {
             Initialise(apiKey, useSecureConnections);
             Language = language;

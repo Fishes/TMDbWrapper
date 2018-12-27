@@ -35,8 +35,11 @@ namespace TmdbWrapper
         {
             var request = new Request<MovieSummary>("company/" + companyId + "/movies");
             request.AddParameter("page", page);
-            if(!string.IsNullOrEmpty(Language))
+            if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
+
             return await request.ProcessSearchRequestAsync();
         }
     }

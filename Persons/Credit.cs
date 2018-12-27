@@ -9,22 +9,27 @@ namespace TmdbWrapper.Persons
     public class Credit : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// List of the crew
         /// </summary>
         public IReadOnlyList<Crew> Crew { get; private set; }
+
         /// <summary>
         /// List of the cast
         /// </summary>
         public IReadOnlyList<Role> Cast { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementation
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Crew = jsonObject.ProcessObjectArray<Crew>("crew");
             Cast = jsonObject.ProcessObjectArray<Role>("cast");
         }
-        #endregion
+
+        #endregion interface implementation
     }
 }

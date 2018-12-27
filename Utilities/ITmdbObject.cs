@@ -2,6 +2,6 @@
 {
     internal interface ITmdbObject
     {
-        void ProcessJson(JSONObject jsonObject);
+        void ProcessJson(JsonObject jsonObject);
     }
 }

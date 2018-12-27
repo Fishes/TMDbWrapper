@@ -11,30 +11,37 @@ namespace TmdbWrapper.Search
     public class CompanySummary : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the company
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Path of the logo image.
         /// </summary>
         public string LogoPath { get; private set; }
+
         /// <summary>
         /// Name of the company.
         /// </summary>
         public string Name { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             LogoPath = jsonObject.GetSafeString("logo_path");
             Name = jsonObject.GetSafeString("name");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region overrides
+
         /// <summary>
         /// Returns this instance ToString.
         /// </summary>
@@ -42,9 +49,11 @@ namespace TmdbWrapper.Search
         {
             return Name;
         }
-        #endregion
 
-        #region image uri's 
+        #endregion overrides
+
+        #region image uri's
+
         /// <summary>
         /// Uri to the logo image.
         /// </summary>
@@ -54,9 +63,11 @@ namespace TmdbWrapper.Search
         {
             return Extensions.MakeImageUri(size.ToString(), LogoPath);
         }
-        #endregion
+
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the associated company.
         /// </summary>
@@ -64,6 +75,7 @@ namespace TmdbWrapper.Search
         {
             return await TheMovieDb.GetCompanyAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

@@ -7,8 +7,10 @@ namespace TmdbWrapper.Utilities
     internal static class Extensions
     {
         #region private constants
+
         private static Uri _baseImageUri;
-        #endregion
+
+        #endregion private constants
 
         internal static void Initialize(Uri baseUri)
         {
@@ -16,17 +18,21 @@ namespace TmdbWrapper.Utilities
         }
 
         #region string extensions
+
         internal static string EscapeString(this string s)
         {
-            return Regex.Replace(s, "[" + Regex.Escape(new String(Path.GetInvalidFileNameChars())) + "]", "-");
+            return Regex.Replace(s, "[" + Regex.Escape(new string(Path.GetInvalidFileNameChars())) + "]", "-");
         }
-        #endregion
+
+        #endregion string extensions
 
         #region image uri methods
+
         internal static Uri MakeImageUri(string size, string path)
         {
-            return new Uri(string.Format("{0}{1}{2}", _baseImageUri, size, path));
+            return new Uri($"{_baseImageUri}{size}{path}");
         }
-        #endregion
+
+        #endregion image uri methods
     }
 }

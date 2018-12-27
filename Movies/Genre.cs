@@ -8,32 +8,39 @@ namespace TmdbWrapper.Movies
     public class Genre : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of this genre.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of this genre.
         /// </summary>
         public string Name { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Returns this instance ToString
-        /// </summary>        
+        /// </summary>
         public override string ToString()
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
         }
-        #endregion
+
+        #endregion interface implementations
     }
 }

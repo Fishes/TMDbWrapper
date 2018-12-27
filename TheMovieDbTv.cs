@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using TmdbWrapper.Cache;
+using TmdbWrapper.Persons;
 using TmdbWrapper.TV;
 using TmdbWrapper.Utilities;
 
@@ -16,7 +17,7 @@ namespace TmdbWrapper
         /// <summary>
         /// Retrieve the cast
         /// </summary>
-        Casts = 1        
+        Casts = 1
     }
 
     public static partial class TheMovieDb
@@ -31,11 +32,15 @@ namespace TmdbWrapper
         {
             var tvSeries = DatabaseCache.GetObject<TVSeries>(tvSeriesId);
 
-            if(tvSeries == null){
+            if (tvSeries == null)
+            {
                 var request = new Request<TVSeries>("tv/" + tvSeriesId);
 
                 if (!string.IsNullOrEmpty(Language))
+                {
                     request.AddParameter("language", Language);
+                }
+
                 if (extra != 0)
                 {
                     request.AddParameter("append_to_response", extra.ToString().Replace(" ", ""));
@@ -56,22 +61,77 @@ namespace TmdbWrapper
         {
             Season season = null;
             var series = DatabaseCache.GetObject<TVSeries>(tvSeriesId);
-            if (series != null)
+            var summary = series?.SeasonSummaries.FirstOrDefault(s => s.SeasonNumber == seasonNumber);
+            if (summary != null)
             {
-                var summary = series.SeasonSummaries.FirstOrDefault(s => s.SeasonNumber == seasonNumber);
-                if(summary != null){
-                    season = DatabaseCache.GetObject<Season>(summary.Id);
-                }
+                season = DatabaseCache.GetObject<Season>(summary.Id);
             }
             if (season == null)
             {
                 var request = new Request<Season>("tv/" + tvSeriesId + "/season/" + seasonNumber);
                 if (!string.IsNullOrEmpty(Language))
+                {
                     request.AddParameter("language", Language);
+                }
+
                 season = await request.ProcesRequestAsync();
                 DatabaseCache.SetObject(season.Id, season);
             }
             return season;
+        }
+
+        public static async Task<Credits> GetTvCreditsAsync(int tvSeriesId)
+        {
+            var credits = DatabaseCache.GetObject<Credits>(tvSeriesId);
+            if (credits == null)
+            {
+                var request = new Request<Credits>($"tv/{tvSeriesId}/credits");
+                if (!string.IsNullOrEmpty(Language))
+                {
+                    request.AddParameter("language", Language);
+                }
+
+                credits = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(tvSeriesId, credits);
+            }
+
+            return credits;
+        }
+
+        public static async Task<Credits> GetTvCreditsSeasonAsync(int tvSeriesId, int seasonNumber)
+        {
+            var credits = DatabaseCache.GetObject<Credits>(tvSeriesId);
+            if (credits == null)
+            {
+                var request = new Request<Credits>($"tv/{tvSeriesId}/season/{seasonNumber}/credits");
+                if (!string.IsNullOrEmpty(Language))
+                {
+                    request.AddParameter("language", Language);
+                }
+
+                credits = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(tvSeriesId, credits);
+            }
+
+            return credits;
+        }
+
+        public static async Task<Credits> GetTvCreditsEpisodeAsync(int tvSeriesId, int seasonNumber, int episodeNumber)
+        {
+            var credits = DatabaseCache.GetObject<Credits>(tvSeriesId);
+            if (credits == null)
+            {
+                var request = new Request<Credits>($"tv/{tvSeriesId}/season/{seasonNumber}/episode/{episodeNumber}/credits");
+                if (!string.IsNullOrEmpty(Language))
+                {
+                    request.AddParameter("language", Language);
+                }
+
+                credits = await request.ProcesRequestAsync();
+                DatabaseCache.SetObject(tvSeriesId, credits);
+            }
+
+            return credits;
         }
     }
 }

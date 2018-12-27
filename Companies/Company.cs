@@ -11,38 +11,47 @@ namespace TmdbWrapper.Companies
     public class Company : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Discription of this company.
         /// </summary>
         public string Description { get; private set; }
+
         /// <summary>
         /// Location of the headquarters of this company.
         /// </summary>
         public string Headquarters { get; private set; }
+
         /// <summary>
         /// Uri for the homepage of this company.
         /// </summary>
         public Uri Homepage { get; private set; }
+
         /// <summary>
         /// Id of this company
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Path of the logo for this company
         /// </summary>
         public string LogoPath { get; private set; }
+
         /// <summary>
         /// Name of this company.
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Id of the parentcompany.
         /// </summary>
         public int ParentCompany { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Description = jsonObject.GetSafeString("description");
             Headquarters = jsonObject.GetSafeString("headquarters");
@@ -52,9 +61,11 @@ namespace TmdbWrapper.Companies
             Name = jsonObject.GetSafeString("name");
             ParentCompany = (int)jsonObject.GetSafeNumber("parent_company");
         }
-        #endregion
-        
+
+        #endregion interface implementations
+
         #region image uri's
+
         /// <summary>
         /// Uri to the logo image.
         /// </summary>
@@ -64,9 +75,11 @@ namespace TmdbWrapper.Companies
         {
             return Extensions.MakeImageUri(size.ToString(), LogoPath);
         }
-        #endregion
+
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the credits for this company
         /// </summary>
@@ -76,6 +89,7 @@ namespace TmdbWrapper.Companies
         {
             return await TheMovieDb.GetCompanyCreditsAsync(Id, page);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

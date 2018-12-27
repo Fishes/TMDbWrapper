@@ -17,15 +17,23 @@ namespace TmdbWrapper
         public static async Task<SearchResult<MovieSummary>> SearchMovieAsync(string query, int page = 1, bool? includeAdult = null, int? year = null)
         {
             var request = new Request<MovieSummary>("search/movie");
-            
+
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
+
             if (includeAdult.HasValue)
+            {
                 request.AddParameter("include_adult", includeAdult.Value ? "true" : "false");
+            }
+
             if (year.HasValue)
+            {
                 request.AddParameter("year", year.Value.ToString());
+            }
 
             return await request.ProcessSearchRequestAsync();
         }
@@ -42,7 +50,10 @@ namespace TmdbWrapper
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
+
             return await request.ProcessSearchRequestAsync();
         }
 
@@ -55,11 +66,13 @@ namespace TmdbWrapper
         public static async Task<SearchResult<PersonSummary>> SearchPersonAsync(string query, int page = 1)
         {
             var request = new Request<PersonSummary>("search/person");
-            
+
             request.AddParameter("query", query.EscapeString());
             request.AddParameter("page", page);
             if (!string.IsNullOrEmpty(Language))
+            {
                 request.AddParameter("language", Language);
+            }
 
             return await request.ProcessSearchRequestAsync();
         }

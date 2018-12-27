@@ -11,42 +11,52 @@ namespace TmdbWrapper.Persons
     public class Crew : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the movie.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Title of the movie.
         /// </summary>
         public string Title { get; private set; }
+
         /// <summary>
         /// Name of the department.
         /// </summary>
         public string Department { get; private set; }
+
         /// <summary>
         /// Original title
         /// </summary>
         public string OriginalTitle { get; private set; }
+
         /// <summary>
         /// Name of the job.
         /// </summary>
         public string Job { get; private set; }
+
         /// <summary>
         /// Path of the poster of the movie.
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// Date of the original release.
         /// </summary>
         public DateTime? ReleaseDate { get; private set; }
+
         /// <summary>
         /// Indictates if then movie is an adult title.
         /// </summary>
         public bool Adult { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Title = jsonObject.GetSafeString("title");
@@ -57,9 +67,11 @@ namespace TmdbWrapper.Persons
             ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             Adult = jsonObject.GetSafeBoolean("adult");
         }
-        #endregion
 
-        #region image uri's 
+        #endregion interface implementations
+
+        #region image uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -69,9 +81,11 @@ namespace TmdbWrapper.Persons
         {
             return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
-        #endregion
+
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the associated movie.
         /// </summary>
@@ -79,6 +93,7 @@ namespace TmdbWrapper.Persons
         {
             return await TheMovieDb.GetMovieAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

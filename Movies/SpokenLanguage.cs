@@ -8,21 +8,27 @@ namespace TmdbWrapper.Movies
     public class SpokenLanguage : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Code of the language.
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public string Iso639_1 { get; private set; }
+
         /// <summary>
         /// Name of the language.
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// The english name of the language.
         /// </summary>
         public string EnglishName { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Returns of this instance the ToString
         /// </summary>
@@ -30,15 +36,18 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Iso639_1 = jsonObject.GetSafeString("iso_639_1");
             Name = jsonObject.GetSafeString("name");
             EnglishName = jsonObject.GetSafeString("english_name");
         }
-        #endregion
+
+        #endregion interface implementations
     }
 }

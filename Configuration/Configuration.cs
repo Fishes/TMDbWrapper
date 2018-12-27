@@ -9,7 +9,7 @@ namespace TmdbWrapper.Configuration
 
         internal IReadOnlyList<string> ChangeKeys { get; set; }
 
-        public void ProcessJson(JSONObject jsonObject)
+        public void ProcessJson(JsonObject jsonObject)
         {
             ImageConfiguration = jsonObject.ProcessObject<ImageConfiguration>("images");
             ChangeKeys = jsonObject.ProcessStringArray("change_keys");

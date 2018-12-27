@@ -11,36 +11,43 @@ namespace TmdbWrapper.Movies
     public class BelongsToCollection : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the collection
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of the collection
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Path to the poster
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// Path to the backdrop
         /// </summary>
         public string BackdropPath { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
             PosterPath = jsonObject.GetSafeString("poster_path");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region overrides
+
         /// <summary>
         /// Returns this instance ToString()
         /// </summary>
@@ -48,9 +55,11 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
-        #endregion
 
-        #region image uri's 
+        #endregion overrides
+
+        #region image uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -70,9 +79,11 @@ namespace TmdbWrapper.Movies
         {
             return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
-        #endregion
 
-        #region navigation properties 
+        #endregion image uri's
+
+        #region navigation properties
+
         /// <summary>
         /// Gets the collection
         /// </summary>
@@ -82,6 +93,6 @@ namespace TmdbWrapper.Movies
             return await TheMovieDb.GetCollectionAsync(Id);
         }
 
-        #endregion
+        #endregion navigation properties
     }
 }

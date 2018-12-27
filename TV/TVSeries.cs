@@ -14,100 +14,124 @@ namespace TmdbWrapper.TV
         /// Path to the backdrop image
         /// </summary>
         public string BackdropPath { get; private set; }
+
         /// <summary>
         /// A list of creators
         /// </summary>
         public IReadOnlyList<Creator> CreatedBy { get; private set; }
+
         /// <summary>
         /// A list of runtimes
         /// </summary>
         public IReadOnlyList<int> EpisodeRuntime { get; private set; }
+
         /// <summary>
         /// The date of the first broadcast
         /// </summary>
         public DateTime? FirstAirDate { get; private set; }
+
         /// <summary>
         /// A list of genres
         /// </summary>
-        public IReadOnlyList<Genre> Genres {get; private set;}
+        public IReadOnlyList<Genre> Genres { get; private set; }
+
         /// <summary>
         /// The adres of the homepage
         /// </summary>
         public Uri Homepage { get; private set; }
+
         /// <summary>
         /// The id of the series
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// A boolean indicating if the series is in production
         /// </summary>
         public bool InProduction { get; private set; }
+
         /// <summary>
         /// A list of spoken languages
         /// </summary>
-        public IReadOnlyList<string> Languages { get; private set;}
+        public IReadOnlyList<string> Languages { get; private set; }
+
         /// <summary>
         /// The broadcast date of the last episode
         /// </summary>
         public DateTime? LastAirDate { get; private set; }
+
         /// <summary>
         /// The name of the tv series
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// A list of networks that broadcasted the series
         /// </summary>
         public IReadOnlyList<Network> Networks { get; private set; }
+
         /// <summary>
         /// The total number of broadcasted episodes
         /// </summary>
         public int NumberOfEpisodes { get; private set; }
+
         /// <summary>
         /// The total number of broadcasted seasons
         /// </summary>
         public int NumberOfSeasons { get; private set; }
+
         /// <summary>
         /// The original name of the series
         /// </summary>
         public string OriginalName { get; private set; }
+
         /// <summary>
         /// A list of countries where the series originated.
         /// </summary>
         public IReadOnlyList<string> OriginCountry { get; private set; }
+
         /// <summary>
         /// A overview of the series plot/setting
         /// </summary>
         public string Overview { get; private set; }
+
         /// <summary>
         /// The popularity ranking
         /// </summary>
         public int Popularity { get; private set; }
+
         /// <summary>
         /// The path to the poster image
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// A list of production companies
         /// </summary>
         public IReadOnlyList<ProductionCompany> ProductionCompanies { get; private set; }
+
         /// <summary>
         /// A list of season summaries
         /// </summary>
         public IReadOnlyList<SeasonSummary> SeasonSummaries { get; private set; }
+
         /// <summary>
         /// The status of the series
         /// </summary>
         public string Status { get; private set; }
+
         /// <summary>
         /// The voting average
         /// </summary>
         public double VoteAverage { get; private set; }
+
         /// <summary>
         /// The number of votes
         /// </summary>
         public int VoteCount { get; private set; }
 
         #region Overrides
+
         /// <summary>
         /// Returns the name of the series
         /// </summary>
@@ -116,9 +140,10 @@ namespace TmdbWrapper.TV
         {
             return Name;
         }
-        #endregion
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        #endregion Overrides
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             CreatedBy = jsonObject.ProcessObjectArray<Creator>("created_by");
@@ -147,6 +172,7 @@ namespace TmdbWrapper.TV
         }
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -166,8 +192,7 @@ namespace TmdbWrapper.TV
         {
             return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
-        #endregion
 
-
+        #endregion Image Uri's
     }
 }

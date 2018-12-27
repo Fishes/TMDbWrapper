@@ -5,7 +5,7 @@ namespace TmdbWrapper.Cache
 {
     internal class DatabaseCache
     {
-        private readonly IDictionary<string, IDictionary<int, WeakReference>> _cache = new Dictionary<string, IDictionary<int, WeakReference>>();
+        private readonly IDictionary<string, IDictionary<int, WeakReference>> cache = new Dictionary<string, IDictionary<int, WeakReference>>();
 
         private static readonly DatabaseCache CacheInstance = new DatabaseCache();
         private readonly object _lock = new object();
@@ -15,9 +15,9 @@ namespace TmdbWrapper.Cache
             object result = null;
             lock (_lock)
             {
-                if (_cache.ContainsKey(type.FullName))
+                if (cache.ContainsKey(type.FullName ?? throw new InvalidOperationException()))
                 {
-                    var set = _cache[type.FullName];
+                    var set = cache[type.FullName];
                     if (set.ContainsKey(id))
                     {
                         var reference = set[id];
@@ -28,25 +28,24 @@ namespace TmdbWrapper.Cache
                     }
                 }
             }
-            return result; 
+            return result;
         }
 
         private void SetValue(int id, object value)
         {
             lock (_lock)
             {
-                if (!_cache.ContainsKey(value.GetType().FullName))
+                if (!cache.ContainsKey(value.GetType().FullName ?? throw new InvalidOperationException()))
                 {
-                    _cache.Add(value.GetType().FullName, new Dictionary<int, WeakReference>());
+                    cache.Add(value.GetType().FullName ?? throw new InvalidOperationException(), new Dictionary<int, WeakReference>());
                 }
-                var set = _cache[value.GetType().FullName];
+                var set = cache[value.GetType().FullName ?? throw new InvalidOperationException()];
                 if (!set.ContainsKey(id))
                 {
                     set.Add(id, new WeakReference(value));
                 }
             }
         }
-
 
         public static T GetObject<T>(int id) where T : class
         {

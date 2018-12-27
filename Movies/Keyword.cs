@@ -8,25 +8,31 @@ namespace TmdbWrapper.Movies
     public class Keyword : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the keyword
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of the keyword
         /// </summary>
         public string Name { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region overrides
+
         /// <summary>
         /// Returns this instances ToString
         /// </summary>
@@ -34,6 +40,7 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
     }
 }

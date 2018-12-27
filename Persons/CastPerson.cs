@@ -1,60 +1,76 @@
 ﻿using System;
 using System.Threading.Tasks;
-using TmdbWrapper.Persons;
 using TmdbWrapper.Utilities;
 
-namespace TmdbWrapper.Movies
+namespace TmdbWrapper.Persons
 {
     /// <summary>
     /// A member of the cast in a movie.
     /// </summary>
-    public class CrewPerson : ITmdbObject
+    public class CastPerson : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Id of the person.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of the person.
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
-        /// Name of the job that is fullfilled.
+        /// Name of the character that is played.
         /// </summary>
-        public string Job { get; private set; }
+        public string Character { get; private set; }
+
         /// <summary>
-        /// The department of the job.
+        /// Order of the character in the credits
         /// </summary>
-        public string Department { get; private set; }
+        public int Order { get; private set; }
+
         /// <summary>
         /// Path of the profile picture
         /// </summary>
         public string ProfilePath { get; private set; }
-        #endregion
+
+        public Gender Gender { get; private set; }
+
+        public MediaType Media { get; internal set; }
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Returns this instances ToString
-        /// </summary>        
+        /// </summary>
         public override string ToString()
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
-            Job = jsonObject.GetSafeString("Job");
-            Department = jsonObject.GetSafeString("department");
+            Character = jsonObject.GetSafeString("character");
+            Order = (int)jsonObject.GetSafeNumber("order");
             ProfilePath = jsonObject.GetSafeString("profile_path");
+            Gender = (Gender)jsonObject.GetSafeInteger("gender");
+            //Media = (MediaType)jsonObject.GetSafeInteger("media_type");
         }
-        #endregion
+
+        #endregion interface implementations
 
         #region image uri's
+
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -64,9 +80,11 @@ namespace TmdbWrapper.Movies
         {
             return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
-        #endregion
+
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the associated person
         /// </summary>
@@ -74,6 +92,7 @@ namespace TmdbWrapper.Movies
         {
             return await TheMovieDb.GetPersonAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

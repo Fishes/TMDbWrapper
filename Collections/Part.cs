@@ -11,29 +11,36 @@ namespace TmdbWrapper.Collections
     public class Part : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Backdrop image path
         /// </summary>
         public string BackdropPath { get; private set; }
+
         /// <summary>
         /// Id of the movie
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Poster image path
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// Release date of the movie
         /// </summary>
         public DateTime? ReleaseDate { get; private set; }
+
         /// <summary>
         /// Title of the movie
         /// </summary>
         public string Title { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Returns this instance ToString
         /// </summary>
@@ -41,10 +48,12 @@ namespace TmdbWrapper.Collections
         {
             return Title;
         }
-        #endregion
+
+        #endregion overrides
 
         #region Interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             Id = (int)jsonObject.GetSafeNumber("id");
@@ -52,9 +61,11 @@ namespace TmdbWrapper.Collections
             ReleaseDate = jsonObject.GetSafeDateTime("release_date");
             Title = jsonObject.GetSafeString("title");
         }
-        #endregion
+
+        #endregion Interface implementations
 
         #region image uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -75,16 +86,18 @@ namespace TmdbWrapper.Collections
             return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
 
-        #endregion
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the associated movie.
-        /// </summary>        
+        /// </summary>
         public async Task<Movie> MovieAsync()
         {
             return await TheMovieDb.GetMovieAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

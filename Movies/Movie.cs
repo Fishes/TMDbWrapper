@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TmdbWrapper.Images;
+using TmdbWrapper.Persons;
 using TmdbWrapper.Search;
 using TmdbWrapper.Utilities;
 
@@ -13,98 +14,123 @@ namespace TmdbWrapper.Movies
     public class Movie : ITmdbObject
     {
         #region private fields
-        private Credits _credits;
-        #endregion
+
+        private Credits credits;
+
+        #endregion private fields
 
         #region Properties
+
         /// <summary>
         /// Indictates wether this is an adult title.
         /// </summary>
         public bool Adult { get; private set; }
+
         /// <summary>
         /// Path of the backdrop image.
         /// </summary>
         public string BackdropPath { get; private set; }
+
         /// <summary>
         /// The collection this movie might belong to.
         /// </summary>
         public BelongsToCollection BelongsToCollection { get; private set; }
+
         /// <summary>
         /// Production budget of this movie.
         /// </summary>
         public int Budget { get; private set; }
+
         /// <summary>
         /// Genres that are assoctiated to this title.
         /// </summary>
         public IReadOnlyList<Genre> Genres { get; private set; }
+
         /// <summary>
         /// Homepage of this movie.
         /// </summary>
         public Uri Homepage { get; private set; }
+
         /// <summary>
         /// Id of this movie.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Id of this movie in the IMDB.
         /// </summary>
         public string ImdbId { get; private set; }
+
         /// <summary>
         /// Original title.
         /// </summary>
         public string OriginalTitle { get; private set; }
+
         /// <summary>
         /// Overview of this movie.
         /// </summary>
         public string Overview { get; private set; }
+
         /// <summary>
         /// Popularity of this movie.
         /// </summary>
         public double Popularity { get; private set; }
+
         /// <summary>
         /// Path of the poster of this movie.
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// List of companies that produced this movie.
         /// </summary>
         public IReadOnlyList<ProductionCompany> ProductionCompanies { get; private set; }
+
         /// <summary>
         /// List of countries where this movie was produced.
         /// </summary>
         public IReadOnlyList<ProductionCountry> ProductionCountries { get; private set; }
+
         /// <summary>
         /// Date this movie was released.
         /// </summary>
         public DateTime? ReleaseDate { get; private set; }
+
         /// <summary>
         /// Revenue that this movie gathered.
         /// </summary>
-        public Int64 Revenue { get; private set; }
+        public long Revenue { get; private set; }
+
         /// <summary>
         /// Original runtime in minutes.
         /// </summary>
         public int Runtime { get; private set; }
+
         /// <summary>
         /// List of languages that is spoken in this movie.
         /// </summary>
         public IReadOnlyList<SpokenLanguage> SpokenLanguages { get; private set; }
+
         /// <summary>
         /// Status of this movie.
         /// </summary>
         public string Status { get; private set; }
+
         /// <summary>
         /// Tagline of the movie.
         /// </summary>
         public string Tagline { get; private set; }
+
         /// <summary>
         /// Title of this movie.
         /// </summary>
         public string Title { get; private set; }
+
         /// <summary>
         /// Average of votes.
         /// </summary>
         public double VoteAverage { get; private set; }
+
         /// <summary>
         /// Number of votes.
         /// </summary>
@@ -113,20 +139,12 @@ namespace TmdbWrapper.Movies
         /// <summary>
         /// Gets the credits associated to this movie.
         /// </summary>
-        public Credits Credits {
-            get
-            {
-                if (_credits == null)
-                {
-                    _credits = TheMovieDb.GetMovieCastAsync(Id).Result;
-                }
-                return _credits;
-            }
-        }
+        public Credits Credits => credits ?? (credits = TheMovieDb.GetMovieCastAsync(Id).Result);
 
-        #endregion
+        #endregion Properties
 
         #region Overrides
+
         /// <summary>
         /// Returns this instance ToString
         /// </summary>
@@ -134,16 +152,18 @@ namespace TmdbWrapper.Movies
         {
             return Title;
         }
-        #endregion
+
+        #endregion Overrides
 
         #region Interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Adult = jsonObject.GetSafeBoolean("adult");
             BackdropPath = jsonObject.GetSafeString("backdrop_path");
             BelongsToCollection = jsonObject.ProcessObject<BelongsToCollection>("belongs_to_collection");
             Budget = (int)jsonObject.GetSafeNumber("budget");
-            Genres = jsonObject.ProcessObjectArray<Genre>("genres");            
+            Genres = jsonObject.ProcessObjectArray<Genre>("genres");
             Homepage = jsonObject.GetSafeUri("homepage");
             Id = (int)jsonObject.GetSafeNumber("id");
             ImdbId = jsonObject.GetSafeString("imdb_id");
@@ -162,12 +182,13 @@ namespace TmdbWrapper.Movies
             Title = jsonObject.GetSafeString("title");
             VoteAverage = jsonObject.GetSafeNumber("vote_average");
             VoteCount = (int)jsonObject.GetSafeNumber("vote_count");
-            _credits = jsonObject.ProcessObject<Credits>("casts");
-
+            credits = jsonObject.ProcessObject<Credits>("casts");
         }
-        #endregion
+
+        #endregion Interface implementations
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -187,9 +208,11 @@ namespace TmdbWrapper.Movies
         {
             return Extensions.MakeImageUri(size.ToString(), BackdropPath);
         }
-        #endregion
+
+        #endregion Image Uri's
 
         #region Navigation Properties
+
         /// <summary>
         /// Gets a list of altenative titles for the specified country
         /// </summary>
@@ -264,6 +287,6 @@ namespace TmdbWrapper.Movies
             return await TheMovieDb.GetMovieTranslationsAsync(Id);
         }
 
-        #endregion
+        #endregion Navigation Properties
     }
 }

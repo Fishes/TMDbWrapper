@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TmdbWrapper</RootNamespace>
     <AssemblyName>TmdbWrapper</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Documents\Visual Studio 2017\Projects\MovieDataCollection\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,9 +55,6 @@
     <Compile Include="Images\Poster.cs" />
     <Compile Include="Movies\AlternativeTitle.cs" />
     <Compile Include="Movies\BelongsToCollection.cs" />
-    <Compile Include="Movies\CastPerson.cs" />
-    <Compile Include="Movies\Credits.cs" />
-    <Compile Include="Movies\CrewPerson.cs" />
     <Compile Include="Movies\Genre.cs" />
     <Compile Include="Movies\Keyword.cs" />
     <Compile Include="Movies\Movie.cs" />
@@ -70,6 +67,7 @@
     <Compile Include="Persons\Credit.cs" />
     <Compile Include="Persons\Crew.cs" />
     <Compile Include="Persons\Image.cs" />
+    <Compile Include="Persons\MediaType.cs" />
     <Compile Include="Persons\Person.cs" />
     <Compile Include="Persons\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,15 +84,20 @@
     <Compile Include="TheMovieDbPerson.cs" />
     <Compile Include="TheMovieDbSearch.cs" />
     <Compile Include="TheMovieDbTv.cs" />
+    <Compile Include="Persons\CastPerson.cs" />
     <Compile Include="TV\Creator.cs" />
-    <Compile Include="TV\EpisodeSummary.cs" />
+    <Compile Include="Persons\Credits.cs" />
+    <Compile Include="Persons\CrewPerson.cs" />
+    <Compile Include="TV\Episode.cs" />
     <Compile Include="TV\Network.cs" />
     <Compile Include="TV\Season.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TV\SeasonSummary.cs" />
     <Compile Include="TV\TVSeries.cs" />
-    <Compile Include="Utilities\ExtensionsJSON.cs" />
+    <Compile Include="Persons\Gender.cs" />
+    <Compile Include="Utilities\HttpClientFactory.cs" />
+    <Compile Include="Utilities\JsonObject.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\ITmdbObject.cs" />
     <Compile Include="Utilities\Request.cs" />
@@ -103,7 +106,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

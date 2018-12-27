@@ -8,17 +8,22 @@ namespace TmdbWrapper.Movies
     public class ProductionCountry : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Code of this country
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public string Iso_3166_1 { get; private set; }
+
         /// <summary>
         /// Name of the contry.
         /// </summary>
         public string Name { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Return this instances ToString
         /// </summary>
@@ -27,14 +32,17 @@ namespace TmdbWrapper.Movies
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Name = jsonObject.GetSafeString("name");
             Iso_3166_1 = jsonObject.GetSafeString("iso_3166_1");
         }
-        #endregion
+
+        #endregion interface implementations
     }
 }

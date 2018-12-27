@@ -13,30 +13,37 @@ namespace TmdbWrapper.TV
         /// The first broadcast of the first episode
         /// </summary>
         public DateTime? AirDate { get; private set; }
+
         /// <summary>
         /// Episodes of the season
         /// </summary>
         public IReadOnlyList<Episode> EpisodeSummaries { get; private set; }
+
         /// <summary>
         /// The name of the season
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// A summary of the season
         /// </summary>
         public string Overview { get; private set; }
+
         /// <summary>
         /// Id of the season
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Path to the poster for this season
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// Sequence number of the season
         /// </summary>
         public int SeasonNumber { get; private set; }
+
         /// <summary>
         /// Returns the name of the season
         /// </summary>
@@ -46,7 +53,7 @@ namespace TmdbWrapper.TV
             return Name;
         }
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             AirDate = jsonObject.GetSafeDateTime("air_date");
             EpisodeSummaries = jsonObject.ProcessObjectArray<Episode>("episodes");
@@ -58,6 +65,7 @@ namespace TmdbWrapper.TV
         }
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -67,6 +75,7 @@ namespace TmdbWrapper.TV
         {
             return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
-        #endregion
+
+        #endregion Image Uri's
     }
 }

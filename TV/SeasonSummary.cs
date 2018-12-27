@@ -12,20 +12,23 @@ namespace TmdbWrapper.TV
         /// The air date of the the season
         /// </summary>
         public DateTime? AirDate { get; private set; }
+
         /// <summary>
         /// The id of the season
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// The path to the poster of the season
         /// </summary>
         public string PosterPath { get; private set; }
+
         /// <summary>
         /// The sequence number of the season
         /// </summary>
         public int SeasonNumber { get; private set; }
 
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             AirDate = jsonObject.GetSafeDateTime("air_date");
             Id = (int)jsonObject.GetSafeNumber("id");
@@ -34,6 +37,7 @@ namespace TmdbWrapper.TV
         }
 
         #region Image Uri's
+
         /// <summary>
         /// Uri to the poster image.
         /// </summary>
@@ -43,6 +47,7 @@ namespace TmdbWrapper.TV
         {
             return Extensions.MakeImageUri(size.ToString(), PosterPath);
         }
-        #endregion
+
+        #endregion Image Uri's
     }
 }

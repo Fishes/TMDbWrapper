@@ -11,25 +11,31 @@ namespace TmdbWrapper.Search
     public class PersonSummary : ITmdbObject
     {
         #region properties
+
         /// <summary>
         /// Indicates wether this is an adult actor.
         /// </summary>
         public bool Adult { get; private set; }
+
         /// <summary>
         /// Id of this person.
         /// </summary>
         public int Id { get; private set; }
+
         /// <summary>
         /// Name of this person.
         /// </summary>
         public string Name { get; private set; }
+
         /// <summary>
         /// Path of an profile image of this person.
         /// </summary>
         public string ProfilePath { get; private set; }
-        #endregion
+
+        #endregion properties
 
         #region overrides
+
         /// <summary>
         /// Returns the ToString of this instance.
         /// </summary>
@@ -38,19 +44,23 @@ namespace TmdbWrapper.Search
         {
             return Name;
         }
-        #endregion
+
+        #endregion overrides
 
         #region interface implementations
-        void ITmdbObject.ProcessJson(JSONObject jsonObject)
+
+        void ITmdbObject.ProcessJson(JsonObject jsonObject)
         {
             Adult = jsonObject.GetSafeBoolean("adult");
             Id = (int)jsonObject.GetSafeNumber("id");
             Name = jsonObject.GetSafeString("name");
             ProfilePath = jsonObject.GetSafeString("profile_path");
         }
-        #endregion
 
-        #region image uri's 
+        #endregion interface implementations
+
+        #region image uri's
+
         /// <summary>
         /// Uri to the profile image.
         /// </summary>
@@ -60,9 +70,11 @@ namespace TmdbWrapper.Search
         {
             return Extensions.MakeImageUri(size.ToString(), ProfilePath);
         }
-        #endregion
+
+        #endregion image uri's
 
         #region navigation properties
+
         /// <summary>
         /// Retrieves the associated person.
         /// </summary>
@@ -70,6 +82,7 @@ namespace TmdbWrapper.Search
         {
             return await TheMovieDb.GetPersonAsync(Id);
         }
-        #endregion
+
+        #endregion navigation properties
     }
 }

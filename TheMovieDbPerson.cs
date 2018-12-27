@@ -48,7 +48,7 @@ namespace TmdbWrapper
         /// </summary>
         /// <param name="personId">The id of the person.</param>
         /// <returns>The credits.</returns>
-        public static async Task<Credit> GetCreditsAsync(int personId)
+        public static async Task<Credit> GetPersonCreditsAsync(int personId)
         {
             var credits = DatabaseCache.GetObject<Credit>(personId);
             if (credits == null)
